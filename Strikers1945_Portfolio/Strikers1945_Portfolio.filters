@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="소스 파일">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="헤더 파일">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="리소스 파일">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="MainGame">
+      <UniqueIdentifier>{49036dc3-09e4-40d6-a5d8-87f8277db0a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2DFrameWork">
+      <UniqueIdentifier>{68ec7a59-951f-4ca9-9540-50e82f0aa353}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2DFrameWork\Utill">
+      <UniqueIdentifier>{0041ea8e-c8c3-4a6a-ac89-c6a8fd20cd70}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2DFrameWork\GameNode">
+      <UniqueIdentifier>{ebc13aea-8787-495a-8183-20a4beb98304}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2DFrameWork\SingleTon">
+      <UniqueIdentifier>{0553f052-02d7-46cd-bbcd-cd961d51dc3c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2DFrameWork\Manager">
+      <UniqueIdentifier>{52dcab0a-5549-44df-986e-4f228a463bea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2DFrameWork\Backbuffer">
+      <UniqueIdentifier>{9db00d90-208d-4784-9645-0900194dd182}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2DFrameWork\Image">
+      <UniqueIdentifier>{b3728354-41b4-4233-8f49-ee60bed35289}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MainGame\test">
+      <UniqueIdentifier>{5800dc43-35c4-452f-a3a0-a3aa2fe7cd2a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MainGame\Object">
+      <UniqueIdentifier>{e3869efb-f5e8-4ab9-a6c0-32c6a02670c6}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="소스.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="GameNode.cpp">
+      <Filter>2DFrameWork\GameNode</Filter>
+    </ClCompile>
+    <ClCompile Include="MainGame.cpp">
+      <Filter>MainGame</Filter>
+    </ClCompile>
+    <ClCompile Include="KeyManager.cpp">
+      <Filter>2DFrameWork\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Backbuffer.cpp">
+      <Filter>2DFrameWork\Backbuffer</Filter>
+    </ClCompile>
+    <ClCompile Include="Image.cpp">
+      <Filter>2DFrameWork\Image</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderTest.cpp">
+      <Filter>MainGame\test</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageCropTest.cpp">
+      <Filter>MainGame\test</Filter>
+    </ClCompile>
+    <ClCompile Include="FrameRenderTest.cpp">
+      <Filter>MainGame\test</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>MainGame\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Monster.cpp">
+      <Filter>MainGame\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="TrigonometricTest.cpp">
+      <Filter>MainGame\test</Filter>
+    </ClCompile>
+    <ClCompile Include="Util.cpp">
+      <Filter>2DFrameWork\Utill</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionFunction.cpp">
+      <Filter>2DFrameWork\Utill</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="GameNode.h">
+      <Filter>2DFrameWork\GameNode</Filter>
+    </ClInclude>
+    <ClInclude Include="MainGame.h">
+      <Filter>MainGame</Filter>
+    </ClInclude>
+    <ClInclude Include="SingleTon.h">
+      <Filter>2DFrameWork\SingleTon</Filter>
+    </ClInclude>
+    <ClInclude Include="RandomFunction.h">
+      <Filter>2DFrameWork\Utill</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyManager.h">
+      <Filter>2DFrameWork\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="commonMacroFuntion.h">
+      <Filter>2DFrameWork\Utill</Filter>
+    </ClInclude>
+    <ClInclude Include="Backbuffer.h">
+      <Filter>2DFrameWork\Backbuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="MacroDefine.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="CustomDefine.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Image.h">
+      <Filter>2DFrameWork\Image</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderTest.h">
+      <Filter>MainGame\test</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageCropTest.h">
+      <Filter>MainGame\test</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameRenderTest.h">
+      <Filter>MainGame\test</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>MainGame\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Monster.h">
+      <Filter>MainGame\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="TrigonometricTest.h">
+      <Filter>MainGame\test</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionFunction.h">
+      <Filter>2DFrameWork\Utill</Filter>
+    </ClInclude>
+    <ClInclude Include="Util.h">
+      <Filter>2DFrameWork\Utill</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
