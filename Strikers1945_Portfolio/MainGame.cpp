@@ -35,6 +35,5 @@ void MainGame::Update() // º¯µ¿
 
 void MainGame::Render(HDC hdc) 
 {
-	
 }
 
