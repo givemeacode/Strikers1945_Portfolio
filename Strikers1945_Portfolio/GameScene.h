@@ -1,13 +1,23 @@
 #pragma once
 
 #include "MainGame.h"
+
 class Monster;
 
 class GameScene
 	: public MainGame
 {
 private:
-	Monster * _monster;
+	RECT rcClient;
+	Monster* _monster;
+
+	Image* _backGround;
+	float _y;
+
+	float _startTime;
+	float _daltaTime;
+	float _currentTime;
+	float _temp;
 public:
 	GameScene();
 	~GameScene();
