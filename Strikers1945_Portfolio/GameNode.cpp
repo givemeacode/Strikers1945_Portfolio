@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "GameNode.h"
-
+#include "SceneManager.h"
 GameNode::GameNode()
 {
 }
@@ -45,6 +45,7 @@ LRESULT GameNode::MainProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lPara
 	switch (iMessage)
 	{
 	case WM_CREATE:
+
 		break;
 	case WM_TIMER:
 		this->Update();

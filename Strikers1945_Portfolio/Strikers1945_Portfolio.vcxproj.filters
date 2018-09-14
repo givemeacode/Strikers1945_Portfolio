@@ -34,6 +34,18 @@
     <ClCompile Include="GameScene.cpp">
       <Filter>MainGame\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>MainGame\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="SingleTonTest.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="SingleTonTest2.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>2DFrameWork\Manager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Backbuffer.h">
@@ -83,6 +95,18 @@
     </ClInclude>
     <ClInclude Include="GameScene.h">
       <Filter>MainGame\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>MainGame\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="SingleTonTest2.h">
+      <Filter>Test</Filter>
+    </ClInclude>
+    <ClInclude Include="SingleTonTest.h">
+      <Filter>Test</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManager.h">
+      <Filter>2DFrameWork\Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

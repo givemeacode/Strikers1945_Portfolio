@@ -4,6 +4,7 @@
 
 GameScene::GameScene()
 {
+	sceneType = eSceneType::SCENE_TEST1;
 }
 
 
@@ -14,7 +15,7 @@ GameScene::~GameScene()
 
 bool GameScene::Init()
 {
-	MainGame::Init();
+	//MainGame::Init();
 	//=========================================================
 	player = new Player;
 
@@ -26,7 +27,7 @@ bool GameScene::Init()
 
 void GameScene::Release()
 {
-	MainGame::Release();
+	//MainGame::Release();
 	//=========================================================
 
 	SAFE_DELETE(player);
@@ -37,7 +38,7 @@ void GameScene::Release()
 
 void GameScene::Update()
 {
-	MainGame::Update();
+	//MainGame::Update();
 	//=========================================================
 	player->Update();
 
@@ -47,12 +48,12 @@ void GameScene::Update()
 
 void GameScene::Render(HDC hdc)
 {
-	HDC	backDC = (this->GetBackBuffer())->GetMemDC();
-	PatBlt(backDC, 0, 0, WINSIZEX, WINSIZEY, WHITENESS);
+	/*HDC	backDC = (this->GetBackBuffer())->GetMemDC();
+	PatBlt(backDC, 0, 0, WINSIZEX, WINSIZEY, WHITENESS);*/
 	//=========================================================
-	player->Render(backDC);
+	player->Render(hdc);
 
 	//=========================================================
 
-	this->GetBackBuffer()->Render(hdc, 0, 0);
+	//this->GetBackBuffer()->Render(hdc, 0, 0);
 }

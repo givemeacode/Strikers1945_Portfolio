@@ -4,10 +4,12 @@
 //#include "MacroDefine.h"
 #include "stdafx.h"
 
-#include "GameScene.h"
+//#include "GameScene.h"
+#include "MainGame.h"
 //=======================================================================================================================================================
 
-GameScene _gs;
+//GameScene _gs;
+MainGame _mg;
 HINSTANCE	_hInst;
 HWND		_hWnd;
 POINT		_ptMouse;
@@ -66,7 +68,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lPszCm
 
 
 	
-	if (!_gs.Init())
+	if (!_mg.Init())
 	{
 		return 0;
 	}
@@ -84,7 +86,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lPszCm
 LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 {
 	
-	return _gs.MainProc(hWnd, iMessage, wParam, lParam);
+	return _mg.MainProc(hWnd, iMessage, wParam, lParam);
 }
 
 void setWindowsSize(int x, int y, int width, int height)

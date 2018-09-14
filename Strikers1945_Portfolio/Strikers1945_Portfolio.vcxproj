@@ -124,6 +124,10 @@
     <ClCompile Include="MainGame.cpp" />
     <ClCompile Include="Monster.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Scene.cpp" />
+    <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="SingleTonTest.cpp" />
+    <ClCompile Include="SingleTonTest2.cpp" />
     <ClCompile Include="Util.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
@@ -140,7 +144,11 @@
     <ClInclude Include="Monster.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="RandomFunction.h" />
+    <ClInclude Include="Scene.h" />
+    <ClInclude Include="SceneManager.h" />
     <ClInclude Include="SingleTon.h" />
+    <ClInclude Include="SingleTonTest.h" />
+    <ClInclude Include="SingleTonTest2.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="CustomDefine.h" />
     <ClInclude Include="Util.h" />
