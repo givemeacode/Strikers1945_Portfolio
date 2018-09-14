@@ -1,0 +1,2 @@
+ImageName,Width,Height,FrameX,FrameY,Trans,R,G,B
+Effect_Crash,120,40,3,1,1,128,0,0

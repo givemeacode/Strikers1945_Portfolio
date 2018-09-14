@@ -1,0 +1,2 @@
+ImageName,Width,Height,FrameX,FrameY,Trans,R,G,B
+Effect_Boss,778,65,12,1,1,0,248,0

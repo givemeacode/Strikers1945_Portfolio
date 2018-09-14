@@ -1,0 +1,2 @@
+ImageName,Width,Height,FrameX,FrameY,Trans,R,G,B
+Effect_4,160,16,10,1,1,0,128,128

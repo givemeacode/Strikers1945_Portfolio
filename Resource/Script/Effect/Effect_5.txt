@@ -1,0 +1,2 @@
+ImageName,Width,Height,FrameX,FrameY,Trans,R,G,B
+Effect_5,2042,255,4,8,1,50,150,200

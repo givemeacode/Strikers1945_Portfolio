@@ -1,0 +1,2 @@
+ImageName,Width,Height,FrameX,FrameY,Trans,R,G,B
+Bomb_Bullet2,513,1542,2,6,1,0,248,0
