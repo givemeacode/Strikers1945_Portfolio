@@ -34,6 +34,21 @@
     <ClCompile Include="GameScene.cpp">
       <Filter>MainGame\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>MainGame\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Gun.cpp">
+      <Filter>MainGame\Object\Gun</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>MainGame\Object\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>2DFrameWork\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="GameSystem.cpp">
+      <Filter>2DFrameWork\Util\System</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Backbuffer.h">
@@ -84,6 +99,21 @@
     <ClInclude Include="GameScene.h">
       <Filter>MainGame\Scene</Filter>
     </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>MainGame\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Gun.h">
+      <Filter>MainGame\Object\Gun</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>MainGame\Object\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManager.h">
+      <Filter>2DFrameWork\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="GameSystem.h">
+      <Filter>2DFrameWork\Util\System</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="2DFrameWork">
@@ -133,6 +163,12 @@
     </Filter>
     <Filter Include="2DFrameWork\Func\SingleTon">
       <UniqueIdentifier>{b2e100c6-6bd0-473f-8a01-e44c50f44b4f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MainGame\Object\Gun">
+      <UniqueIdentifier>{3cb4e549-b1db-4cac-b245-752033e3702f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MainGame\Object\Bullet">
+      <UniqueIdentifier>{74738a1f-02f2-43d9-91b4-494fcde8d4f8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

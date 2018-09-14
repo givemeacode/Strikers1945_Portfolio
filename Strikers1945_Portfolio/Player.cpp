@@ -34,7 +34,7 @@ void Player::Init()
 void Player::Update()
 {
 	//======= 키 조작 .... 플레이어1의 x,y값을 이용해 클라이언트 영역 밖으로 나가는걸 제한함 =========
-	if (KEYMANAGER->isStayKeyDown(VK_LEFT) && player1.x  > 0)
+	if (KEYMANAGER->IsStayKeyDown(VK_LEFT) && player1.x  > 0)
 	{
 		player1.angle += 0.04f;
 		player1.x -= player1.speed;
@@ -43,7 +43,7 @@ void Player::Update()
 		dirChange = true;
 		playerImage->SetFrameX(3);
 	}
-	if (KEYMANAGER->isStayKeyDown(VK_RIGHT) && player1.x < WINSIZEX)
+	if (KEYMANAGER->IsStayKeyDown(VK_RIGHT) && player1.x < WINSIZEX)
 	{
 		player1.angle -= 0.04f;
 		player1.x += player1.speed;
@@ -52,19 +52,19 @@ void Player::Update()
 		dirChange = false;
 		playerImage->SetFrameX(3);
 	}
-	if (KEYMANAGER->isStayKeyDown(VK_UP) && player1.y > 0)
+	if (KEYMANAGER->IsStayKeyDown(VK_UP) && player1.y > 0)
 	{
 		player1.y -= player1.speed;
 		playerImage->SetY(playerImage->GetY() - player1.speed);
 	}
-	if (KEYMANAGER->isStayKeyDown(VK_DOWN) && player1.y < WINSIZEY)
+	if (KEYMANAGER->IsStayKeyDown(VK_DOWN) && player1.y < WINSIZEY)
 	{
 		player1.y += player1.speed;
 		playerImage->SetY(playerImage->GetY() + player1.speed);
 	}
 
 	// 스페이스 누르면 총알 발사  - Once Down
-	if (KEYMANAGER->isOnceKeyDown(VK_SPACE))
+	if (KEYMANAGER->IsOnceKeyDown(VK_SPACE))
 	{
 		// 총알발사 함수
 		//
@@ -73,11 +73,11 @@ void Player::Update()
 
 
 	// ====== 테스트용 ... D를 누르면 플레이어의 렉트 출력===============
-	if (KEYMANAGER->isStayKeyDown(0x44))
+	if (KEYMANAGER->IsStayKeyDown(0x44))
 	{
 		Check = true;
 	}
-	if (KEYMANAGER->isOnceKeyUp(0x44))
+	if (KEYMANAGER->IsOnceKeyUp(0x44))
 	{
 		Check = false;
 	}

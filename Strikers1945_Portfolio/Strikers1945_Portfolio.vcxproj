@@ -116,23 +116,31 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Backbuffer.cpp" />
+    <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="CollisionFunction.cpp" />
     <ClCompile Include="GameNode.cpp" />
     <ClCompile Include="GameScene.cpp" />
+    <ClCompile Include="GameSystem.cpp" />
+    <ClCompile Include="Gun.cpp" />
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="KeyManager.cpp" />
     <ClCompile Include="MainGame.cpp" />
     <ClCompile Include="Monster.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Scene.cpp" />
+    <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="Util.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Backbuffer.h" />
+    <ClInclude Include="Bullet.h" />
     <ClInclude Include="CollisionFunction.h" />
     <ClInclude Include="commonMacroFuntion.h" />
     <ClInclude Include="GameNode.h" />
     <ClInclude Include="GameScene.h" />
+    <ClInclude Include="GameSystem.h" />
+    <ClInclude Include="Gun.h" />
     <ClInclude Include="Image.h" />
     <ClInclude Include="KeyManager.h" />
     <ClInclude Include="MacroDefine.h" />
@@ -140,6 +148,8 @@
     <ClInclude Include="Monster.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="RandomFunction.h" />
+    <ClInclude Include="Scene.h" />
+    <ClInclude Include="SceneManager.h" />
     <ClInclude Include="SingleTon.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="CustomDefine.h" />

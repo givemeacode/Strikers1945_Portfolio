@@ -18,13 +18,13 @@ public:
 	bool Init();
 	void Release();
 
-	bool isOnceKeyDown(int _key);
-	bool isOnceKeyUp(int _key);
-	bool isStayKeyDown(int _key);
-	bool isToggleKey(int _key);
+	bool IsOnceKeyDown(int _key);
+	bool IsOnceKeyUp(int _key);
+	bool IsStayKeyDown(int _key);
+	bool IsToggleKey(int _key);
 
-	bitset<KEYMAX> getKeyUp() { return _keyUp; }
-	bitset<KEYMAX> getKeyDown() { return _keyDown; }
+	bitset<KEYMAX> GetKeyUp() { return _keyUp; }
+	bitset<KEYMAX> GetKeyDown() { return _keyDown; }
 
 	void setKeyDown(int _key, bool _state)
 	{
