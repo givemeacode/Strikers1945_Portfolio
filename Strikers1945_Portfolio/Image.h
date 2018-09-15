@@ -97,7 +97,6 @@ public:
 	// 스프라이트 이미지 랜더용
 	void	FrameRender(HDC hdc, int destX, int destY);
 	void	FrameRender(HDC hdc, int destX, int destY, int currentframeX, int currentframeY);
-	
 
 	/*
 	 inline 은 함수 호출 비용을없앰.. = 함수호출시 그전 내용을 멈추고 호출된 함수로 점프(넘어가게)되는데.. 그걸 없앰. 

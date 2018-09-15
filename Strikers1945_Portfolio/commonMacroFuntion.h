@@ -40,3 +40,41 @@ inline void RectangleMakeCenter(HDC hdc, int x, int y, int width, int height)
 {
 	Rectangle(hdc, x - (width / 2), y - (height / 2), x + (width / 2), y + (height / 2));
 }
+
+
+inline void DrawObject(HDC hdc, const RECT& rc, int size, const COLORREF penColor, const COLORREF brColor, const OBJ_TYPE nType, const int ropCode = R2_XORPEN)
+{
+	HPEN hPen, hOldPen;
+	HBRUSH hBrush, hOldBrush;
+
+	//Restoperation : 이미지위에 이미지가 있으면 어떻게 처리하겠는가..
+	//SetROP2(hdc, ropCode);
+
+	hPen = CreatePen(PS_SOLID, size, penColor);
+	hOldPen = (HPEN)SelectObject(hdc, hPen);
+
+	hBrush = CreateSolidBrush(brColor);
+	hOldBrush = (HBRUSH)SelectObject(hdc, hBrush);
+
+	switch (nType)
+	{
+	case ELLIPSE:
+		Ellipse(hdc, rc.left, rc.top, rc.right, rc.bottom);
+		break;
+	case RECTANGLE:
+		Rectangle(hdc, rc.left, rc.top, rc.right, rc.bottom);
+		break;
+	}
+
+	SelectObject(hdc, hOldPen);
+	SelectObject(hdc, hOldBrush);
+
+	DeleteObject(hPen);
+	DeleteObject(hBrush);
+}
+
+
+inline void DrawObject(HDC hdc, const RECT& rc, int size, const COLORREF color, const OBJ_TYPE nType, const int ropCode = R2_XORPEN)
+{
+	DrawObject(hdc, rc, size, color, color, nType, ropCode);
+}

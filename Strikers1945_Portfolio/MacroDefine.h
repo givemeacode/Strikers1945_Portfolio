@@ -14,7 +14,7 @@
 // 윈도우 사이즈 관련 매크로
 #define WINSTYLE	WS_CAPTION | WS_SYSMENU
 
-#define WINSIZEX	800
+#define WINSIZEX	1200
 #define WINSIZEY	800
 #define WINSTARTX	0
 #define WINSTARTY	0
@@ -22,6 +22,7 @@
 // 싱글턴 객체 매크로
 #define RAND		RandomFunction::getSingleton()
 #define KEYMANAGER	KeyManager::getSingleton()
+#define GAMESYS     GameSystem::getSingleton()
 
 //
 #define PI			3.141592f
