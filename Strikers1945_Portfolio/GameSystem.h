@@ -2,6 +2,9 @@
 
 #include "SingleTon.h"
 
+class Player;
+class Monster;
+
 struct sCharacterPositon
 {
 	RECT rcGameLeft1;
@@ -27,10 +30,16 @@ class GameSystem
 {
 private:
 	RECT rcClient;
+	Player* player;
+	
 public:
 	GameSystem();
 	~GameSystem();
 public:
 	RECT GetGameClientRect();
+public:
+	void SetPlayer(Player* _player);
+	void CollisionCharacter(Monster* _monster,RECT& rcTest);
+	void GameSceneMonsterInit();
 };
 

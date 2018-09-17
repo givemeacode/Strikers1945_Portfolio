@@ -8,5 +8,8 @@ public:
 	~CollisionObject();
 public:
 	bool Init();
+public:
+	RECT GetRectCollision();
+	void SetRectCollision(RECT rc);
 };
 

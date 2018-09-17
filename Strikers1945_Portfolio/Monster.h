@@ -36,11 +36,13 @@ private:
 private:
 	Gun* _gun;
 
+	float fStartTime;
+	float CurrentTime;
 public:
 	Monster();
 	~Monster();
 public:
-	bool Init(eMonsterType type);
+	bool Init(eMonsterType type ,int x, int y);
 	void Update();
 	void Render(HDC hdc);
 public:
@@ -54,5 +56,7 @@ public:
 	void SetPivotY(float y);
 
 	void SetCenterPivot(RECT rc);
+
+	Gun* GetGun() { return _gun; }
 };
 

@@ -12,11 +12,12 @@ Bullet::~Bullet()
 {
 }
 
-bool Bullet::Init(float x, float y)
+bool Bullet::Init(float _x, float _y, float _radius)
 {
-	rcBullet = RectMakeCenter(x, y, 30, 30);
-	fPosX = x;
-	fPosY = y;
+	rcBullet = RectMakeCenter(_x, _y, _radius * 2, _radius * 2);
+	fPosX = _x;
+	fPosY = _y;
+	fRadius = _radius;
 	return true;
 }
 
@@ -66,4 +67,9 @@ void Bullet::SetPivotY(float y)
 
 void Bullet::SetCenterPivot(RECT rc)
 {
+}
+
+float Bullet::GetRadius()
+{
+	return fRadius;
 }

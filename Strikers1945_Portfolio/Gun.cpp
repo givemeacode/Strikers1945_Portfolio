@@ -5,6 +5,7 @@
 
 Gun::Gun()
 {
+	fAngle = PI + (PI / 2);
 }
 
 
@@ -29,10 +30,18 @@ bool Gun::Init(eGunType type,float x, float y)
 void Gun::Render(HDC hdc)
 {
 	std::list<Bullet*>::iterator iter;
-	for (iter = bulletList.begin(); iter != bulletList.end(); iter++)
+	if (!bulletList.empty())
 	{
-		(*iter)->Render(hdc);
+		for (iter = bulletList.begin(); iter != bulletList.end(); iter++)
+		{
+
+			if ((*iter)->GetIsBulletFire())
+			{
+				(*iter)->Render(hdc);
+			}
+		}
 	}
+	
 
 }
 
@@ -43,7 +52,7 @@ void Gun::Release()
 void Gun::BulletFire(float x, float y)
 {
 	Bullet* bullet = new Bullet();
-	bullet->Init(x, y);
+	bullet->Init(x, y, 15);				// 반지름 사용 
 	bullet->SetIsBulletFire(true);
 	bulletList.push_back(bullet);
 	//if (!_bullet->isFire)
@@ -59,16 +68,47 @@ void Gun::BulletFire(float x, float y)
 void Gun::BulletMove()
 {
 	std::list<Bullet*>::iterator iter;
-	for (iter = bulletList.begin(); iter != bulletList.end(); iter++)
+	if (!bulletList.empty())
 	{
-		if ((*iter)->GetIsBulletFire())
+		for (iter = bulletList.begin(); iter != bulletList.end(); iter++)
 		{
-			(*iter)->SetPivotX((*iter)->GetPivotX() + (cosf(PI/ 2) * 3.0f));
-			(*iter)->SetPivotY((*iter)->GetPivotY() + (-sinf(PI/2) * 3.0f));
+			if ((*iter)->GetIsBulletFire())
+			{
+				(*iter)->SetPivotX((*iter)->GetPivotX() + (cosf(fAngle) * 8.0f));
+				(*iter)->SetPivotY((*iter)->GetPivotY() + (-sinf(fAngle) * 8.0f));
+				// 위치 갱신
+				(*iter)->Update();
 
-		
-			(*iter)->Update();
+				// 충돌처리
+				if ((*iter)->GetPivotY() <= 15 || (*iter)->GetPivotY() >= WINSIZEY)
+				{
+			 		(*iter)->SetIsBulletFire(false);
+					//delete (*iter);
+					//iter = bulletList.erase(iter);
+					//
+					//if (bulletList.empty())
+					//{
+					//	break;
+					//}
+				}
+			}
 		}
+
+		// 삭제 
+		for (iter = bulletList.begin(); iter != bulletList.end(); iter++)
+		{
+			if (!(*iter)->GetIsBulletFire())
+			{
+				delete (*iter);
+				iter = bulletList.erase(iter);
+
+				if (bulletList.empty())
+				{
+					break;
+				}
+			}
+		}
+
 	}
 }
 
@@ -78,12 +118,12 @@ void Gun::SetPivot(float x, float y)
 
 float Gun::GetPivotX()
 {
-	return 0.0f;
+	return fPosX;
 }
 
 float Gun::GetPivotY()
 {
-	return 0.0f;
+	return fPosY;
 }
 
 void Gun::SetPivotX(float x)
@@ -96,4 +136,9 @@ void Gun::SetPivotY(float y)
 
 void Gun::SetCenterPivot(RECT rc)
 {
+}
+
+std::list<Bullet*>& Gun::GetBulletList()
+{
+	return bulletList;
 }

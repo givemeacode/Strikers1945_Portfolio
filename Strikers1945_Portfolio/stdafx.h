@@ -5,6 +5,7 @@
 #include <tchar.h>
 #include <stdio.h>
 #include <math.h>
+#include <mmsystem.h>
 
 #include <ostream>
 #include <algorithm>

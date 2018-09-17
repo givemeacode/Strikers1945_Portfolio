@@ -12,7 +12,7 @@ Monster::~Monster()
 {
 }
 
-bool Monster::Init(eMonsterType type)
+bool Monster::Init(eMonsterType type, int x , int y)
 {
 	//rcGameClient = GAMESYS->GetGameClientRect();
 	//rcGameClient.left = rcGameClient.left + 100;
@@ -35,18 +35,21 @@ bool Monster::Init(eMonsterType type)
 	//rcPosY = (rcObj.top + ((rcObj.bottom - rcObj.top)/2));
 	
 	//================================================== ÃÑ¾Ë ¿¬½À ================================
-	rcMonster = RectMakeCenter(WINSIZEX / 2, WINSIZEY / 2, 50, 50);
+	rcMonster = RectMakeCenter(x,y , 50, 50);
 	
 	SetCenterPivot(rcMonster);
 	
 	_gun = new Gun();
 	_gun->Init(eGunType::GUN_NONE, GetPivotX(), GetPivotY()); 
 
+	fStartTime = GetTickCount();
 	return true;
 }
 
 void Monster::Update()
 {
+	CurrentTime = GetTickCount();
+
 	MonsterAI();
 }
 
@@ -66,6 +69,7 @@ void Monster::Render(HDC hdc)
 
 void Monster::MonsterAI()
 {
+
 	//rcObj.right += cosf(0) * 2.0f;
 	//rcObj.left += cosf(0) * 2.0f;
 	//rcObj.top += -sinf(PI) * 2.0f;
@@ -85,7 +89,7 @@ void Monster::MonsterAI()
 
 	//
 	//rcObj = RectMakeCenter(rcPosX, rcPosY, 50, 50);
-	
+	/*
 	if (KEYMANAGER->IsStayKeyDown(VK_LEFT))
 	{
 		SetPivotX(GetPivotX() - (cosf(0)) * 2.0f);
@@ -100,7 +104,14 @@ void Monster::MonsterAI()
 	{
 		_gun->BulletFire(GetPivotX(),GetPivotY());
 	}
+*/	
 
+	float deltaTime = (CurrentTime - fStartTime) / 1000.f;
+	if (deltaTime > 0.5f)
+	{
+		_gun->BulletFire(GetPivotX(), GetPivotY());
+		fStartTime = GetTickCount();
+	}
 	_gun->BulletMove();
 	//
 	rcMonster = RectMakeCenter(GetPivotX(), GetPivotY(), 50, 50);

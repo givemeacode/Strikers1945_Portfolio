@@ -19,6 +19,7 @@ private:
 	float fPivotY;
 	float fPosX;
 	float fPosY;
+	float fAngle;
 private:
 	std::list<Bullet*> bulletList;
 public:
@@ -40,5 +41,6 @@ public:
 	void SetPivotY(float y);
 
 	void SetCenterPivot(RECT rc);
+	std::list<Bullet*>& GetBulletList();
 };
 

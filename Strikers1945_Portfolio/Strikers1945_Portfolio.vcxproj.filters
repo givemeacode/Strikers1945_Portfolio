@@ -120,6 +120,7 @@
     <ClInclude Include="CollisionObject.h">
       <Filter>MainGame\Object</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="2DFrameWork">
@@ -176,5 +177,14 @@
     <Filter Include="MainGame\Object\Bullet">
       <UniqueIdentifier>{74738a1f-02f2-43d9-91b4-494fcde8d4f8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="리소스">
+      <UniqueIdentifier>{a13f5188-e232-401f-b3ce-b7168157e74f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Strikers1945_Portfolio.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="Stage1.wav" />
   </ItemGroup>
 </Project>
