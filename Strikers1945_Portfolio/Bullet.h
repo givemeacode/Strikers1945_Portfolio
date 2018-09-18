@@ -7,13 +7,14 @@ private:
 	float fPosY;
 	float fPivotX;
 	float fPivotY;
+	float fRadius;
 	bool isBulletFire;
 	bool isCollision;
 public:
 	Bullet();
 	~Bullet();
 public:
-	bool Init(float x, float y);
+	bool Init(float x, float y, float _radius);
 	void Update();
 	void Render(HDC hdc);
 public:
@@ -27,13 +28,10 @@ public:
 	void SetPivotY(float y);
 
 	void SetCenterPivot(RECT rc);
-<<<<<<< master
-=======
 
 public:
 	float GetRadius();
 	bool GetIsCollision();
 	void SetIsCollision(bool _iscollision);
->>>>>>> local
 };
 

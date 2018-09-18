@@ -163,11 +163,7 @@
     <ClInclude Include="MultiGun.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="RandomFunction.h" />
-<<<<<<< master
-=======
-    <ClInclude Include="resource.h" />
     <ClInclude Include="RevolvingGun.h" />
->>>>>>> local
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="SingleTon.h" />

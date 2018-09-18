@@ -5,6 +5,7 @@
 
 Gun::Gun()
 {
+	fAngle = PI + (PI / 2);
 }
 
 
@@ -24,20 +25,19 @@ bool Gun::Init(float x, float y)
 
 void Gun::Render(HDC hdc)
 {
-<<<<<<< master
-	std::list<Bullet*>::iterator iter;
-	for (iter = bulletList.begin(); iter != bulletList.end(); iter++)
-=======
 	/*std::list<Bullet*>::iterator iter;
 	if (!bulletList.empty())
->>>>>>> local
 	{
-		(*iter)->Render(hdc);
+		for (iter = bulletList.begin(); iter != bulletList.end(); iter++)
+		{
+
+			if ((*iter)->GetIsBulletFire())
+			{
+				(*iter)->Render(hdc);
+			}
+		}
 	}
-<<<<<<< master
-=======
 	*/
->>>>>>> local
 
 }
 
@@ -47,19 +47,12 @@ void Gun::Release()
 
 void Gun::BulletFire(float x, float y)
 {
-<<<<<<< master
-	Bullet* bullet = new Bullet();
-	bullet->Init(x, y);
-	bullet->SetIsBulletFire(true);
-	bulletList.push_back(bullet);  
-=======
 	//Bullet* bullet = new Bullet();
 	//bullet->Init(x, y, 15);				// 반지름 사용 
 	//bullet->SetIsBulletFire(true);
 	//bulletList.push_back(bullet);
 
 
->>>>>>> local
 	//if (!_bullet->isFire)
 	//{
 	//	_bullet->isFire = true;
@@ -72,20 +65,6 @@ void Gun::BulletFire(float x, float y)
 
 void Gun::BulletMove()
 {
-<<<<<<< master
-	std::list<Bullet*>::iterator iter;
-	for (iter = bulletList.begin(); iter != bulletList.end(); iter++)
-	{
-		if ((*iter)->GetIsBulletFire())
-		{
-			(*iter)->SetPivotX((*iter)->GetPivotX() + (cosf(PI/ 2) * 20.0f)); // 맨뒤 값은 총알 속도.
-			(*iter)->SetPivotY((*iter)->GetPivotY() + (-sinf(PI/2) * 20.0f));
-
-		
-			(*iter)->Update();
-		}
-	}
-=======
 	//std::list<Bullet*>::iterator iter;
 	//if (!bulletList.empty())
 	//{
@@ -129,7 +108,6 @@ void Gun::BulletMove()
 	//	}
 
 	//}
->>>>>>> local
 }
 
 void Gun::SetPivot(float x, float y)
@@ -138,12 +116,12 @@ void Gun::SetPivot(float x, float y)
 
 float Gun::GetPivotX()
 {
-	return 0.0f;
+	return fPosX;
 }
 
 float Gun::GetPivotY()
 {
-	return 0.0f;
+	return fPosY;
 }
 
 void Gun::SetPivotX(float x)
@@ -156,4 +134,9 @@ void Gun::SetPivotY(float y)
 
 void Gun::SetCenterPivot(RECT rc)
 {
+}
+
+std::list<Bullet*>& Gun::GetBulletList()
+{
+	return bulletList;
 }

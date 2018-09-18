@@ -144,9 +144,6 @@
     <ClInclude Include="CollisionObject.h">
       <Filter>MainGame\Object</Filter>
     </ClInclude>
-    <ClInclude Include="resource.h">
-      <Filter>리소스</Filter>
-    </ClInclude>
     <ClInclude Include="DegreeGun.h">
       <Filter>MainGame\Object\Gun</Filter>
     </ClInclude>
@@ -236,15 +233,5 @@
     <Filter Include="2DFrameWork\Timer">
       <UniqueIdentifier>{056ddfab-a701-4bd8-86b0-406e6dd75f4c}</UniqueIdentifier>
     </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <Media Include="Stage1.wav">
-      <Filter>리소스</Filter>
-    </Media>
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="Strikers1945_Portfolio.rc">
-      <Filter>리소스</Filter>
-    </ResourceCompile>
   </ItemGroup>
 </Project>

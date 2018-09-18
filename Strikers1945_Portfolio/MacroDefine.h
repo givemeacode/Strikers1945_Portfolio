@@ -2,10 +2,6 @@
 
 // 사용자 정의 빌드 구분
 
-
-
-
-
 // 메모리 해제 매크로
 // Backbuffer
 #define SAFE_DELETE(p)	{if(p) {delete(p);(p) = NULL;}}

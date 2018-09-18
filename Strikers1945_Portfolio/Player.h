@@ -2,45 +2,40 @@
 //#define PLAYERSPEED 5
 #define PLAYERSIZE	22 // 플레이어 렉트의 크기
 class Image;
-
-class Gun;
 //
+struct Player1
+{
+	float x, y;
+	float angle;
+	float endx, endy;
+	float length;
+	float speed;
 
+	RECT rc;
+};
 
 class Player
 {
 private:
 
 	Image * playerImage;
-	Gun *	gun;
+
 	int		dirChange;
 	int		nCount;
 	int		iIndex;
-	
-	float	x, y;
-	float	angle;
-	float	endx, endy;
-	float	length;
-	float	speed;
-
-	RECT	collisionBox;	// 충돌처리 해주는 원
-	RECT	rc;				// 이미지크기의 렉트
 
 	//
+	Player1 player1;
 
-	bool check; // 테스트용
+	bool Check; // 테스트용
 
-public:		
+public:
 	Player();
-	~Player();	
+	~Player();
 public:
 	void Init();
 	void Update();
 	void Render(HDC hdc);
-public:
-	void PositionInit();
-	void MoveKey();
-	void FireKey();
 	//========================
 };
 

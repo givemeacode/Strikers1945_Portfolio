@@ -18,7 +18,7 @@ private:
 	float fAngle;
 	RECT rcMonster;
 	RECT rcCollision;
-	
+
 private:
 	//RECT rcMonster1;
 	//RECT rcMonster2;
@@ -36,16 +36,18 @@ private:
 private:
 	Gun* _gun;
 
+	float fStartTime;
+	float CurrentTime;
 public:
 	Monster();
 	~Monster();
 public:
-	bool Init(eMonsterType type);
+	bool Init(eMonsterType type, int x, int y);
 	void Update();
 	void Render(HDC hdc);
 public:
 	void MonsterAI();
-	
+
 public:
 	void SetPivot(float x, float y);
 	float GetPivotX();
@@ -54,5 +56,7 @@ public:
 	void SetPivotY(float y);
 
 	void SetCenterPivot(RECT rc);
+
+	Gun* GetGun() { return _gun; }
 };
 
