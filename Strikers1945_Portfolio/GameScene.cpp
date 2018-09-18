@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "GameScene.h"
-//#include "Player.h"
-#include "Monster.h"
+#include "Player.h"
+//#include "Monster.h"
 
 GameScene::GameScene()
 {
@@ -17,8 +17,7 @@ bool GameScene::Init()
 {
 	MainGame::Init();
 	//=========================================================
-//	player = new Player;
-<<<<<<< master
+
 	_monster = new Monster();
 	_monster->Init(eMonsterType::MONSTER_TYPE_NONE);
 =======
@@ -65,7 +64,7 @@ void GameScene::Release()
 	MainGame::Release();
 	//=========================================================
 
-//	SAFE_DELETE(player);
+	SAFE_DELETE(player);
 
 	//=========================================================
 
@@ -75,8 +74,8 @@ void GameScene::Update()
 {
 	MainGame::Update();
 	//=========================================================
-	//player->Update();
-	_monster->Update();
+	player->Update();
+//	_monster->Update();
 <<<<<<< master
 =======
 	//GAMESYS->CollisionCharacter(_monster, rcTest);
@@ -97,8 +96,8 @@ void GameScene::Render(HDC hdc)
 	HDC	backDC = (this->GetBackBuffer())->GetMemDC();
 	PatBlt(backDC, 0, 0, WINSIZEX, WINSIZEY, WHITENESS);
 	//=========================================================
-	//player->Render(backDC);
-	_monster->Render(backDC);
+	player->Render(backDC);
+	//_monster->Render(backDC);
 <<<<<<< master
 =======
 	//Rectangle(backDC, rcTest.left, rcTest.top, rcTest.right, rcTest.bottom);

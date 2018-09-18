@@ -51,7 +51,7 @@ void Gun::BulletFire(float x, float y)
 	Bullet* bullet = new Bullet();
 	bullet->Init(x, y);
 	bullet->SetIsBulletFire(true);
-	bulletList.push_back(bullet);
+	bulletList.push_back(bullet);  
 =======
 	//Bullet* bullet = new Bullet();
 	//bullet->Init(x, y, 15);				// 반지름 사용 
@@ -78,8 +78,8 @@ void Gun::BulletMove()
 	{
 		if ((*iter)->GetIsBulletFire())
 		{
-			(*iter)->SetPivotX((*iter)->GetPivotX() + (cosf(PI/ 2) * 3.0f));
-			(*iter)->SetPivotY((*iter)->GetPivotY() + (-sinf(PI/2) * 3.0f));
+			(*iter)->SetPivotX((*iter)->GetPivotX() + (cosf(PI/ 2) * 20.0f)); // 맨뒤 값은 총알 속도.
+			(*iter)->SetPivotY((*iter)->GetPivotY() + (-sinf(PI/2) * 20.0f));
 
 		
 			(*iter)->Update();
