@@ -1,25 +1,25 @@
 #pragma once
-#include "Backbuffer.h"
-
-class Backbuffer;
+#include "BackBuffer.h"
 
 class GameNode
 {
-	Backbuffer * _backBuffer;
+private:
+	Backbuffer*		_backBuffer;
+
+	bool			_managerInit;
 
 	void SetBackBuffer();
-private:
-	
 public:
 	GameNode();
 	virtual ~GameNode();
 
 	virtual bool Init();
+	virtual bool Init(bool mInit);
 	virtual void Release();
 	virtual void Update();
 	virtual void Render(HDC hdc);
 
-	Backbuffer * GetBackBuffer() { return _backBuffer; }
+	Backbuffer* GetBackBuffer() { return _backBuffer; }
 
 	LRESULT MainProc(HWND, UINT, WPARAM, LPARAM);
 

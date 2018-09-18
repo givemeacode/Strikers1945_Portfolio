@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Monster.h"
 #include "Gun.h"
-
+#include "DegreeGun.h"
 Monster::Monster()
 {
 	fAngle = PI + PI / 2;
@@ -39,8 +39,10 @@ bool Monster::Init(eMonsterType type)
 	
 	SetCenterPivot(rcMonster);
 	
-	_gun = new Gun();
-	_gun->Init(eGunType::GUN_NONE, GetPivotX(), GetPivotY()); 
+	//_gun = new Gun();
+	_gun = new DegreeGun();
+
+	_gun->Init(GetPivotX(), GetPivotY()); 
 
 	return true;
 }

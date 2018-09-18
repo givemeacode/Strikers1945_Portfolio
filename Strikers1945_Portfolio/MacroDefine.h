@@ -23,7 +23,8 @@
 #define RAND		RandomFunction::getSingleton()
 #define KEYMANAGER	KeyManager::getSingleton()
 #define GAMESYS     GameSystem::getSingleton()
-
+#define TIMEMANAGER		TimeManager::getSingleton()
+#define IMAGEMANAGER	ImageManager::getSingleton()
 //
 #define PI			3.141592f
 #define PI2			PI*2

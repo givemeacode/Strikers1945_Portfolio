@@ -72,12 +72,30 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lPszCm
 	}
 
 	ShowWindow(_hWnd, cmdShow);
+	HDC hdc = GetDC(_hWnd);
 
-	while (GetMessage(&message, 0, 0, 0))
+	while (true)
 	{
-		TranslateMessage(&message);
-		DispatchMessage(&message);
+		if (PeekMessage(&message, NULL, 0, 0, PM_REMOVE))
+		{
+			if (message.message == WM_QUIT)
+				break;
+
+			TranslateMessage(&message);
+			DispatchMessage(&message);
+		}
+		else
+		{
+			TIMEMANAGER->Update(60.f);
+
+			_gs.Update();
+			_gs.Render(hdc);
+		}
 	}
+
+	_gs.Release();
+
+	ReleaseDC(_hWnd, hdc);
 	return message.wParam;
 }
 

@@ -12,15 +12,11 @@ Gun::~Gun()
 {
 }
 
-bool Gun::Init(eGunType type,float x, float y)
+bool Gun::Init(float x, float y)
 {
-	switch (type)
-	{
-	case eGunType::GUN_NONE:
-		fPosX = x;
- 		fPosY = y + 3;
-		break;
-	}
+	/*fPosX = x;
+	fPosY = y + 3;
+	*/
 	return true;
 }
 
@@ -28,11 +24,20 @@ bool Gun::Init(eGunType type,float x, float y)
 
 void Gun::Render(HDC hdc)
 {
+<<<<<<< master
 	std::list<Bullet*>::iterator iter;
 	for (iter = bulletList.begin(); iter != bulletList.end(); iter++)
+=======
+	/*std::list<Bullet*>::iterator iter;
+	if (!bulletList.empty())
+>>>>>>> local
 	{
 		(*iter)->Render(hdc);
 	}
+<<<<<<< master
+=======
+	*/
+>>>>>>> local
 
 }
 
@@ -42,10 +47,19 @@ void Gun::Release()
 
 void Gun::BulletFire(float x, float y)
 {
+<<<<<<< master
 	Bullet* bullet = new Bullet();
 	bullet->Init(x, y);
 	bullet->SetIsBulletFire(true);
 	bulletList.push_back(bullet);
+=======
+	//Bullet* bullet = new Bullet();
+	//bullet->Init(x, y, 15);				// 반지름 사용 
+	//bullet->SetIsBulletFire(true);
+	//bulletList.push_back(bullet);
+
+
+>>>>>>> local
 	//if (!_bullet->isFire)
 	//{
 	//	_bullet->isFire = true;
@@ -58,6 +72,7 @@ void Gun::BulletFire(float x, float y)
 
 void Gun::BulletMove()
 {
+<<<<<<< master
 	std::list<Bullet*>::iterator iter;
 	for (iter = bulletList.begin(); iter != bulletList.end(); iter++)
 	{
@@ -70,6 +85,51 @@ void Gun::BulletMove()
 			(*iter)->Update();
 		}
 	}
+=======
+	//std::list<Bullet*>::iterator iter;
+	//if (!bulletList.empty())
+	//{
+	//	for (iter = bulletList.begin(); iter != bulletList.end(); iter++)
+	//	{
+	//		if ((*iter)->GetIsBulletFire())
+	//		{
+	//			(*iter)->SetPivotX((*iter)->GetPivotX() + (cosf(fAngle) * 8.0f));
+	//			(*iter)->SetPivotY((*iter)->GetPivotY() + (-sinf(fAngle) * 8.0f));
+	//			// 위치 갱신
+	//			(*iter)->Update();
+
+	//			// 충돌처리
+	//			if ((*iter)->GetPivotY() <= 15 || (*iter)->GetPivotY() >= WINSIZEY)
+	//			{
+	//		 		(*iter)->SetIsBulletFire(false);
+	//				//delete (*iter);
+	//				//iter = bulletList.erase(iter);
+	//				//
+	//				//if (bulletList.empty())
+	//				//{
+	//				//	break;
+	//				//}
+	//			}
+	//		}
+	//	}
+
+	//	// 삭제 
+	//	for (iter = bulletList.begin(); iter != bulletList.end(); iter++)
+	//	{
+	//		if (!(*iter)->GetIsBulletFire())
+	//		{
+	//			delete (*iter);
+	//			iter = bulletList.erase(iter);
+
+	//			if (bulletList.empty())
+	//			{
+	//				break;
+	//			}
+	//		}
+	//	}
+
+	//}
+>>>>>>> local
 }
 
 void Gun::SetPivot(float x, float y)

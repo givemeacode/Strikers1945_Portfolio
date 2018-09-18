@@ -1,5 +1,7 @@
 #pragma once
 
+#pragma warning(disable:4996)
+
 #include <Windows.h>
 #include <assert.h>
 #include <tchar.h>
@@ -12,6 +14,7 @@
 #include <list>
 #include <map>
 #include <random>
+#include <string>
 
 
 // 사용자 정의 헤더
@@ -23,7 +26,11 @@
 #include "CollisionFunction.h"
 #include "Util.h"
 #include "RandomFunction.h"
-#include "KeyManager.h"
+//#include "KeyManager.h"
 #include "Image.h"
 #include "GameNode.h"
 #include "GameSystem.h"
+
+#include "KeyManager.h"
+#include "TimeManager.h"
+#include "ImageManager.h"

@@ -2,35 +2,27 @@
 
 class Bullet;
 
-enum eGunType
-{
-	GUN_NONE,
-
-};
-
 
 class Gun
 {
-private:
+protected:
 	float fCoolTime;
-private:
-	//RECT rcGun;
 	float fPivotX;
 	float fPivotY;
 	float fPosX;
 	float fPosY;
-private:
+protected:
 	std::list<Bullet*> bulletList;
 public:
 	Gun();
 	~Gun();
 public:
-	bool Init(eGunType type,float x, float y);
-	void Render(HDC hdc);
-	void Release();
+	virtual bool Init(float x, float y);
+	virtual void Render(HDC hdc);
+	virtual void Release();
 public:
-	void BulletFire(float x, float y);
-	void BulletMove();
+	virtual void BulletFire(float x, float y);
+	virtual void BulletMove();
 public:
 
 	void SetPivot(float x, float y);

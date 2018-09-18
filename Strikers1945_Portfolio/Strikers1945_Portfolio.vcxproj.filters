@@ -52,6 +52,30 @@
     <ClCompile Include="CollisionObject.cpp">
       <Filter>MainGame\Object</Filter>
     </ClCompile>
+    <ClCompile Include="DegreeGun.cpp">
+      <Filter>MainGame\Object\Gun</Filter>
+    </ClCompile>
+    <ClCompile Include="GuidedMissileGun.cpp">
+      <Filter>MainGame\Object\Gun</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiGun.cpp">
+      <Filter>MainGame\Object\Gun</Filter>
+    </ClCompile>
+    <ClCompile Include="RevolvingGun.cpp">
+      <Filter>MainGame\Object\Gun</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation.cpp">
+      <Filter>2DFrameWork\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageManager.cpp">
+      <Filter>2DFrameWork\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Timer.cpp">
+      <Filter>2DFrameWork\Timer</Filter>
+    </ClCompile>
+    <ClCompile Include="TimeManager.cpp">
+      <Filter>2DFrameWork\Manager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Backbuffer.h">
@@ -120,6 +144,33 @@
     <ClInclude Include="CollisionObject.h">
       <Filter>MainGame\Object</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>리소스</Filter>
+    </ClInclude>
+    <ClInclude Include="DegreeGun.h">
+      <Filter>MainGame\Object\Gun</Filter>
+    </ClInclude>
+    <ClInclude Include="GuidedMissileGun.h">
+      <Filter>MainGame\Object\Gun</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiGun.h">
+      <Filter>MainGame\Object\Gun</Filter>
+    </ClInclude>
+    <ClInclude Include="RevolvingGun.h">
+      <Filter>MainGame\Object\Gun</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>2DFrameWork\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageManager.h">
+      <Filter>2DFrameWork\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.h">
+      <Filter>2DFrameWork\Timer</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeManager.h">
+      <Filter>2DFrameWork\Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="2DFrameWork">
@@ -176,5 +227,24 @@
     <Filter Include="MainGame\Object\Bullet">
       <UniqueIdentifier>{74738a1f-02f2-43d9-91b4-494fcde8d4f8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="리소스">
+      <UniqueIdentifier>{a13f5188-e232-401f-b3ce-b7168157e74f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2DFrameWork\Animation">
+      <UniqueIdentifier>{3bc1cb57-2180-4b84-80e7-b4adaf1695fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2DFrameWork\Timer">
+      <UniqueIdentifier>{056ddfab-a701-4bd8-86b0-406e6dd75f4c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="Stage1.wav">
+      <Filter>리소스</Filter>
+    </Media>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Strikers1945_Portfolio.rc">
+      <Filter>리소스</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>

@@ -8,6 +8,7 @@ private:
 	float fPivotX;
 	float fPivotY;
 	bool isBulletFire;
+	bool isCollision;
 public:
 	Bullet();
 	~Bullet();
@@ -26,5 +27,13 @@ public:
 	void SetPivotY(float y);
 
 	void SetCenterPivot(RECT rc);
+<<<<<<< master
+=======
+
+public:
+	float GetRadius();
+	bool GetIsCollision();
+	void SetIsCollision(bool _iscollision);
+>>>>>>> local
 };
 

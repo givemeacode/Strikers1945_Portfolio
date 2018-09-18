@@ -13,7 +13,7 @@ MainGame::~MainGame()
 
 bool MainGame::Init() // √ ±‚»≠
 {
-	GameNode::Init();
+	GameNode::Init(true);
 
 	
 
