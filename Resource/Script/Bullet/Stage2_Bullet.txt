@@ -1,2 +1,2 @@
 ImageName,Width,Height,FrameX,FrameY,Trans,R,G,B
-Bomb_Bullet3,1280,1280,4,4,1,255,255,255
+Stage2_Bullet,420,77,12,1,1,248,0,248

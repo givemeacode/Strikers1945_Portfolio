@@ -35,6 +35,8 @@ public:
 	GameSystem();
 	~GameSystem();
 public:
+	bool Init();
+public:
 	RECT GetGameClientRect();
 	void SetPlayer(Player* _player);
 	Player* GetPlayer() { return player; }

@@ -1,2 +1,2 @@
 ImageName,Width,Height,FrameX,FrameY,Trans,R,G,B
-Bomb_Bullet3,1280,1280,4,4,1,255,255,255
+BigAirPlan,354,372,1,1,1,0,128,128

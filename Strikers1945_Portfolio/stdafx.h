@@ -34,3 +34,4 @@
 #include "KeyManager.h"
 #include "TimeManager.h"
 #include "ImageManager.h"
+#include "ResourceManager.h"

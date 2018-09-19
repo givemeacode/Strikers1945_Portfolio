@@ -1,2 +1,2 @@
 ImageName,Width,Height,FrameX,FrameY,Trans,R,G,B
-Bomb_Bullet3,1280,1280,4,4,1,255,255,255
+LMBullet_Foward,60,28,4,1,1,128,128,128

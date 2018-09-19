@@ -134,6 +134,7 @@
     <ClCompile Include="MultiGun.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerGun.cpp" />
+    <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="RevolvingGun.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
@@ -165,6 +166,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerGun.h" />
     <ClInclude Include="RandomFunction.h" />
+    <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="RevolvingGun.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
