@@ -3,6 +3,7 @@
 // 핸들 = 우리가 만든 어떤 대상에 대해
 //		  api를 사용해서 접근하기위한 key값. 이라고 생각하자.
 
+class Animation;
 
 // 이미지 클래스
 // 어디선가..(Init or 생성자?) 생성,초기화를 하고.... render에서 그려주자.
@@ -93,6 +94,9 @@ public:
 
 	// 루프 랜더
 	void	LoopRender(HDC hdc, const LPRECT drawArea, int offsetX, int offsetY);
+
+	// 애니 랜더
+	void	AniRender(HDC hdc, int destX, int destY, Animation* ani);
 
 	// 스프라이트 이미지 랜더용
 	void	FrameRender(HDC hdc, int destX, int destY);

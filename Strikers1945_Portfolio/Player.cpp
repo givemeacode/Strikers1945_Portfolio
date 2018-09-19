@@ -9,16 +9,17 @@ Player::Player()
 	PositionInit();
 
 	isDead = false;
+	isClear = false;
 
 	// 시간체크
 	runTimer = GetTickCount();
 	deathTimer = 0; // 죽었을때 시점을 저장하기위해.
 
-	deathMotionTime = 0; // 죽었을때 잠깐 없어지는 시간 ( 폭파 모션 )
+//	deathMotionTime = 0; // 죽었을때 잠깐 없어지는 시간 ( 폭파 모션 )
 	responTime = 0.f; // 리스폰시간
 
 	//// 테스트용 ////
-	target = RectMakeCenter(WINSIZEX / 2, 0, 50, 50);
+	target = RectMakeCenter(WINSIZEX / 2, 50, 50, 50);
 
 	//
 	gun = new PlayerGun;
@@ -43,6 +44,7 @@ void Player::Update()
 	}
 
 	IsDead();
+	IsClear();
 
 	// 이동 ( 키보드 방향키 )
 	MoveKey();
@@ -58,7 +60,7 @@ void Player::Update()
 	if (KEYMANAGER->IsOnceKeyUp(0x44))
 	{
 		check = false;
-	}	   
+	}
 	// ====== 플레이어의 총알이 나가는위치는 endx, endy값으로 하기위해 endx, endy를 설정해줌 =========
 	endx = x;
 	endy = y - (length + 7);
@@ -69,7 +71,7 @@ void Player::Update()
 
 
 	/////////// 테스트 ///////////////////
-	OffsetRect(&target, 0, 5);
+	//OffsetRect(&target, 0, 5);
 }
 
 void Player::Render(HDC hdc)
@@ -103,9 +105,9 @@ void Player::Render(HDC hdc)
 	_stprintf_s(playerName, sizeof(playerName), TEXT("responTime : %d"), responTime);
 	TextOut(hdc, WINSIZEX / 2 - 270, 210, TEXT(playerName), _tcslen(TEXT(playerName)));
 
-	TCHAR choiceTime1[100] = { 0, };
-	_stprintf_s(choiceTime1, sizeof(choiceTime1), TEXT("deathMotionTime : %d"), deathMotionTime);
-	TextOut(hdc, WINSIZEX / 2 - 270, 180, TEXT(choiceTime1), _tcslen(TEXT(choiceTime1)));
+//	TCHAR choiceTime1[100] = { 0, };
+//	_stprintf_s(choiceTime1, sizeof(choiceTime1), TEXT("deathMotionTime : %d"), deathMotionTime);
+//	TextOut(hdc, WINSIZEX / 2 - 270, 180, TEXT(choiceTime1), _tcslen(TEXT(choiceTime1)));
 
 
 	Rectangle(hdc, target.left, target.top, target.right, target.bottom);
@@ -116,6 +118,7 @@ void Player::Render(HDC hdc)
 
 void Player::PositionInit()
 {
+	playerLevel = 1;
 	// 플레이어 객체 ( 렉트 ) 초기화
 	angle = PI / 2.f;
 	x = static_cast<float>(WINSIZEX) / 2;
@@ -169,9 +172,21 @@ void Player::IsDead()
 		}
 		else if (responTime >= 5)
 		{
-			deathMotionTime = 0;
+	//		deathMotionTime = 0;
 			responTime = 0;
 			isDead = false;					// 리스폰시간이 되면 isDead( 상태 )는 false가 되서 이프문을 나감.
+		}
+	}
+}
+
+void Player::IsClear()
+{
+	if (isClear)
+	{
+		if (y > 0)
+		{
+			// 클리어 음악추가?
+			y -= 7;
 		}
 	}
 }
@@ -179,9 +194,9 @@ void Player::IsDead()
 void Player::MoveKey()
 {
 	//======= 키 조작 .... 플레이어1의 x,y값을 이용해 클라이언트 영역 밖으로 나가는걸 제한함 =========
-	if (!isDead)
+	if (!isDead && !isClear)
 	{
-		if (KEYMANAGER->IsStayKeyDown(VK_LEFT) && rc.left > 0)
+		if (KEYMANAGER->IsStayKeyDown(VK_LEFT) && rc.left > 100) // 100은 나중에 양쪽에 까만부분 추가했을때를 생각해서 ,,, 움직일 부분 제한
 		{
 			angle += 0.04f;
 			x -= speed;
@@ -190,7 +205,7 @@ void Player::MoveKey()
 			dirChange = true;
 			playerImage->SetFrameX(3);
 		}
-		if (KEYMANAGER->IsStayKeyDown(VK_RIGHT) && rc.right < WINSIZEX)
+		if (KEYMANAGER->IsStayKeyDown(VK_RIGHT) && rc.right < WINSIZEX - 100) // 100은 나중에 양쪽에 까만부분 추가했을때를 생각해서 ,,, 움직일 부분 제한
 		{
 			angle -= 0.04f;
 			x += speed;
@@ -209,18 +224,33 @@ void Player::MoveKey()
 			y += speed;
 			//playerImage->SetY(playerImage->GetY() + speed);
 		}
-
-
+		//======================== 테스트 ==========================================================================================================
+		if (KEYMANAGER->IsOnceKeyDown('1'))
+		{
+			playerLevel = 1;
+		}
+		if (KEYMANAGER->IsOnceKeyDown('2'))
+		{
+			playerLevel = 2;
+		}
+		if (KEYMANAGER->IsOnceKeyDown('3'))
+		{
+			playerLevel = 3;
+		}
+		if (KEYMANAGER->IsOnceKeyDown('4'))
+		{
+			playerLevel = 4;
+		}
 		// 플레이어 x,y값에 따라 이미지가 따라와야되니까 업데이트하는 곳에 넣어줌
-		playerImage->SetX(x - playerImage->GetFrameWidth() / 2 - 4);
-		playerImage->SetY(y - playerImage->GetFrameHeight() / 2);
 	}
+	playerImage->SetX(x - playerImage->GetFrameWidth() / 2 - 4);
+	playerImage->SetY(y - playerImage->GetFrameHeight() / 2);
 }
 
 void Player::FireKey()
 {
 	// 스페이스 바를 누르면 총알 발사
-	if (!isDead)
+	if (!isDead && !isClear)
 	{
 		if (KEYMANAGER->IsOnceKeyDown(VK_SPACE))
 		{

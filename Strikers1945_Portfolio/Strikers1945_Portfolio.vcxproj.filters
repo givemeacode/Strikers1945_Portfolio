@@ -79,6 +79,9 @@
     <ClCompile Include="PlayerGun.cpp">
       <Filter>MainGame\Object\Gun</Filter>
     </ClCompile>
+    <ClCompile Include="CharacterSelectScene.cpp">
+      <Filter>MainGame\Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Backbuffer.h">
@@ -173,6 +176,9 @@
     </ClInclude>
     <ClInclude Include="PlayerGun.h">
       <Filter>MainGame\Object\Gun</Filter>
+    </ClInclude>
+    <ClInclude Include="CharacterSelectScene.h">
+      <Filter>MainGame\Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -21,8 +21,9 @@ private:
 	float length;
 	float speed;
 
+	// 충돌처리할때, isDead와 isClear false 일때만 충돌처리.
 	bool	isDead;
-
+	bool	isClear;
 	//
 	RECT	collisionBox;	// 충돌처리 해주는 원
 	RECT	rc;				// 이미지크기의 렉트
@@ -34,7 +35,7 @@ private:
 	DWORD runTimer;	  // 전체 진행시간 체크
 	DWORD deathTimer; // 죽은시간.
 
-	int deathMotionTime;
+	//int deathMotionTime;
 	float responTime;
 
 	// 테스트용
@@ -52,7 +53,9 @@ public:
 	int GetPlayerLevel() { return playerLevel; }
 public:
 	void PositionInit();
+
 	void IsDead();
+	void IsClear();
 
 	void MoveKey();
 	void FireKey();

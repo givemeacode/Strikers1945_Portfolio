@@ -28,6 +28,8 @@
 #include "RandomFunction.h"
 //#include "KeyManager.h"
 #include "Image.h"
+#include "Animation.h"
+
 #include "GameNode.h"
 #include "GameSystem.h"
 

@@ -1,9 +1,23 @@
 #pragma once
 #include "Gun.h"
 
+class Animation;
+
 class PlayerGun :public Gun
 {
 	int playerDMG;
+
+	Image*		playerGunImage1;
+	Animation*	playerGunAni1;
+
+	Image*		playerGunImage2;
+	Animation*	playerGunAni2;
+
+	Image*		playerGunImage3;
+	Animation*	playerGunAni3;
+
+	Image*		playerGunImage4;
+	Animation*	playerGunAni4;
 public:
 	PlayerGun();
 	~PlayerGun();
