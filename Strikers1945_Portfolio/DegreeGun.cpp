@@ -23,12 +23,7 @@ bool DegreeGun::Init(float x, float y)
 
 	fStartX = fPosX;
 	fStartY = fPosY;
-	for (int i = 0; i < 1000; i++)
-	{
-		Bullet* bullet = new Bullet();
-		bullet->Init(x, y, 20);
-		bulletList.push_back(bullet);
-	}
+	
 
 	return true;
 }
@@ -47,9 +42,6 @@ void DegreeGun::Render(HDC hdc)
 			}
 		}
 	}
-
-
-
 }
 
 void DegreeGun::Release()
@@ -58,17 +50,10 @@ void DegreeGun::Release()
 
 void DegreeGun::BulletFire(float x, float y)
 {
-	std::list<Bullet*>::iterator it;
-	for (it = bulletList.begin(); it != bulletList.end(); it++)
-	{
-		if (!(*it)->GetIsBulletFire())
-		{
-			(*it)->SetIsBulletFire(true);
-			(*it)->SetPivotX((*it)->GetPivotX() +(cosf(fAngle))+10);
-			(*it)->SetPivotY((*it)->GetPivotY() + (-sinf(fAngle)));
-			break;
-		}
-	}
+	Bullet* bullet = new Bullet();
+	bullet->Init(x, y, 15);				// 반지름 사용 
+	bullet->SetIsBulletFire(true);
+	bulletList.push_back(bullet);			
 }
 
 void DegreeGun::BulletMove()
@@ -129,6 +114,5 @@ void DegreeGun::BulletMove()
 			}
 		}
 
-	}
-	
+	}	
 }

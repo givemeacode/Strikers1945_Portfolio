@@ -12,6 +12,7 @@ protected:
 	float fPosX;
 	float fPosY;
 	float fAngle;
+	float fSpeed;
 protected:
 	std::list<Bullet*> bulletList;
 public:

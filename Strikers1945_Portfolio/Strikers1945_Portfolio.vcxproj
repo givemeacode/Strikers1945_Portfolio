@@ -133,6 +133,7 @@
     <ClCompile Include="Monster.cpp" />
     <ClCompile Include="MultiGun.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerGun.cpp" />
     <ClCompile Include="RevolvingGun.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
@@ -162,6 +163,7 @@
     <ClInclude Include="Monster.h" />
     <ClInclude Include="MultiGun.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerGun.h" />
     <ClInclude Include="RandomFunction.h" />
     <ClInclude Include="RevolvingGun.h" />
     <ClInclude Include="Scene.h" />

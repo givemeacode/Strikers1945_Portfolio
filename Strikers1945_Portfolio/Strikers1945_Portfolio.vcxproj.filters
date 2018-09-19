@@ -76,6 +76,9 @@
     <ClCompile Include="TimeManager.cpp">
       <Filter>2DFrameWork\Manager</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerGun.cpp">
+      <Filter>MainGame\Object\Gun</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Backbuffer.h">
@@ -167,6 +170,9 @@
     </ClInclude>
     <ClInclude Include="TimeManager.h">
       <Filter>2DFrameWork\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerGun.h">
+      <Filter>MainGame\Object\Gun</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

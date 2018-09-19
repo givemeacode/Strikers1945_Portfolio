@@ -18,3 +18,8 @@ RECT GameSystem::GetGameClientRect()
 {
 	return rcClient;
 }
+
+void GameSystem::SetPlayer(Player * _player)
+{
+	player = _player;
+}

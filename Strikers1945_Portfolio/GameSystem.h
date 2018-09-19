@@ -2,8 +2,11 @@
 
 #include "SingleTon.h"
 
+class Player;
+
 struct sCharacterPositon
 {
+
 	RECT rcGameLeft1;
 	RECT rcGameLeft2;
 	RECT rcGameLeft3;
@@ -25,6 +28,7 @@ struct sCharacterPositon
 class GameSystem
 	: public SingletonBase<GameSystem>
 {
+	Player* player;
 private:
 	RECT rcClient;
 public:
@@ -32,5 +36,7 @@ public:
 	~GameSystem();
 public:
 	RECT GetGameClientRect();
+	void SetPlayer(Player* _player);
+	Player* GetPlayer() { return player; }
 };
 
