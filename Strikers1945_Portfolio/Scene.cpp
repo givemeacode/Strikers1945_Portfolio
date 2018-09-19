@@ -14,17 +14,29 @@ Scene::~Scene()
 
 bool Scene::Init()
 {
-	return false;
+	return true;
 }
 
 void Scene::Release()
 {
+
 }
 
 void Scene::Update()
 {
+
 }
 
 void Scene::Render(HDC hdc)
 {
+}
+
+void Scene::SetSceneType(eSceneType _type)
+{
+	sceneType = _type;
+}
+
+eSceneType Scene::GetSceneType()
+{
+	return sceneType;
 }

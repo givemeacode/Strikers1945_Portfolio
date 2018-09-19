@@ -8,6 +8,7 @@
 
 GameScene::GameScene()
 {
+	sceneType = eSceneType::SCENE_TEST1;
 }
 
 
@@ -18,7 +19,7 @@ GameScene::~GameScene()
 
 bool GameScene::Init()
 {
-	MainGame::Init();
+	//GameNode::Init(true);
 	//=========================================================
 	player = new Player;
 	GAMESYS->SetPlayer(player);
@@ -28,7 +29,7 @@ bool GameScene::Init()
 
 void GameScene::Release()
 {
-	MainGame::Release();
+	//GameNode::Release();
 	//=========================================================
 
 //	SAFE_DELETE(player);
@@ -40,7 +41,7 @@ void GameScene::Release()
 
 void GameScene::Update()
 {
-	MainGame::Update();
+	//GameNode::Update();
 	//=========================================================
 	player->Update();
 	//GAMESYS->CollisionCharacter(_monster, rcTest);
@@ -49,14 +50,16 @@ void GameScene::Update()
 
 void GameScene::Render(HDC hdc)
 {
-	HDC	backDC = (this->GetBackBuffer())->GetMemDC();
-	PatBlt(backDC, 0, 0, WINSIZEX, WINSIZEY, WHITENESS);
+	//GameNode::Render(hdc);
+
+	//HDC	backDC = (this->GetBackBuffer())->GetMemDC();
+	//PatBlt(backDC, 0, 0, WINSIZEX, WINSIZEY, WHITENESS);
 	//=========================================================
-	player->Render(backDC);
+	player->Render(hdc);
 	//Rectangle(backDC, rcTest.left, rcTest.top, rcTest.right, rcTest.bottom);
 	//=========================================================
 	
 	//=========================================================
 
-	this->GetBackBuffer()->Render(hdc, 0, 0);
+	//this->GetBackBuffer()->Render(hdc, 0, 0);
 }

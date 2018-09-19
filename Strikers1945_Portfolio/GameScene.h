@@ -1,11 +1,13 @@
 #pragma once
 
-#include "MainGame.h"
+//#include "MainGame.h"
+#include "Scene.h"
+
 class Player;
 class Monster;
 
 class GameScene
-	: public MainGame
+	: public Scene
 {
 private:
 	Player * player;
