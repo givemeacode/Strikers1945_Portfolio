@@ -4,14 +4,13 @@
 
 #include "Monster.h"
 #include "Timer.h"
-
+#include "Boss.h"
 #pragma comment (lib,"winmm")
 
 GameScene::GameScene()
 {
 	sceneType = eSceneType::SCENE_TEST1;
 }
-
 
 GameScene::~GameScene()
 {
@@ -41,6 +40,11 @@ bool GameScene::Init()
 
 	//monster2 = new Monster;
 	//monster2->Init(MONSTER_TYPE_NONE, WINSIZEX, 100);
+	//player = new Player;
+	//GAMESYS->SetPlayer(player);
+	
+	boss = new Boss();
+	boss->Init();
 	return true;
 }
 
@@ -160,6 +164,8 @@ void GameScene::Update()
 	//monster1->Update();
 	//monster2->Update();
 
+	//player->Update();
+	boss->Update();
 	//GAMESYS->CollisionCharacter(_monster, rcTest);
 	
 }
@@ -187,6 +193,10 @@ void GameScene::Render(HDC hdc)
 	//monster2->Render(hdc);
 
 
+
+
+	//player->Render(hdc);
+	boss->Render(hdc);
 
 	//Rectangle(backDC, rcTest.left, rcTest.top, rcTest.right, rcTest.bottom);
 	//=========================================================

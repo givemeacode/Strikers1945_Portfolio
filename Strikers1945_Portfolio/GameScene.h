@@ -5,6 +5,7 @@
 
 class Player;
 class Monster;
+class Boss;
 
 class GameScene
 	: public Scene
@@ -25,6 +26,8 @@ private:
 
 	DWORD RunTimer;	  // 전체 진행시간 체크
 		//RECT rcTest;
+	Boss* boss;
+	//RECT rcTest;
 public:
 	GameScene();
 	~GameScene();
