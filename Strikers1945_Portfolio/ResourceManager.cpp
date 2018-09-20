@@ -23,7 +23,7 @@ ResourceManager::~ResourceManager()
 
 void ResourceManager::AddResource(eReSourceType type, const TCHAR* _fileName)
 {
-	ParsingData(type, _fileName);
+ 	ParsingData(type, _fileName);
 
 	//switch (type)
 	//{

@@ -3,6 +3,7 @@
 // 핸들 = 우리가 만든 어떤 대상에 대해
 //		  api를 사용해서 접근하기위한 key값. 이라고 생각하자.
 
+class Animation;
 
 // 이미지 클래스
 // 어디선가..(Init or 생성자?) 생성,초기화를 하고.... render에서 그려주자.
@@ -52,11 +53,11 @@ private:
 			frameWidth = 0;
 			frameHeight = 0;
 			loadType = LOAD_RESOURCE;
-			boundingBox = RectMake(0,0,0,0);
+			boundingBox = RectMake(0, 0, 0, 0);
 		}
 
-	}IMAGE_INFO,*LPIMAGE_INFO;
-	
+	}IMAGE_INFO, *LPIMAGE_INFO;
+
 private:
 	LPIMAGE_INFO	_imageInfo;		// 이미지 정보 구조체
 	TCHAR*			_fileName;		// 파일 이름
@@ -68,7 +69,7 @@ public:
 	virtual ~Image();
 
 	// 빈 비트맵에 사용할 Init ... 파일이름 없다.
-	bool	Init(int width, int whight); 
+	bool	Init(int width, int whight);
 
 	// 파일로부터의 로딩용
 	bool	Init(const TCHAR* fileName, int width, int height, bool trans = false, COLORREF transColor = false); // COLORREF = 3바이트 자료형... false면 (0,0,0)
@@ -94,15 +95,18 @@ public:
 	// 루프 랜더
 	void	LoopRender(HDC hdc, const LPRECT drawArea, int offsetX, int offsetY);
 
+	// 애니 랜더
+	void	AniRender(HDC hdc, int destX, int destY, Animation* ani);
+
 	// 스프라이트 이미지 랜더용
 	void	FrameRender(HDC hdc, int destX, int destY);
 	void	FrameRender(HDC hdc, int destX, int destY, int currentframeX, int currentframeY);
 
 	/*
-	 inline 은 함수 호출 비용을없앰.. = 함수호출시 그전 내용을 멈추고 호출된 함수로 점프(넘어가게)되는데.. 그걸 없앰. 
+	 inline 은 함수 호출 비용을없앰.. = 함수호출시 그전 내용을 멈추고 호출된 함수로 점프(넘어가게)되는데.. 그걸 없앰.
 										속도는 빠르지만, 이런내용을 숙지하고 사용할것.
 			ex)루프돌면서 체크하거나 그런건 inline을 쓰면안됨.
-	*/	
+	*/
 	// 편의를 위한 기타 함수들
 	inline void		SetX(float x) { _imageInfo->x = x; }
 	inline float	GetX() { return _imageInfo->x; }
@@ -156,7 +160,7 @@ public:
 
 	inline int GetFrameX() { return _imageInfo->currentframeX; }
 	inline int GetFrameY() { return _imageInfo->currentframeY; }
-	
+
 	inline int GetFrameWidth() { return _imageInfo->frameWidth; }
 	inline int GetFrameHeight() { return _imageInfo->frameHeight; }
 

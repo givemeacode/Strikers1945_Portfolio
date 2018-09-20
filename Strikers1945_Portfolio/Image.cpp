@@ -395,6 +395,11 @@ void Image::LoopRender(HDC hdc, const LPRECT drawArea, int offsetX, int offsetY)
 	}
 }
 
+void Image::AniRender(HDC hdc, int destX, int destY, Animation * ani)
+{
+	Render(hdc, destX, destY, ani->getFramePos().x, ani->getFramePos().y,
+		ani->getFrameWidth(), ani->getFrameHeight());
+}
 void Image::FrameRender(HDC hdc, int destX, int destY)
 {
 	if (_trans)

@@ -30,6 +30,7 @@
 #include "Image.h"
 #include "GameNode.h"
 #include "GameSystem.h"
+#include "Animation.h"
 
 #include "KeyManager.h"
 #include "TimeManager.h"

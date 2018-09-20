@@ -14,17 +14,58 @@ PlayerGun::~PlayerGun()
 
 bool PlayerGun::Init(float x, float y)
 {
+	// 1랩총알
+	//playerGunImage1 = IMAGEMANAGER->AddFrameImage(TEXT("Player1_Level1"),
+	//	TEXT("../Resource/Image/Player/Player1/AV_8_Player_Bullet1.bmp"),
+	//	132, 49, 4, 1, true, RGB(248, 0, 248)); // 33 49 .. 17 25
+	playerGunImage1 = IMAGEMANAGER->FindImage(TEXT("Bomb_Airplan"));
+	playerGunAni1 = new Animation;
+	playerGunAni1->Init(playerGunImage1);
+	playerGunAni1->setDefPlayFrame(true, true); // (리버스, 루프)
+	playerGunAni1->setFPS(1); // 프레임 1 프레임당 (n) - 업데이트가 커질수록 갱신 주기가 짧아짐.
+
+	// 2랩총알
+	playerGunImage2 = IMAGEMANAGER->AddFrameImage(TEXT("Player1_Level2"),
+		TEXT("../Resource/Image/Player/Player1/AV_8_Player_Bullet2.bmp"),
+		132, 49, 4, 1, true, RGB(248, 0, 248));
+
+	playerGunAni2 = new Animation;
+	playerGunAni2->Init(playerGunImage2);
+	playerGunAni2->setDefPlayFrame(true, true); // (리버스, 루프)
+	playerGunAni2->setFPS(1);
+
+	// 3랩총알
+	playerGunImage3 = IMAGEMANAGER->AddFrameImage(TEXT("Player1_Level3"),
+		TEXT("../Resource/Image/Player/Player1/AV_8_Player_Bullet3.bmp"),
+		132, 49, 4, 1, true, RGB(248, 0, 248)); // 33 49 .. 17 25
+
+	playerGunAni3 = new Animation;
+	playerGunAni3->Init(playerGunImage3);
+	playerGunAni3->setDefPlayFrame(true, true); // (리버스, 루프)
+	playerGunAni3->setFPS(1);
+
+	// 4랩총알
+	playerGunImage4 = IMAGEMANAGER->AddFrameImage(TEXT("Player1_Level4"),
+		TEXT("../Resource/Image/Player/Player1/AV_8_Player_Bullet4.bmp"),
+		132, 49, 4, 1, true, RGB(248, 0, 248));
+
+	playerGunAni4 = new Animation;
+	playerGunAni4->Init(playerGunImage4);
+	playerGunAni4->setDefPlayFrame(true, true); // (리버스, 루프)
+	playerGunAni4->setFPS(1);
+
 	fPosX = x;
 	fPosY = y + 3;
 
 	fAngle = PI / 2;
-	fSpeed = 10.f;
-	
+	fSpeed = 7.f; // 총알 속도. -> 지정하지않으면 Gun에 있는 fSpeed로 지정됨.
+
 	return true;
 }
 
 void PlayerGun::Render(HDC hdc)
 {
+
 	std::list<Bullet*>::iterator iter;
 	if (!bulletList.empty())
 	{
@@ -33,7 +74,25 @@ void PlayerGun::Render(HDC hdc)
 
 			if ((*iter)->GetIsBulletFire())
 			{
-				(*iter)->Render(hdc);
+				//(*iter)->Render(hdc);
+
+				// AniRender함수에 들어갈 값은 left,top인데 GetPivot값은 중심값을 가져오는거라서, 총알의 크기 반절만큼, 조정을 해줬음
+				if (GAMESYS->GetPlayer()->GetPlayerLevel() == 1)
+				{
+					playerGunImage1->AniRender(hdc, (*iter)->GetPivotX() - 17, (*iter)->GetPivotY() - 25, playerGunAni1);
+				}
+				if (GAMESYS->GetPlayer()->GetPlayerLevel() == 2)
+				{
+					playerGunImage2->AniRender(hdc, (*iter)->GetPivotX() - 17, (*iter)->GetPivotY() - 25, playerGunAni2);
+				}
+				if (GAMESYS->GetPlayer()->GetPlayerLevel() == 3)
+				{
+					playerGunImage3->AniRender(hdc, (*iter)->GetPivotX() - 17, (*iter)->GetPivotY() - 25, playerGunAni3);
+				}
+				if (GAMESYS->GetPlayer()->GetPlayerLevel() == 4)
+				{
+					playerGunImage4->AniRender(hdc, (*iter)->GetPivotX() - 17, (*iter)->GetPivotY() - 25, playerGunAni4);
+				}
 			}
 		}
 	}
@@ -41,6 +100,10 @@ void PlayerGun::Render(HDC hdc)
 
 void PlayerGun::Release()
 {
+	SAFE_DELETE(playerGunAni1);
+	SAFE_DELETE(playerGunAni2);
+	SAFE_DELETE(playerGunAni3);
+	SAFE_DELETE(playerGunAni4);
 }
 
 void PlayerGun::BulletFire(float x, float y)
@@ -51,6 +114,30 @@ void PlayerGun::BulletFire(float x, float y)
 	bulletList.push_back(bullet);
 
 
+	if (GAMESYS->GetPlayer()->GetPlayerLevel() == 1)
+	{
+		playerGunAni1->start();
+
+		playerDMG = 1;
+	}
+	else if (GAMESYS->GetPlayer()->GetPlayerLevel() == 2)
+	{
+		playerGunAni2->start();
+
+		playerDMG = 2;
+	}
+	else if (GAMESYS->GetPlayer()->GetPlayerLevel() == 3)
+	{
+		playerGunAni3->start();
+
+		playerDMG = 3;
+	}
+	else if (GAMESYS->GetPlayer()->GetPlayerLevel() == 4)
+	{
+		playerGunAni4->start();
+
+		playerDMG = 4;
+	}
 }
 
 void PlayerGun::BulletMove()
@@ -58,26 +145,6 @@ void PlayerGun::BulletMove()
 	std::list<Bullet*>::iterator iter;
 	std::list<Bullet*>::iterator it;
 
-	if (GAMESYS->GetPlayer()->GetPlayerLevel() == 1)
-	{
-		playerDMG = 1;
-		// 레벨1 이미지
-	}
-	if (GAMESYS->GetPlayer()->GetPlayerLevel() == 2)
-	{
-		playerDMG = 2;
-		// 레벨2 이미지
-	}
-	if (GAMESYS->GetPlayer()->GetPlayerLevel() == 3)
-	{
-		playerDMG = 3;
-		// 레벨3 이미지
-	}
-	if (GAMESYS->GetPlayer()->GetPlayerLevel() == 4)
-	{
-		playerDMG = 4;
-		// 레벨4 이미지
-	}
 
 
 	if (!bulletList.empty())
@@ -133,4 +200,9 @@ void PlayerGun::BulletMove()
 		}
 
 	}
+
+	playerGunAni1->frameUpdate(TIMEMANAGER->getElapsedTime() * 10);
+	playerGunAni2->frameUpdate(TIMEMANAGER->getElapsedTime() * 10);
+	playerGunAni3->frameUpdate(TIMEMANAGER->getElapsedTime() * 10);
+	playerGunAni4->frameUpdate(TIMEMANAGER->getElapsedTime() * 10);
 }

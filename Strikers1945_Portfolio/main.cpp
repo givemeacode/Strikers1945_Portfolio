@@ -67,13 +67,15 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lPszCm
 		WINSIZEY);
 
 
-	
+	GAMESYS->Init();
+
 	if (!_mg.Init())
 	{
 		return 0;
 	}
 
-	GAMESYS->Init();
+
+
 
 	ShowWindow(_hWnd, cmdShow);
 	HDC hdc = GetDC(_hWnd);
