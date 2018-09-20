@@ -92,18 +92,18 @@ void Player::Render(HDC hdc)
 		LineMake(hdc, x, y, endx, endy);
 	}
 
-	TCHAR szTemp[100] = { 0, };
-	_stprintf_s(szTemp, sizeof(szTemp), TEXT("runTimer : %d"), runTimer);
-	TextOut(hdc, WINSIZEX / 2 - 270, 120, TEXT(szTemp), _tcslen(TEXT(szTemp)));
+	//TCHAR szTemp[100] = { 0, };
+	//_stprintf_s(szTemp, sizeof(szTemp), TEXT("runTimer : %d"), runTimer);
+	//TextOut(hdc, WINSIZEX / 2 - 270, 120, TEXT(szTemp), _tcslen(TEXT(szTemp)));
 
-	// 선택시간.. 9초부터 0초까지... 0초가되면 현재 위치하는 인덱스값으로 자동 결정.
-	TCHAR tempChoiceTime[100] = { 0, };
-	_stprintf_s(tempChoiceTime, sizeof(tempChoiceTime), TEXT("deathTimer : %d"), deathTimer);
-	TextOut(hdc, WINSIZEX / 2 - 270, 150, TEXT(tempChoiceTime), _tcslen(TEXT(tempChoiceTime)));
+	//// 선택시간.. 9초부터 0초까지... 0초가되면 현재 위치하는 인덱스값으로 자동 결정.
+	//TCHAR tempChoiceTime[100] = { 0, };
+	//_stprintf_s(tempChoiceTime, sizeof(tempChoiceTime), TEXT("deathTimer : %d"), deathTimer);
+	//TextOut(hdc, WINSIZEX / 2 - 270, 150, TEXT(tempChoiceTime), _tcslen(TEXT(tempChoiceTime)));
 
-	TCHAR playerName[100] = { 0, };
-	_stprintf_s(playerName, sizeof(playerName), TEXT("responTime : %d"), responTime);
-	TextOut(hdc, WINSIZEX / 2 - 270, 210, TEXT(playerName), _tcslen(TEXT(playerName)));
+	//TCHAR playerName[100] = { 0, };
+	//_stprintf_s(playerName, sizeof(playerName), TEXT("responTime : %d"), responTime);
+	//TextOut(hdc, WINSIZEX / 2 - 270, 210, TEXT(playerName), _tcslen(TEXT(playerName)));
 
 	//	TCHAR choiceTime1[100] = { 0, };
 	//	_stprintf_s(choiceTime1, sizeof(choiceTime1), TEXT("deathMotionTime : %d"), deathMotionTime);
@@ -260,4 +260,5 @@ void Player::FireKey()
 	}
 	gun->BulletMove();
 }
+
 

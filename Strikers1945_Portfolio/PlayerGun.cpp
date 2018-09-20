@@ -15,40 +15,28 @@ PlayerGun::~PlayerGun()
 bool PlayerGun::Init(float x, float y)
 {
 	// 1랩총알
-	//playerGunImage1 = IMAGEMANAGER->AddFrameImage(TEXT("Player1_Level1"),
-	//	TEXT("../Resource/Image/Player/Player1/AV_8_Player_Bullet1.bmp"),
-	//	132, 49, 4, 1, true, RGB(248, 0, 248)); // 33 49 .. 17 25
-	playerGunImage1 = IMAGEMANAGER->FindImage(TEXT("Bomb_Airplan"));
+	playerGunImage1 = IMAGEMANAGER->FindImage(TEXT("AV_8_Player_Bullet1"));
 	playerGunAni1 = new Animation;
 	playerGunAni1->Init(playerGunImage1);
 	playerGunAni1->setDefPlayFrame(true, true); // (리버스, 루프)
 	playerGunAni1->setFPS(1); // 프레임 1 프레임당 (n) - 업데이트가 커질수록 갱신 주기가 짧아짐.
 
 	// 2랩총알
-	playerGunImage2 = IMAGEMANAGER->AddFrameImage(TEXT("Player1_Level2"),
-		TEXT("../Resource/Image/Player/Player1/AV_8_Player_Bullet2.bmp"),
-		132, 49, 4, 1, true, RGB(248, 0, 248));
-
+	playerGunImage2 = IMAGEMANAGER->FindImage(TEXT("AV_8_Player_Bullet2"));
 	playerGunAni2 = new Animation;
 	playerGunAni2->Init(playerGunImage2);
 	playerGunAni2->setDefPlayFrame(true, true); // (리버스, 루프)
 	playerGunAni2->setFPS(1);
 
 	// 3랩총알
-	playerGunImage3 = IMAGEMANAGER->AddFrameImage(TEXT("Player1_Level3"),
-		TEXT("../Resource/Image/Player/Player1/AV_8_Player_Bullet3.bmp"),
-		132, 49, 4, 1, true, RGB(248, 0, 248)); // 33 49 .. 17 25
-
+	playerGunImage3 = IMAGEMANAGER->FindImage(TEXT("AV_8_Player_Bullet3"));
 	playerGunAni3 = new Animation;
 	playerGunAni3->Init(playerGunImage3);
 	playerGunAni3->setDefPlayFrame(true, true); // (리버스, 루프)
 	playerGunAni3->setFPS(1);
 
 	// 4랩총알
-	playerGunImage4 = IMAGEMANAGER->AddFrameImage(TEXT("Player1_Level4"),
-		TEXT("../Resource/Image/Player/Player1/AV_8_Player_Bullet4.bmp"),
-		132, 49, 4, 1, true, RGB(248, 0, 248));
-
+	playerGunImage4 = IMAGEMANAGER->FindImage(TEXT("AV_8_Player_Bullet4"));
 	playerGunAni4 = new Animation;
 	playerGunAni4->Init(playerGunImage4);
 	playerGunAni4->setDefPlayFrame(true, true); // (리버스, 루프)

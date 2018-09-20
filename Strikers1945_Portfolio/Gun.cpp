@@ -48,6 +48,7 @@ void Gun::Release()
 
 void Gun::BulletFire(float x, float y)
 {
+	 
 	//Bullet* bullet = new Bullet();
 	//bullet->Init(x, y, 15);				// 반지름 사용 
 	//bullet->SetIsBulletFire(true);

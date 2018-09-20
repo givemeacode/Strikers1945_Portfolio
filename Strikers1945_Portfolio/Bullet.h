@@ -10,6 +10,7 @@ private:
 	float fRadius;
 	bool isBulletFire;
 	bool isCollision;
+	float fAngle;
 public:
 	Bullet();
 	~Bullet();
@@ -33,5 +34,8 @@ public:
 	float GetRadius();
 	bool GetIsCollision();
 	void SetIsCollision(bool _iscollision);
+
+	float GetAngle() { return fAngle; }
+	void SetAngle(float _angle) { fAngle = _angle; }
 };
 

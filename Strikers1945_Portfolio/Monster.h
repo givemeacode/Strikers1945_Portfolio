@@ -18,6 +18,7 @@ private:
 	float fAngle;
 	RECT rcMonster;
 	RECT rcCollision;
+	bool isLive;
 
 private:
 	//RECT rcMonster1;
@@ -38,6 +39,8 @@ private:
 
 	float fStartTime;
 	float CurrentTime;
+	float deltaTime;
+	float coolTime;
 public:
 	Monster();
 	~Monster();
@@ -58,5 +61,8 @@ public:
 	void SetCenterPivot(RECT rc);
 
 	Gun* GetGun() { return _gun; }
+	bool GetIsLive() { return isLive; }
+	void SetIsLive(bool _isLive) { isLive = _isLive; }
+
 };
 

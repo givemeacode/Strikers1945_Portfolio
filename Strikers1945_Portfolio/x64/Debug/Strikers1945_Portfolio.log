@@ -1,0 +1,9 @@
+﻿  GameScene.cpp
+c:\users\taeho\desktop\1945 스트라이커포트폴리오\strikers1945_portfolio\strikers1945_portfolio\image.h(125): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\taeho\desktop\1945 스트라이커포트폴리오\strikers1945_portfolio\strikers1945_portfolio\image.h(130): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\taeho\desktop\1945 스트라이커포트폴리오\strikers1945_portfolio\strikers1945_portfolio\player.h(63): warning C4244: 'return': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\taeho\desktop\1945 스트라이커포트폴리오\strikers1945_portfolio\strikers1945_portfolio\player.h(64): warning C4244: 'return': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\taeho\desktop\1945 스트라이커포트폴리오\strikers1945_portfolio\strikers1945_portfolio\gamescene.cpp(33): warning C4244: '=': 'DWORD'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\taeho\desktop\1945 스트라이커포트폴리오\strikers1945_portfolio\strikers1945_portfolio\gamescene.cpp(73): warning C4244: '=': 'DWORD'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\taeho\desktop\1945 스트라이커포트폴리오\strikers1945_portfolio\strikers1945_portfolio\gamescene.cpp(83): warning C4244: '=': 'DWORD'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Strikers1945_Portfolio.vcxproj -> C:\Users\taeho\Desktop\1945 스트라이커포트폴리오\Strikers1945_Portfolio\x64\Debug\Strikers1945_Portfolio.exe

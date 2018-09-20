@@ -30,7 +30,7 @@ void MainGame::Release() // 해제
 
 void MainGame::Update() // 변동
 {
-	GameNode::Update();
+	//GameNode::Update();
 	//============================
 	GameNode::Update();
 	SceneManager::getSingleton()->Update();

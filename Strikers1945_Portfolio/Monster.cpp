@@ -2,9 +2,13 @@
 #include "Monster.h"
 #include "Gun.h"
 #include "DegreeGun.h"
+#include "GuidedMissileGun.h"
+#include "MultiGun.h"
+
 Monster::Monster()
 {
 	fAngle = PI + PI / 2;
+	coolTime = 5.0f;
 }
 
 
@@ -40,8 +44,8 @@ bool Monster::Init(eMonsterType type, int x, int y)
 	SetCenterPivot(rcMonster);
 
 	//_gun = new Gun();
-	_gun = new DegreeGun();
-
+	_gun = new MultiGun();
+	
 	_gun->Init(GetPivotX(), GetPivotY());
 
 	fStartTime = GetTickCount();
@@ -57,6 +61,27 @@ void Monster::Update()
 
 void Monster::Render(HDC hdc)
 {
+
+
+	////
+	//TCHAR CurrentTime[100] = { 0, };
+	//_stprintf_s(CurrentTime, sizeof(CurrentTime), TEXT("CurrentTime : %d"), CurrentTime);
+	//TextOut(hdc, WINSIZEX / 2 - 270, 600, TEXT(CurrentTime), _tcslen(TEXT(CurrentTime)));
+
+	//TCHAR fStartTime[100] = { 0, };
+	//_stprintf_s(fStartTime, sizeof(fStartTime), TEXT("fStartTime : %d"), fStartTime);
+	//TextOut(hdc, WINSIZEX / 2 - 270, 650, TEXT(fStartTime), _tcslen(TEXT(fStartTime)));
+
+	//TCHAR deltaTime[100] = { 0, };
+	//_stprintf_s(deltaTime, sizeof(deltaTime), TEXT("deltaTime : %d"), deltaTime);
+	//TextOut(hdc, WINSIZEX / 2 - 270, 700, TEXT(deltaTime), _tcslen(TEXT(deltaTime)));
+	////
+
+
+
+
+
+
 	//DrawObject(hdc, rcGameClient, 1, RGB(0, 128, 128), OBJ_TYPE::RECTANGLE);
 	//DrawObject(hdc, rcMonster1, 1, RGB(0, 255, 0), OBJ_TYPE::RECTANGLE);
 	//DrawObject(hdc, rcMonster2, 1, RGB(0, 255, 0), OBJ_TYPE::RECTANGLE);
@@ -67,6 +92,7 @@ void Monster::Render(HDC hdc)
 	//DrawObject(hdc, rcObj, 1, RGB(0, 255, 255), OBJ_TYPE::RECTANGLE);
 	DrawObject(hdc, rcMonster, 1, RGB(0, 255, 255), OBJ_TYPE::RECTANGLE);
 	_gun->Render(hdc);
+
 }
 
 void Monster::MonsterAI()
@@ -82,6 +108,7 @@ void Monster::MonsterAI()
 	//rcObj.right += cosf(angle) * 2.0f;
 	//rcObj.top += -sinf(angle) * 2.0f;
 	//rcObj.bottom += -sinf(angle) * 2.0f;
+
 
 	//float angle = UTIL::GetAngle(rcPosX, rcPosY,
 	//	(rcMonster4.left + ((rcMonster4.right - rcMonster4.left) / 2)), (rcMonster4.top + ((rcMonster4.bottom - rcMonster4.top) / 2)));
@@ -109,12 +136,18 @@ void Monster::MonsterAI()
 */
 
 	float deltaTime = (CurrentTime - fStartTime) / 1000.f;
-	if (deltaTime > 0.5f)
+	if (deltaTime >= 3.0f) // 3.0fÃÊ¸¶´Ù ½ô.
 	{
 		_gun->BulletFire(GetPivotX(), GetPivotY());
+		
 		fStartTime = GetTickCount();
 	}
 	_gun->BulletMove();
+
+	/*float test = TIMEMANAGER->getElapsedTime();
+	deltaTime += test;*/
+	//float _deltaTime = (CurrentTime - fStartTime) / 1000.f;
+	
 	//
 	rcMonster = RectMakeCenter(GetPivotX(), GetPivotY(), 50, 50);
 

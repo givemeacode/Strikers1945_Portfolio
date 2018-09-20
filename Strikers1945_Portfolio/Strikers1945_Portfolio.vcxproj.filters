@@ -37,9 +37,6 @@
     <ClCompile Include="Scene.cpp">
       <Filter>MainGame\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="Gun.cpp">
-      <Filter>MainGame\Object\Gun</Filter>
-    </ClCompile>
     <ClCompile Include="Bullet.cpp">
       <Filter>MainGame\Object\Bullet</Filter>
     </ClCompile>
@@ -51,18 +48,6 @@
     </ClCompile>
     <ClCompile Include="CollisionObject.cpp">
       <Filter>MainGame\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="DegreeGun.cpp">
-      <Filter>MainGame\Object\Gun</Filter>
-    </ClCompile>
-    <ClCompile Include="GuidedMissileGun.cpp">
-      <Filter>MainGame\Object\Gun</Filter>
-    </ClCompile>
-    <ClCompile Include="MultiGun.cpp">
-      <Filter>MainGame\Object\Gun</Filter>
-    </ClCompile>
-    <ClCompile Include="RevolvingGun.cpp">
-      <Filter>MainGame\Object\Gun</Filter>
     </ClCompile>
     <ClCompile Include="Animation.cpp">
       <Filter>2DFrameWork\Animation</Filter>
@@ -76,11 +61,26 @@
     <ClCompile Include="TimeManager.cpp">
       <Filter>2DFrameWork\Manager</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerGun.cpp">
-      <Filter>MainGame\Object\Gun</Filter>
-    </ClCompile>
     <ClCompile Include="ResourceManager.cpp">
       <Filter>2DFrameWork\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="DegreeGun.cpp">
+      <Filter>MainGame\Object\Gun\GunType</Filter>
+    </ClCompile>
+    <ClCompile Include="GuidedMissileGun.cpp">
+      <Filter>MainGame\Object\Gun\GunType</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiGun.cpp">
+      <Filter>MainGame\Object\Gun\GunType</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerGun.cpp">
+      <Filter>MainGame\Object\Gun\GunType</Filter>
+    </ClCompile>
+    <ClCompile Include="RevolvingGun.cpp">
+      <Filter>MainGame\Object\Gun\GunType</Filter>
+    </ClCompile>
+    <ClCompile Include="Gun.cpp">
+      <Filter>MainGame\Object\Gun</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -135,9 +135,6 @@
     <ClInclude Include="Scene.h">
       <Filter>MainGame\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Gun.h">
-      <Filter>MainGame\Object\Gun</Filter>
-    </ClInclude>
     <ClInclude Include="Bullet.h">
       <Filter>MainGame\Object\Bullet</Filter>
     </ClInclude>
@@ -149,18 +146,6 @@
     </ClInclude>
     <ClInclude Include="CollisionObject.h">
       <Filter>MainGame\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="DegreeGun.h">
-      <Filter>MainGame\Object\Gun</Filter>
-    </ClInclude>
-    <ClInclude Include="GuidedMissileGun.h">
-      <Filter>MainGame\Object\Gun</Filter>
-    </ClInclude>
-    <ClInclude Include="MultiGun.h">
-      <Filter>MainGame\Object\Gun</Filter>
-    </ClInclude>
-    <ClInclude Include="RevolvingGun.h">
-      <Filter>MainGame\Object\Gun</Filter>
     </ClInclude>
     <ClInclude Include="Animation.h">
       <Filter>2DFrameWork\Animation</Filter>
@@ -174,11 +159,26 @@
     <ClInclude Include="TimeManager.h">
       <Filter>2DFrameWork\Manager</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerGun.h">
-      <Filter>MainGame\Object\Gun</Filter>
-    </ClInclude>
     <ClInclude Include="ResourceManager.h">
       <Filter>2DFrameWork\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="DegreeGun.h">
+      <Filter>MainGame\Object\Gun\GunType</Filter>
+    </ClInclude>
+    <ClInclude Include="GuidedMissileGun.h">
+      <Filter>MainGame\Object\Gun\GunType</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiGun.h">
+      <Filter>MainGame\Object\Gun\GunType</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerGun.h">
+      <Filter>MainGame\Object\Gun\GunType</Filter>
+    </ClInclude>
+    <ClInclude Include="RevolvingGun.h">
+      <Filter>MainGame\Object\Gun\GunType</Filter>
+    </ClInclude>
+    <ClInclude Include="Gun.h">
+      <Filter>MainGame\Object\Gun</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -244,6 +244,9 @@
     </Filter>
     <Filter Include="2DFrameWork\Timer">
       <UniqueIdentifier>{056ddfab-a701-4bd8-86b0-406e6dd75f4c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MainGame\Object\Gun\GunType">
+      <UniqueIdentifier>{825e55fc-2dbf-41d8-b42c-fac5c6df22b2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

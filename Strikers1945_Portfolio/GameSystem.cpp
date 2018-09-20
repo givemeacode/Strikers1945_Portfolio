@@ -19,7 +19,7 @@ bool GameSystem::Init()
 {
 
 	{
-		RESOURCEMANAGER->AddResource(eReSourceType::R_BOMB, TEXT("Bomb_Airplan"));
+		//RESOURCEMANAGER->AddResource(eReSourceType::R_BOMB, TEXT("Bomb_Airplan"));
 	//	RESOURCEMANAGER->AddResource(eReSourceType::R_BOMB, TEXT("Bomb_Bullet2"));
 	//	RESOURCEMANAGER->AddResource(eReSourceType::R_BOMB, TEXT("Bomb_Bullet3"));
 	//	RESOURCEMANAGER->AddResource(eReSourceType::R_BOMB, TEXT("Bomb_Bullet4"));
@@ -99,10 +99,10 @@ bool GameSystem::Init()
 	//	RESOURCEMANAGER->AddResource(eReSourceType::R_PLAYER, TEXT("AV_8_Player_2"));
 	//	RESOURCEMANAGER->AddResource(eReSourceType::R_PLAYER, TEXT("AV_8_Player_Bullet_1"));
 	//	RESOURCEMANAGER->AddResource(eReSourceType::R_PLAYER, TEXT("AV_8_Player_Bullet_2"));
-	//	RESOURCEMANAGER->AddResource(eReSourceType::R_PLAYER, TEXT("AV_8_Player_Bullet1"));
-	//	RESOURCEMANAGER->AddResource(eReSourceType::R_PLAYER, TEXT("AV_8_Player_Bullet2"));
-	//	RESOURCEMANAGER->AddResource(eReSourceType::R_PLAYER, TEXT("AV_8_Player_Bullet3"));
-	//	RESOURCEMANAGER->AddResource(eReSourceType::R_PLAYER, TEXT("AV_8_Player_Bullet4"));
+		RESOURCEMANAGER->AddResource(eReSourceType::R_PLAYER, TEXT("AV_8_Player_Bullet1")); // 플레이어 총알1
+		RESOURCEMANAGER->AddResource(eReSourceType::R_PLAYER, TEXT("AV_8_Player_Bullet2"));
+		RESOURCEMANAGER->AddResource(eReSourceType::R_PLAYER, TEXT("AV_8_Player_Bullet3"));
+		RESOURCEMANAGER->AddResource(eReSourceType::R_PLAYER, TEXT("AV_8_Player_Bullet4"));
 	//	RESOURCEMANAGER->AddResource(eReSourceType::R_PLAYER, TEXT("AV_8_Player_Ending"));
 
 	//	RESOURCEMANAGER->AddResource(eReSourceType::R_PLAYER, TEXT("F4_Player"));

@@ -5,6 +5,9 @@
 class GuidedMissileGun
 	: public Gun
 {
+	float fAngle;
+	float fSpeed;
+
 public:
 	GuidedMissileGun();
 	~GuidedMissileGun();

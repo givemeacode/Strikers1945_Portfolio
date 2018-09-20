@@ -13,6 +13,7 @@ protected:
 	float fPosY;
 	float fAngle;
 	float fSpeed;
+	float _cooltime;
 protected:
 	std::list<Bullet*> bulletList;
 public:
@@ -35,5 +36,6 @@ public:
 
 	void SetCenterPivot(RECT rc);
 	std::list<Bullet*>& GetBulletList();
+	void SetAngle(float _angle) { fAngle = _angle; }
 };
 
