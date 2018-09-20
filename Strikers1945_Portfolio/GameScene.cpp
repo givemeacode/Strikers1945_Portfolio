@@ -24,21 +24,16 @@ bool GameScene::Init()
 	//=========================================================
 	
 	// 시간
-	
+	RunTimer = 0;
+	startTimer = GetTickCount(); // 전체 시작시간
 
 	// 플레이어
 	player = new Player;
 	GAMESYS->SetPlayer(player);
 
-	fStartTime = GetTickCount();
-
-	deltaTime = 0;
 	// 몬스터
 
-	//-------------
-	Monster* monster1 = new Monster();
-	monster1->Init(MONSTER_TYPE_NONE, WINSIZEX / 2, 100);
-	monsterList.push_back(monster1);
+
 
 	//
 	//monster1 = new Monster;
@@ -67,27 +62,94 @@ void GameScene::Update()
 	//=========================================================
 
 	// 시간
-	//worldTime = TIMEMANAGER->getWorldTime();
+	RunTimer = GetTickCount() - startTimer; // 전체시간
+
 	// 플레이어
 	player->Update();
-	_currentTime = GetTickCount();
-	
 
-	//deltaTime += TIMEMANAGER->getElapsedTime();
-	deltaTime = (_currentTime - fStartTime);
-
+// 테스트
+	if (RunTimer == 5 * THOU) // 30초 : 1번 왼쪽 -> 오른쪽 위 [ 1]
+	{
+		Monster* monster1 = new Monster();
+		monster1->Init(MONSTER_TYPE_NONE, WINSIZEX / 2, 100);
+		monsterList.push_back(monster1);
+	}
+//
 	// 몬스터
-	if (deltaTime == 1000 )
-	{
-		
-		fStartTime = GetTickCount();
-	}
-	
-	if (worldTime == 5)
-	{
-		
+	//=============================== 30초 ~ 1분 ===================================
 
+	if (RunTimer == 30 * THOU) // 30초 : 1번 왼쪽 -> 오른쪽 위 [ 1]
+	{
+		Monster* monster1 = new Monster();
+		monster1->Init(MONSTER_TYPE_NONE, WINSIZEX / 2, 100);
+		monsterList.push_back(monster1);
 	}
+	if (RunTimer == 32 * THOU) // 32초 :  오른쪽 -> 왼쪽 위 [2] 
+	{
+		Monster* monster1 = new Monster();
+		monster1->Init(MONSTER_TYPE_NONE, WINSIZEX / 2 - 200, 100);
+		monsterList.push_back(monster1);
+	}
+	if (RunTimer == 35 * THOU) // 35초 : 위 -> 아래 중심으로 이동 (중간 캐릭터 ) 
+	{
+		Monster* monster1 = new Monster();
+		monster1->Init(MONSTER_TYPE_NONE, WINSIZEX / 2 - 200, 500);
+		monsterList.push_back(monster1);
+	}
+	if (RunTimer == 40 * THOU) // 40초 : 1번 2번 같이 생성
+	{
+		Monster* monster1 = new Monster();
+		monster1->Init(MONSTER_TYPE_NONE, WINSIZEX / 2 - 200, 200);
+		monsterList.push_back(monster1);
+	}
+	if (RunTimer == 50 * THOU) // 50초 : 중간 2 생성 -> 위 아래 
+	{
+		Monster* monster1 = new Monster();
+		monster1->Init(MONSTER_TYPE_NONE, WINSIZEX / 2 - 200, 200);
+		monsterList.push_back(monster1);
+	}
+
+	//=============================== 1분 ~ 1분30초 ===================================
+
+	if (RunTimer == 60 * THOU) // 1분 : 중간 크기 2마리 
+	{
+		Monster* monster1 = new Monster();
+		monster1->Init(MONSTER_TYPE_NONE, WINSIZEX / 2 - 200, 200);
+		monsterList.push_back(monster1);
+	}
+	if (RunTimer == 65 * THOU) // 1분 5초 : 1번 2번 같이 생성
+	{
+		Monster* monster1 = new Monster();
+		monster1->Init(MONSTER_TYPE_NONE, WINSIZEX / 2 - 200, 200);
+		monsterList.push_back(monster1);
+	}
+	if (RunTimer == 75 * THOU) // 1분 15초 : 중간3 2마리 양쪽 사이드 생성 
+	{
+		Monster* monster1 = new Monster();
+		monster1->Init(MONSTER_TYPE_NONE, WINSIZEX / 2 - 200, 200);
+		monsterList.push_back(monster1);
+	}
+
+	//========================== 1분 30초! ( 보스 등장 ) ==============================
+
+	if (RunTimer == 90 * THOU) // 1분 30초 : 보스 
+	{
+		Monster* monster1 = new Monster();
+		monster1->Init(MONSTER_TYPE_NONE, WINSIZEX / 2 - 200, 200);
+		monsterList.push_back(monster1);
+	}
+
+
+
+
+
+
+
+
+
+
+
+
 
 	std::list<Monster*>::iterator it;
 	for (it = monsterList.begin(); it != monsterList.end(); it++)
@@ -110,12 +172,6 @@ void GameScene::Render(HDC hdc)
 	//PatBlt(backDC, 0, 0, WINSIZEX, WINSIZEY, WHITENESS);
 	//=========================================================
 	
-	// 시간 테스트용 .. 현재 월드 진행 시간 출력
-	//TCHAR testGetWorldTime[100] = { 0, };
-	//_stprintf_s(testGetWorldTime, sizeof(testGetWorldTime), TEXT("WorldTime : %d"), worldTime);
-	//TextOut(hdc, 700, 120, TEXT(testGetWorldTime), _tcslen(TEXT(testGetWorldTime)));
-	//
-
 	TIMEMANAGER->Render(hdc);
 
 	// 플레이어

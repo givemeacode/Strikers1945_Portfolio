@@ -82,6 +82,9 @@
     <ClCompile Include="Gun.cpp">
       <Filter>MainGame\Object\Gun</Filter>
     </ClCompile>
+    <ClCompile Include="NormalGun.cpp">
+      <Filter>MainGame\Object\Gun\GunType</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Backbuffer.h">
@@ -179,6 +182,9 @@
     </ClInclude>
     <ClInclude Include="Gun.h">
       <Filter>MainGame\Object\Gun</Filter>
+    </ClInclude>
+    <ClInclude Include="NormalGun.h">
+      <Filter>MainGame\Object\Gun\GunType</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

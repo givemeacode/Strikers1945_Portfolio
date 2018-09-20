@@ -26,7 +26,7 @@ bool Bullet::Init(float _x, float _y, float _radius)
 void Bullet::Update()
 {
 	// 충돌 처리를 할 총알 갱신 
-	rcBullet = RectMakeCenter(fPosX, fPosY, 30, 30);
+	rcBullet = RectMakeCenter(fPosX, fPosY, 30, 30); // 총알 크기가 안바뀌는건 이부분 30
 }
 
 void Bullet::Render(HDC hdc)

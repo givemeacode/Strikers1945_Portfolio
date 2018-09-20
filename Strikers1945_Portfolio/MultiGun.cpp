@@ -101,8 +101,8 @@ void MultiGun::BulletMove()
 	{
 		if ((*it)->GetIsBulletFire())
 		{
-			(*it)->SetPivotX((*it)->GetPivotX() + cosf((*it)->GetAngle()) * 3.f);
-			(*it)->SetPivotY((*it)->GetPivotY() + -sinf((*it)->GetAngle()) * 3.f);
+			(*it)->SetPivotX((*it)->GetPivotX() + cosf((*it)->GetAngle()) * fSpeed);
+			(*it)->SetPivotY((*it)->GetPivotY() + -sinf((*it)->GetAngle()) * fSpeed);
 
 			(*it)->Update();
 

@@ -37,5 +37,8 @@ public:
 	void SetCenterPivot(RECT rc);
 	std::list<Bullet*>& GetBulletList();
 	void SetAngle(float _angle) { fAngle = _angle; }
+
+	float GetSpeed() { return fSpeed; }
+	void SetSpeed(float _speed) { fSpeed = _speed; }
 };
 

@@ -4,6 +4,8 @@
 #include "DegreeGun.h"
 #include "GuidedMissileGun.h"
 #include "MultiGun.h"
+#include "RevolvingGun.h"
+#include "NormalGun.h"
 
 Monster::Monster()
 {
@@ -44,7 +46,7 @@ bool Monster::Init(eMonsterType type, int x, int y)
 	SetCenterPivot(rcMonster);
 
 	//_gun = new Gun();
-	_gun = new MultiGun();
+	_gun = new NormalGun();
 	
 	_gun->Init(GetPivotX(), GetPivotY());
 

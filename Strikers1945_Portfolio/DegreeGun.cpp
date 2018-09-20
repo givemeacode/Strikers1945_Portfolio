@@ -68,10 +68,10 @@ void DegreeGun::BulletMove()
 		{
 			if ((*iter)->GetIsBulletFire())
 			{
-				(*iter)->SetPivotX((*iter)->GetPivotX() + (cosf(fAngle)* 8.0f));
+				(*iter)->SetPivotX((*iter)->GetPivotX() + (cosf(fAngle)* fSpeed));
 				//;
 
-				(*iter)->SetPivotY((*iter)->GetPivotY() + ((-sinf(fAngle += cycleTypeAngle) * 2.0f) + 2.0f));
+				(*iter)->SetPivotY((*iter)->GetPivotY() + ((-sinf(fAngle += cycleTypeAngle) * fSpeed) + 2.0f));
 				//(*iter)->SetPivotY((*iter)->GetPivotY() + 3.0f);
 
 				// 위치 갱신

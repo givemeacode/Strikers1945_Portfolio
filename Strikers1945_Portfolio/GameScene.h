@@ -16,13 +16,14 @@ private:
 	//Monster* monster2;
 
 	std::list<Monster*> monsterList;
-	// 시간관련
-	float	worldTime;
-	float deltaTime;
+	
+	
 	bool stage1;
+	
+	// 시간관련	
+	DWORD startTimer; // 전체 시작시간
 
-	float _currentTime;
-	float fStartTime;
+	DWORD RunTimer;	  // 전체 진행시간 체크
 		//RECT rcTest;
 public:
 	GameScene();

@@ -6,7 +6,7 @@
 Gun::Gun()
 {
 	fAngle = PI + (PI / 2);
-	fSpeed = 20.f;
+	fSpeed = 10.f;
 }
 
 

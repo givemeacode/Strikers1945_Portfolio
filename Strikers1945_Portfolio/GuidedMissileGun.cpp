@@ -8,7 +8,6 @@ GuidedMissileGun::GuidedMissileGun()
 {
 	fAngle = PI + PI /2 ;
 
-	fSpeed = 4.f;
 }
 
 
@@ -63,8 +62,8 @@ void GuidedMissileGun::BulletMove()
 	{
 		if ((*it)->GetIsBulletFire())
 		{
-			(*it)->SetPivotX((*it)->GetPivotX() + cosf((*it)->GetAngle()) * 10.f);
-			(*it)->SetPivotY((*it)->GetPivotY() + (-sinf((*it)->GetAngle()) * 10.f));
+			(*it)->SetPivotX((*it)->GetPivotX() + cosf((*it)->GetAngle()) * fSpeed);
+			(*it)->SetPivotY((*it)->GetPivotY() + (-sinf((*it)->GetAngle()) * fSpeed));
 
 			(*it)->Update();
 

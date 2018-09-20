@@ -25,3 +25,4 @@
 //
 #define PI			3.141592f
 #define PI2			PI*2
+#define THOU		1000
