@@ -21,6 +21,38 @@ bool GameSystem::Init()
 	{
 		GamePositionInfoInit();
 	}
+
+	//rcMonster1 = RectMakeCenter(rcGameClient.left - 50, WINSIZEY / 2, 50, 50);
+	//rcMonster2 = RectMakeCenter(rcGameClient.right + 50, WINSIZEY / 2, 50, 50);
+
+	//rcMonster3 = RectMakeCenter(rcGameClient.left - 50, WINSIZEY / 4, 50, 50);
+	//rcMonster4 = RectMakeCenter(rcGameClient.right + 50, WINSIZEY / 4, 50, 50);
+
+	//rcMonster5 = RectMakeCenter(rcGameClient.left - 50, rcGameClient.top +25, 50, 50);
+	//rcMonster6 = RectMakeCenter(rcGameClient.right + 50, rcGameClient.top +25, 50, 50);
+
+
+
+	// 위치 정보 값 
+	//{
+	//	posInfo.rcGameLeft1 = RectMakeCenter(50, WINSIZEY / 2, 50,50);
+	//	posInfo.rcGameLeft2 = RectMakeCenter(50, WINSIZEY / 4 , 50,50);
+	//	posInfo.rcGameLeft3 = RectMakeCenter(50, 25 , 50,50	);
+
+	//	posInfo.rcGameRight1 = RectMakeCenter(WINSIZEX - 50, WINSIZEY / 2, 50, 50);
+	//	posInfo.rcGameRight2 = RectMakeCenter(WINSIZEX - 50, WINSIZEY / 4, 50, 50);
+	//	posInfo.rcGameRight3 = RectMakeCenter(WINSIZEX - 50, 25, 50, 50);
+
+	//	posInfo.ptGameLeft1;
+	//	posInfo.ptGameLeft2;
+	//	posInfo.ptGameLeft3;
+
+	//	posInfo.ptGameRight1;
+	//	posInfo.ptGameRight2;
+	//	posInfo.ptGameRight3;
+	//}
+
+
 	{
 		//RESOURCEMANAGER->AddResource(eReSourceType::R_BOMB, TEXT("Bomb_Airplan"));
 	//	RESOURCEMANAGER->AddResource(eReSourceType::R_BOMB, TEXT("Bomb_Bullet2"));
@@ -45,7 +77,7 @@ bool GameSystem::Init()
 	//	RESOURCEMANAGER->AddResource(eReSourceType::R_EFFECT, TEXT("Effect_4"));
 	//	RESOURCEMANAGER->AddResource(eReSourceType::R_EFFECT, TEXT("Effect_5"));
 	//	RESOURCEMANAGER->AddResource(eReSourceType::R_EFFECT, TEXT("Effect_6"));
-	//	RESOURCEMANAGER->AddResource(eReSourceType::R_EFFECT, TEXT("Effect_7"));
+		RESOURCEMANAGER->AddResource(eReSourceType::R_EFFECT, TEXT("Effect_7"));	// 플레이어 데드 이펙트
 	//	RESOURCEMANAGER->AddResource(eReSourceType::R_EFFECT, TEXT("Effect_Boss"));
 	//	RESOURCEMANAGER->AddResource(eReSourceType::R_EFFECT, TEXT("Effect_Crash"));
 	//	RESOURCEMANAGER->AddResource(eReSourceType::R_EFFECT, TEXT("Effect_Power"));

@@ -29,10 +29,10 @@ class GameSystem
 	: public SingletonBase<GameSystem>
 {
 private:
+	sCharacterPositon posInfo;
 	Player* player;
 private:
 	RECT rcClient;
-	sCharacterPositon posInfo;
 public:
 	GameSystem();
 	~GameSystem();
