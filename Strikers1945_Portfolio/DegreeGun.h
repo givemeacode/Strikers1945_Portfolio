@@ -5,6 +5,9 @@
 class DegreeGun
 	: public Gun
 {
+	Image*		degreeGunImage;
+	Animation*	degreeGunAni;
+
 private:
 	float cycleTypeAngle;
 	float fStartX;

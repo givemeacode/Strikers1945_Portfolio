@@ -5,6 +5,12 @@
 
 MultiGun::MultiGun()
 {
+	multiGunImage = IMAGEMANAGER->FindImage(TEXT("MBasic_Bullet2"));
+	multiGunAni = new Animation;
+	multiGunAni->Init(multiGunImage);
+	multiGunAni->setDefPlayFrame(false, true); // (리버스, 루프)
+	multiGunAni->setFPS(1); // 프레임 1 프레임당 (n) - 업데이트가 커질수록 갱신 주기가 짧아짐.
+
 	fAngle = PI + PI / 2;
 	_cooltime = 5.0f;
 }
@@ -31,12 +37,14 @@ void MultiGun::Render(HDC hdc)
 		for (it = bulletList.begin(); it != bulletList.end(); it++)
 		{
 			(*it)->Render(hdc);
+			multiGunImage->AniRender(hdc, (*it)->GetPivotX()-10, (*it)->GetPivotY()-10, multiGunAni);// 총알이미지 크기가 20,21 이니까 10,10만큼 조정해서 중간으로 옴겨줌.
 		}
 	}
 }
 
 void MultiGun::Release()
 {
+	SAFE_DELETE(multiGunAni);
 }
 
 void MultiGun::BulletFire(float x, float y)
@@ -58,7 +66,7 @@ void MultiGun::BulletFire(float x, float y)
 	//}
 
 
-	for (int i = 0; i < 5; i++)
+	for (int i = 0; i < 7; i++)
 	{
 		Bullet* bullet = new Bullet();
 		bullet->Init(x, y, 10);
@@ -76,21 +84,28 @@ void MultiGun::BulletFire(float x, float y)
 			(*it)->SetAngle(fAngle);
 			break;
 		case 1:
-			(*it)->SetAngle(fAngle + PI / 4);
+			(*it)->SetAngle(fAngle + PI / 6);
 			break;
 		case 2:
-			(*it)->SetAngle(fAngle + PI / 5);
+			(*it)->SetAngle(fAngle + PI / 7);
 			break;
 		case 3:
-			(*it)->SetAngle(fAngle - PI / 4);
+			(*it)->SetAngle(fAngle + PI / 8);
 			break;
 		case 4:
-			(*it)->SetAngle(fAngle - PI / 5);
+			(*it)->SetAngle(fAngle - PI / 6);
+			break;
+		case 5:
+			(*it)->SetAngle(fAngle - PI / 7);
+			break;
+		case 6:
+			(*it)->SetAngle(fAngle - PI / 8);
 			iCount = -1;
 			break;
 		}
 		iCount++;
 	}
+	multiGunAni->start();
 }
 
 void MultiGun::BulletMove()
@@ -105,7 +120,7 @@ void MultiGun::BulletMove()
 			(*it)->SetPivotY((*it)->GetPivotY() + -sinf((*it)->GetAngle()) * fSpeed);
 
 			(*it)->Update();
-
 		}
 	}
+	multiGunAni->frameUpdate(TIMEMANAGER->getElapsedTime() * 10);
 }

@@ -4,6 +4,9 @@
 class RevolvingGun
 	: public Gun
 {
+	Image*		revolvingGunImage;
+	Animation*	revolvingGunAni;
+
 public:
 	RevolvingGun();
 	~RevolvingGun();

@@ -6,6 +6,7 @@
 class Player;
 class Monster;
 class Boss;
+class UI;
 
 class GameScene
 	: public Scene
@@ -28,6 +29,7 @@ private:
 		//RECT rcTest;
 	Boss* boss;
 	//RECT rcTest;
+	UI*	ui;
 public:
 	GameScene();
 	~GameScene();

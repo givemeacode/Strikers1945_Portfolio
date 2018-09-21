@@ -4,6 +4,8 @@
 class NormalGun
 	: public Gun
 {
+	Image*		normalGunImage;
+	Animation*	normalGunAni;
 public:
 	NormalGun();
 	~NormalGun();

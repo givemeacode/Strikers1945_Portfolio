@@ -1,2 +1,2 @@
 ImageName,Width,Height,FrameX,FrameY,Trans,R,G,B
-LMBullet_Straight,240,25,8,1,1,0,128,128
+BossBullet,105,51,2,1,1,248,0,248

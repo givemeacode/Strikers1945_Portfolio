@@ -26,8 +26,12 @@ bool GameSystem::Init()
 	}
 
 	//{
-	//	RESOURCEMANAGER->AddResource(eReSourceType::R_BULLET, TEXT("BMBasic_Bullet2"));
-	//	RESOURCEMANAGER->AddResource(eReSourceType::R_BULLET, TEXT("MBasic_Bullet"));
+		RESOURCEMANAGER->AddResource(eReSourceType::R_BULLET, TEXT("MBasic_Bullet2"));		// 멀티 건
+		RESOURCEMANAGER->AddResource(eReSourceType::R_BULLET, TEXT("MBasic_Bullet"));		// 노멀 건
+		RESOURCEMANAGER->AddResource(eReSourceType::R_BULLET, TEXT("MGuide_Bullet"));		// 가이드미사일 건
+		RESOURCEMANAGER->AddResource(eReSourceType::R_BULLET, TEXT("BossBullet"));			// 디그리 건
+		RESOURCEMANAGER->AddResource(eReSourceType::R_BULLET, TEXT("LMBullet_Straight"));	// 리볼빙 건
+
 	//	RESOURCEMANAGER->AddResource(eReSourceType::R_BULLET, TEXT("MBasic_Bullet2"));
 	//	RESOURCEMANAGER->AddResource(eReSourceType::R_BULLET, TEXT("Stage2_Bullet"));
 	//	RESOURCEMANAGER->AddResource(eReSourceType::R_BULLET, TEXT("Stage2_Bullet2"));
@@ -139,7 +143,7 @@ bool GameSystem::Init()
 	//}
 
 	//{
-	//	RESOURCEMANAGER->AddResource(eReSourceType::R_SCORE, TEXT("Score"));
+		RESOURCEMANAGER->AddResource(eReSourceType::R_SCORE, TEXT("Score"));			// 스코어
 	//}
 
 	//{

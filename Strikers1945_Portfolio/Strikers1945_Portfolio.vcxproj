@@ -119,6 +119,7 @@
     <ClCompile Include="Backbuffer.cpp" />
     <ClCompile Include="Boss.cpp" />
     <ClCompile Include="Bullet.cpp" />
+    <ClCompile Include="CharacterSelectScene.cpp" />
     <ClCompile Include="CollisionFunction.cpp" />
     <ClCompile Include="CollisionObject.cpp" />
     <ClCompile Include="DegreeGun.cpp" />
@@ -142,6 +143,7 @@
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="TimeManager.cpp" />
     <ClCompile Include="Timer.cpp" />
+    <ClCompile Include="UI.cpp" />
     <ClCompile Include="Util.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
@@ -150,6 +152,7 @@
     <ClInclude Include="Backbuffer.h" />
     <ClInclude Include="Boss.h" />
     <ClInclude Include="Bullet.h" />
+    <ClInclude Include="CharacterSelectScene.h" />
     <ClInclude Include="CollisionFunction.h" />
     <ClInclude Include="CollisionObject.h" />
     <ClInclude Include="commonMacroFuntion.h" />
@@ -179,6 +182,7 @@
     <ClInclude Include="CustomDefine.h" />
     <ClInclude Include="TimeManager.h" />
     <ClInclude Include="Timer.h" />
+    <ClInclude Include="UI.h" />
     <ClInclude Include="Util.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

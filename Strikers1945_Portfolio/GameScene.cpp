@@ -5,6 +5,7 @@
 #include "Monster.h"
 #include "Timer.h"
 #include "Boss.h"
+#include "UI.h"
 #pragma comment (lib,"winmm")
 
 GameScene::GameScene()
@@ -45,6 +46,11 @@ bool GameScene::Init()
 	
 	boss = new Boss();
 	boss->Init();
+
+
+	//ui
+	ui = new UI();
+	ui->Init();
 	return true;
 }
 
@@ -82,7 +88,7 @@ void GameScene::Update()
 	// 몬스터
 	//=============================== 30초 ~ 1분 ===================================
 
-	if (RunTimer == 30 * THOU) // 30초 : 1번 왼쪽 -> 오른쪽 위 [ 1]
+	if (RunTimer == 5 * THOU) // 30초 : 1번 왼쪽 -> 오른쪽 위 [ 1]
 	{
 		Monster* monster1 = new Monster();
 		monster1->Init(MONSTER_TYPE_NONE, WINSIZEX / 2, 100);
@@ -147,13 +153,7 @@ void GameScene::Update()
 
 
 
-
-
-
-
-
-
-
+	
 
 	std::list<Monster*>::iterator it;
 	for (it = monsterList.begin(); it != monsterList.end(); it++)
@@ -166,8 +166,10 @@ void GameScene::Update()
 
 	//player->Update();
 	boss->Update();
-	//GAMESYS->CollisionCharacter(_monster, rcTest);
-	
+
+	// 인터페이스
+	ui->Update();
+	//GAMESYS->CollisionCharacter(_monster, rcTest);	
 }
 
 void GameScene::Render(HDC hdc)
@@ -193,10 +195,11 @@ void GameScene::Render(HDC hdc)
 	//monster2->Render(hdc);
 
 
-
-
 	//player->Render(hdc);
 	boss->Render(hdc);
+
+	// 인터페이스
+	ui->Render(hdc);
 
 	//Rectangle(backDC, rcTest.left, rcTest.top, rcTest.right, rcTest.bottom);
 	//=========================================================

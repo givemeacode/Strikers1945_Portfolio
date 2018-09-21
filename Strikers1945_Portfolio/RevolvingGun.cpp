@@ -4,6 +4,12 @@
 
 RevolvingGun::RevolvingGun()
 {
+	revolvingGunImage = IMAGEMANAGER->FindImage(TEXT("LMBullet_Straight"));
+	revolvingGunAni = new Animation;
+	revolvingGunAni->Init(revolvingGunImage);
+	revolvingGunAni->setDefPlayFrame(false, true); // (리버스, 루프)
+	revolvingGunAni->setFPS(1); // 프레임 1 프레임당 (n) - 업데이트가 커질수록 갱신 주기가 짧아짐.
+
 	fAngle = PI + PI / 2;
 
 }
@@ -29,12 +35,15 @@ void RevolvingGun::Render(HDC hdc)
 		for (it = bulletList.begin(); it != bulletList.end(); it++)
 		{
 			(*it)->Render(hdc);
+			revolvingGunImage->AniRender(hdc, (*it)->GetPivotX() - 15, (*it)->GetPivotY() - 13, revolvingGunAni);// 총알이미지 크기가 30,25 이니까 15,13만큼 조정해서 중간으로 옴겨줌.
 		}
 	}
 }
 
 void RevolvingGun::Release()
 {
+	SAFE_DELETE(revolvingGunAni);
+
 }
 
 void RevolvingGun::BulletFire(float x, float y)
@@ -52,7 +61,9 @@ void RevolvingGun::BulletFire(float x, float y)
 	for (it = bulletList.begin(); it != bulletList.end(); it++, iCount++)
 	{
 		(*it)->SetAngle(iCount);
-	}	
+	}
+	revolvingGunAni->start();
+
 }
 
 void RevolvingGun::BulletMove()
@@ -67,7 +78,8 @@ void RevolvingGun::BulletMove()
 			(*it)->SetPivotY((*it)->GetPivotY() + -sinf((*it)->GetAngle()) * fSpeed);
 
 			(*it)->Update();
-
 		}
 	}
+	revolvingGunAni->frameUpdate(TIMEMANAGER->getElapsedTime() * 10);
+
 }

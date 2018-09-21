@@ -5,6 +5,9 @@
 class GuidedMissileGun
 	: public Gun
 {
+	Image*		guidedMissileGunImage;
+	Animation*	guidedMissileGunAni;
+
 	float fAngle;
 
 public:

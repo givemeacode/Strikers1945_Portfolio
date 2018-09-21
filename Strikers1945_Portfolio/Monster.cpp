@@ -46,7 +46,7 @@ bool Monster::Init(eMonsterType type, int x, int y)
 	SetCenterPivot(rcMonster);
 
 	//_gun = new Gun();
-	_gun = new NormalGun();
+	_gun = new GuidedMissileGun();
 	
 	_gun->Init(GetPivotX(), GetPivotY());
 

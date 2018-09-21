@@ -4,6 +4,9 @@
 class MultiGun
 	: public Gun
 {
+	Image*		multiGunImage;
+	Animation*	multiGunAni;
+
 public:
 	MultiGun();
 	~MultiGun();
