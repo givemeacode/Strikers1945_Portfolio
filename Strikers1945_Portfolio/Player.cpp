@@ -24,11 +24,19 @@ Player::Player()
 	//
 	gun = new PlayerGun;
 	gun->Init(endx, endy);
+
+	// 애니메이션
+	deathEffect = IMAGEMANAGER->FindImage(TEXT("Effect_7"));
+	deathAnimation = new Animation;
+	deathAnimation->Init(deathEffect);
+	deathAnimation->setDefPlayFrame(false, true);
+	deathAnimation->setFPS(5.f); //
 }
 
 Player::~Player()
 {
 	SAFE_DELETE(playerImage);
+	SAFE_DELETE(deathAnimation);
 }
 
 void Player::Init()
@@ -69,6 +77,8 @@ void Player::Update()
 	collisionBox = RectMakeCenter(x, y, PLAYERSIZE, PLAYERSIZE);
 	rc = RectMakeCenter(x, y, 32, 32);
 
+	// 애니메이션
+	deathAnimation->frameUpdate(TIMEMANAGER->getElapsedTime() * 2);
 
 	/////////// 테스트 ///////////////////
 	//OffsetRect(&target, 0, 5);
@@ -80,6 +90,14 @@ void Player::Render(HDC hdc)
 	playerImage->FrameRender(hdc, playerImage->GetX(), playerImage->GetY(),
 		playerImage->GetFrameX(), playerImage->GetFrameY());
 
+	//애니메이션
+	if (isDead)
+	{
+		if (responTime < 1000)
+		{
+			deathEffect->AniRender(hdc, x-64, y-64, deathAnimation); // 64는 이미지 사이즈/2
+		}
+	}
 
 
 	///////////////        테스트        ///////////////////////////
@@ -150,29 +168,26 @@ void Player::IsDead()
 		deathTimer = GetTickCount(); // 죽었을떄 흘러가는시간.
 
 
-		if (responTime < 5000) // 런타임( 전체 )에서 데스타임( 죽은 시간 )을 빼면 -> 죽었던 시간이됨.
+		if (responTime < 3000) // 런타임( 전체 )에서 데스타임( 죽은 시간 )을 빼면 -> 죽었던 시간이됨.
 		{
 			responTime = ((deathTimer - runTimer));
 			//deathMotionTime = ((deathTimer - runTimer) / 1000);
 
-			if (responTime < 2000)
+			if (responTime < 1000)
 			{
+				deathAnimation->resume();
 				// 폭파되는 이미지.. 애니메이션?
 			}
-			else if (responTime >= 2000 && responTime < 5000)
+			else if (responTime >= 1000 && responTime < 3000)
 			{
 				PositionInit(); // 자리 초기화하고
 
-				y = -(responTime / 20) + WINSIZEY + 150; // 계산기로 계산한값. responTomer 3000~4999
+				y = -(responTime / 20) + WINSIZEY + 50; // 계산기로 계산한값. responTomer 3000~4999
 				playerImage->SetY(y - playerImage->GetFrameHeight() / 2);  // 렉트는 중심부터 그려지고, 이미지는 left,top부터 그리니까 이미지프레임의 높이의 반을 계산해줘서 중심으로 옴긴다.
-
-				//무적 ( 이미지 반짝반짝 & 충돌처리를 하는 함수를 수정 )
 			}
-
 		}
-		else if (responTime >= 5)
+		else
 		{
-			//		deathMotionTime = 0;
 			responTime = 0;
 			isDead = false;					// 리스폰시간이 되면 isDead( 상태 )는 false가 되서 이프문을 나감.
 		}

@@ -38,6 +38,9 @@ private:
 	//int deathMotionTime;
 	float responTime;
 
+	// 애니메이션
+	Image *		deathEffect;
+	Animation*	deathAnimation;
 	// 테스트용
 	bool check;
 	RECT target;

@@ -42,7 +42,7 @@ bool GameSystem::Init()
 	//	RESOURCEMANAGER->AddResource(eReSourceType::R_EFFECT, TEXT("Effect_4"));
 	//	RESOURCEMANAGER->AddResource(eReSourceType::R_EFFECT, TEXT("Effect_5"));
 	//	RESOURCEMANAGER->AddResource(eReSourceType::R_EFFECT, TEXT("Effect_6"));
-	//	RESOURCEMANAGER->AddResource(eReSourceType::R_EFFECT, TEXT("Effect_7"));
+		RESOURCEMANAGER->AddResource(eReSourceType::R_EFFECT, TEXT("Effect_7"));	// 플레이어 데드 이펙트
 	//	RESOURCEMANAGER->AddResource(eReSourceType::R_EFFECT, TEXT("Effect_Boss"));
 	//	RESOURCEMANAGER->AddResource(eReSourceType::R_EFFECT, TEXT("Effect_Crash"));
 	//	RESOURCEMANAGER->AddResource(eReSourceType::R_EFFECT, TEXT("Effect_Power"));
