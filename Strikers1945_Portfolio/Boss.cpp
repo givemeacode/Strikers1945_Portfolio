@@ -55,7 +55,7 @@ bool Boss::Init()
 	aniBossPropellerRight = new Animation();
 	aniBossPropellerRight->Init(bossPropellerRight);
 	aniBossPropellerRight->setDefPlayFrame(false, true);
-	aniBossPropellerRight->setFPS(1.f);
+	aniBossPropellerRight->setFPS(3.f);
 	aniBossPropellerRight->start();
 
 
@@ -287,29 +287,42 @@ void Boss::Render(HDC hdc)
 
 
 	//============================================================
+
+	bossBody->FrameRender(hdc, rcBossBody.left, rcBossBody.top, 0, 0);
+
+
 	float fResult = (500 * 50) / 100;
 	if (fHp > fResult)
 	{
 		bossLeft->FrameRender(hdc, rcBossLeft.left, rcBossLeft.top, 0, 0);
 		bossRight->FrameRender(hdc, rcBossRight.left, rcBossRight.top, 0, 0);
+
+		bossPropellerLeft->AniRender(hdc,
+			rcBossPropellerLeft.left,
+			rcBossPropellerLeft.top, aniBossPropellerLeft);
+
+		bossPropellerRight->AniRender(hdc,
+			rcBossPropellerRight.left,
+			rcBossPropellerRight.top, aniBossPropellerRight);
 	}
 	else
 	{
-		bossLeft->FrameRender(hdc, rcBossLeft.left, rcBossLeft.top, 1, 0);
-		bossRight->FrameRender(hdc, rcBossRight.left, rcBossRight.top, 1, 0);
+		bossLeft->FrameRender(hdc, rcBossLeft.left + 11, rcBossLeft.top, 1, 0);
+		bossRight->FrameRender(hdc, rcBossRight.left -14, rcBossRight.top, 1, 0);
+
+		bossPropellerLeft->AniRender(hdc,
+			rcBossPropellerLeft.left +3,
+			rcBossPropellerLeft.top, aniBossPropellerLeft);
+
+		bossPropellerRight->AniRender(hdc,
+			rcBossPropellerRight.left - 3,
+			rcBossPropellerRight.top, aniBossPropellerRight);
 	}
 	
 	//bossLeft->FrameRender(hdc, WINSIZEX / 2 - bossLeft->GetFrameWidth() + 13, bossBody->GetFrameHeight() / 3 + 140, 1, 0);
 	//bossRight->FrameRender(hdc, WINSIZEX / 2 + bossBody->GetFrameWidth() - 16, bossBody->GetFrameHeight() / 3 + 140, 1, 0);
-	bossBody->FrameRender(hdc, rcBossBody.left, rcBossBody.top,0, 0);
 	
-	bossPropellerLeft->AniRender(hdc,
-		rcBossPropellerLeft.left,
-		rcBossPropellerLeft.top, aniBossPropellerLeft);
-	
-	bossPropellerRight->AniRender(hdc,
-		rcBossPropellerRight.left,
-		rcBossPropellerRight.top, aniBossPropellerRight);
+
 
 	gun1->Render(hdc);
 	gun2->Render(hdc);

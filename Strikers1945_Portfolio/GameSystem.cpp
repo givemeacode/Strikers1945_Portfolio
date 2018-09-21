@@ -17,7 +17,10 @@ GameSystem::~GameSystem()
 
 bool GameSystem::Init()
 {
-
+	
+	{
+		GamePositionInfoInit();
+	}
 	{
 		//RESOURCEMANAGER->AddResource(eReSourceType::R_BOMB, TEXT("Bomb_Airplan"));
 	//	RESOURCEMANAGER->AddResource(eReSourceType::R_BOMB, TEXT("Bomb_Bullet2"));
@@ -155,6 +158,41 @@ bool GameSystem::Init()
 RECT GameSystem::GetGameClientRect()
 {
 	return rcClient;
+}
+
+void GameSystem::GamePositionInfoInit()
+{
+	//// RECT ( 哭率  )
+	//{
+	//	rcGameLeft1;
+	//	rcGameLeft2;
+	//	rcGameLeft3;
+
+	//	
+	//}
+
+	//// RECT ( 坷弗率 )
+	//{
+	//	rcGameRight1;
+	//	rcGameRight2;
+	//	rcGameRight3;
+	//}
+
+	//// POINT ( 哭率 )
+	//{
+	//	ptGameLeft1;
+	//	ptGameLeft2;
+	//	ptGameLeft3;
+	//}
+
+	//// POINT ( 坷弗率 ) 
+	//{
+	//	ptGameRight1;
+	//	ptGameRight2;
+	//	ptGameRight3;
+	//}
+
+
 }
 
 void GameSystem::SetPlayer(Player * _player)

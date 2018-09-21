@@ -28,9 +28,11 @@ struct sCharacterPositon
 class GameSystem
 	: public SingletonBase<GameSystem>
 {
+private:
 	Player* player;
 private:
 	RECT rcClient;
+	sCharacterPositon posInfo;
 public:
 	GameSystem();
 	~GameSystem();
@@ -38,6 +40,7 @@ public:
 	bool Init();
 public:
 	RECT GetGameClientRect();
+	void GamePositionInfoInit();
 	void SetPlayer(Player* _player);
 	Player* GetPlayer() { return player; }
 };
