@@ -151,6 +151,7 @@ void GameScene::Update()
 			(*it)->Update();
 	}
 
+	GAMESYS->CollisionObject(monsterList);
 	//monster1->Update();
 	//monster2->Update();
 

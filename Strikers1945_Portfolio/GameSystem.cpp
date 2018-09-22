@@ -1,8 +1,10 @@
 #include "stdafx.h"
 #include "GameSystem.h"
 
-
-
+#include "Monster.h"
+#include "Player.h"
+#include "Gun.h"
+#include "Bullet.h"
 
 GameSystem::GameSystem()
 {
@@ -253,5 +255,78 @@ void GameSystem::SetPlayer(Player * _player)
 CPOS & GameSystem::GetPosInfo()
 {
 	return posInfo;
+}
+
+void GameSystem::CollisionObject(std::list<Monster*> monsterlist)
+{
+	std::list<Monster*>::iterator it;
+	std::list<Bullet*>::iterator biter;
+
+	// 플레이어 총알 충돌 ( 클라이언트 화면 ) 
+	for (biter = player->GetGun()->GetBulletList().begin(); biter != player->GetGun()->GetBulletList().end(); biter++)
+	{
+		if ((*biter)->GetIsBulletFire())
+		{
+			if ((*biter)->GetPivotX() <= 15 || (*biter)->GetPivotX() >= WINSIZEX + 15 ||
+				(*biter)->GetPivotY() <= 15 || (*biter)->GetPivotY() >= WINSIZEY)
+			{
+				(*biter)->SetIsBulletFire(false);
+			}
+
+			// 몬스터 
+
+		}
+	}
+
+	for (biter = player->GetGun()->GetBulletList().begin(); biter != player->GetGun()->GetBulletList().end(); )
+	{
+		if (!(*biter)->GetIsBulletFire())
+		{
+			biter = player->GetGun()->GetBulletList().erase(biter);
+
+		}
+		else
+		{
+			++biter;
+		}
+	}
+
+
+
+	//===========================================================================================================
+	// 몬스터 총알 충돌 ( 클라이언트 화면 ) 
+	for (it = monsterlist.begin(); it != monsterlist.end(); it++)
+	{
+		for (biter = (*it)->GetGun()->GetBulletList().begin(); biter != (*it)->GetGun()->GetBulletList().end(); biter++)
+		{
+			if ((*biter)->GetIsBulletFire())
+			{
+				if ((*biter)->GetPivotX() <= 15 || (*biter)->GetPivotX() >= WINSIZEX + 15 ||
+					(*biter)->GetPivotY() <= 15 || (*biter)->GetPivotY() >= WINSIZEY)
+				{
+					 (*biter)->SetIsBulletFire(false);
+				}
+				
+				
+			}
+		}
+	}
+
+	for (it = monsterlist.begin(); it != monsterlist.end(); it++)
+	{
+		for (biter = (*it)->GetGun()->GetBulletList().begin(); biter != (*it)->GetGun()->GetBulletList().end(); )
+		{
+			if (!(*biter)->GetIsBulletFire())
+			{
+				biter = (*it)->GetGun()->GetBulletList().erase(biter);
+			}
+			else
+			{
+				++biter;
+			}
+		}
+	}
+
+	
 }
 

@@ -65,7 +65,7 @@ public:
 
 	int GetX() { return x; } // collisionBox( 충돌처리를 담당할 원 )의...   x값을 구해오는 함수
 	int GetY() { return y; } // collisionBox( 충돌처리를 담당할 원 )의...   y값을 구해오는 함수
-
+	Gun* GetGun() { return gun; }
 	//========================
 
 };

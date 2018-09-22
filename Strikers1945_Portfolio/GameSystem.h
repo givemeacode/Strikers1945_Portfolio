@@ -3,6 +3,7 @@
 #include "SingleTon.h"
 
 class Player;
+class Monster;
 
 typedef struct sCharacterPositon
 {
@@ -31,6 +32,7 @@ class GameSystem
 private:
 	CPOS posInfo;
 	Player* player;
+	
 private:
 	RECT rcClient;
 public:
@@ -44,7 +46,7 @@ public:
 	void GameResourceInit();
 	void SetPlayer(Player* _player);
 	CPOS& GetPosInfo();
-
+	void CollisionObject(std::list<Monster*> monsterlist);
 	Player* GetPlayer() { return player; }
 };
 

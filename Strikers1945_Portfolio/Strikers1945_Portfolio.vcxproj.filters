@@ -40,9 +40,6 @@
     <ClCompile Include="GameSystem.cpp">
       <Filter>2DFrameWork\Util\System</Filter>
     </ClCompile>
-    <ClCompile Include="CollisionObject.cpp">
-      <Filter>MainGame\Object</Filter>
-    </ClCompile>
     <ClCompile Include="Animation.cpp">
       <Filter>2DFrameWork\Animation</Filter>
     </ClCompile>
@@ -164,9 +161,6 @@
     </ClInclude>
     <ClInclude Include="GameSystem.h">
       <Filter>2DFrameWork\Util\System</Filter>
-    </ClInclude>
-    <ClInclude Include="CollisionObject.h">
-      <Filter>MainGame\Object</Filter>
     </ClInclude>
     <ClInclude Include="Animation.h">
       <Filter>2DFrameWork\Animation</Filter>
