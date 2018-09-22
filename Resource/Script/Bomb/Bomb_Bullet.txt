@@ -1,2 +1,0 @@
-ImageName,Width,Height,FrameX,FrameY,Trans,R,G,B
-Bomb_Bullet,120,128,8,4,1,248,0,248

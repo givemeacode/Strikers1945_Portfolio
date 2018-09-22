@@ -36,3 +36,4 @@
 #include "TimeManager.h"
 #include "ImageManager.h"
 #include "ResourceManager.h"
+#include "EffectManager.h"

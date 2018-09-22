@@ -191,6 +191,13 @@ void ResourceManager::ParsingData(eReSourceType type, const TCHAR* _fileName)
 		wsprintf(_fileImagePath, TEXT("../Resource/Image/StageBack/%s.bmp"), _fileName);
 		break;
 	}
-
+	
 	IMAGEMANAGER->AddFrameImage(fileKey, _fileImagePath, width, height, frameX, frameY, trans, transColor);
+
+	if (type == eReSourceType::R_EFFECT)
+	{
+		EFFECTMANAGER->AddEffect(fileKey, _fileImagePath, width, height,
+			IMAGEMANAGER->FindImage(fileKey)->GetFrameWidth(), IMAGEMANAGER->FindImage(fileKey)->GetFrameHeight(), 1, 1.0f, 100, transColor);
+	}
+	
 }

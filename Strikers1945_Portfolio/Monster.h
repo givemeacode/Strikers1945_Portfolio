@@ -2,52 +2,45 @@
 
 class Gun;
 
-enum eMonsterType
-{
-	MONSTER_TYPE_NONE,
-	MONSTER_TYPE_MIDLLEBOSS,
-	//MONSTER_TYPE_BOSS,
-};
-
 class Monster
 {
-private:
+protected:
 	float fPivotX;
 	float fPivotY;
 	float fHp;
 	float fAngle;
-	RECT rcMonster;
-	RECT rcCollision;
+	float fMoveAngle;
+	float width;
+	float height;
 	bool isLive;
-
-private:
-	//RECT rcMonster1;
-	//RECT rcMonster2;
-	//RECT rcMonster3;
-	//RECT rcMonster4;
-	//RECT rcMonster5;
-	//RECT rcMonster6;
-
-	//RECT rcGameClient;
-
-	//RECT rcObj;
-	////POINT rcObjPos;
-	//float rcPosX;
-	//float rcPosY;
-private:
-	Gun* _gun;
-
-	float fStartTime;
-	float CurrentTime;
-	float deltaTime;
+protected:
 	float coolTime;
+protected:
+	RECT rcMonster;
+	POINT ptMonster;
+	RECT rcCollision;
+
+	RECT rcLastPos;
+	POINT ptLastPos;
+protected:
+	Image* monsterImg;
+protected:
+	float rcPosX;
+	float rcPosY;
+protected:
+	Gun* _gun;
+	GAMEPOS startPos;
+	GAMEPOS lastPos;
 public:
 	Monster();
-	~Monster();
+	virtual ~Monster();
 public:
-	bool Init(eMonsterType type, int x, int y);
-	void Update();
-	void Render(HDC hdc);
+	virtual bool Init(int x, int y);
+	virtual bool Init(const TCHAR* fileName, int x, int y);
+	virtual bool Init(const TCHAR* fileName);
+	virtual bool Init(const TCHAR* fileName, int number, GAMEPOS pos);
+	virtual void Update();
+	virtual void Render(HDC hdc);
 public:
 	void MonsterAI();
 
@@ -59,10 +52,17 @@ public:
 	void SetPivotY(float y);
 
 	void SetCenterPivot(RECT rc);
+	void CoolTimeReset();
 
+	void OffectX(float x);
+	void OffectY(float y);
+	
+	void StartPosition(Image* img);
+	void LastPosition(GAMEPOS pos);
 	Gun* GetGun() { return _gun; }
 	bool GetIsLive() { return isLive; }
 	void SetIsLive(bool _isLive) { isLive = _isLive; }
-
+	Image* GetImage() { return monsterImg; }
+	
 };
 

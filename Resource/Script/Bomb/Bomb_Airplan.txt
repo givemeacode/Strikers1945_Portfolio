@@ -1,2 +1,0 @@
-ImageName,Width,Height,FrameX,FrameY,Trans,R,G,B
-Bomb_Airplan,286,252,1,1,1,0,248,0

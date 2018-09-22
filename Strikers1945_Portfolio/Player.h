@@ -9,7 +9,7 @@ class Player
 {
 private:
 
-	Image * playerImage;
+	Image* playerImage;
 	int		playerLevel;
 	int		dirChange;
 	int		nCount;

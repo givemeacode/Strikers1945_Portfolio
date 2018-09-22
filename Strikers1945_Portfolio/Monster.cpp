@@ -7,10 +7,13 @@
 #include "RevolvingGun.h"
 #include "NormalGun.h"
 
+
 Monster::Monster()
 {
 	fAngle = PI + PI / 2;
-	coolTime = 5.0f;
+	coolTime = 2.0f;
+	startPos = GAMEPOS::G_NONE;
+	lastPos = GAMEPOS::G_NONE;
 }
 
 
@@ -18,81 +21,97 @@ Monster::~Monster()
 {
 }
 
-bool Monster::Init(eMonsterType type, int x, int y)
+bool Monster::Init(int x, int y)
 {
-	//rcGameClient = GAMESYS->GetGameClientRect();
-	//rcGameClient.left = rcGameClient.left + 100;
-	//rcGameClient.right -= 100;
+	////================================================== 총알 연습 ================================
+	////rcMonster = RectMakeCenter(x, y, 50, 50);
+	//rcMonster = RectMakeCenter(GAMESYS->GetPosInfo().ptGameCenterLeft1.x, GAMESYS->GetPosInfo().ptGameCenterLeft1.y,
+	//	50, 50);
+	//ptMonster.x = rcMonster.left + ((rcMonster.right - rcMonster.left) / 2);
+	//ptMonster.y = rcMonster.bottom + ((rcMonster.bottom - rcMonster.top) / 2);
 
-	//rcMonster1 = RectMakeCenter(rcGameClient.left - 50, WINSIZEY / 2, 50, 50);
-	//rcMonster2 = RectMakeCenter(rcGameClient.right + 50, WINSIZEY / 2, 50, 50);
+	//SetPivotX(rcMonster.left + ((rcMonster.right - rcMonster.left) / 2));
+	//SetPivotY(rcMonster.bottom + ((rcMonster.bottom - rcMonster.top) / 2));
+	//// 피벗 위치 가운데 생성 
+	////SetCenterPivot(rcMonster);
 
-	//rcMonster3 = RectMakeCenter(rcGameClient.left - 50, WINSIZEY / 4, 50, 50);
-	//rcMonster4 = RectMakeCenter(rcGameClient.right + 50, WINSIZEY / 4, 50, 50);
+	////SetPivotX(x);
+	////SetPivotY(y);
+	//
+	////_gun = new Gun();
+	//_gun = new NormalGun();
+	//
+	//_gun->Init(GetPivotX(), GetPivotY());
 
-	//rcMonster5 = RectMakeCenter(rcGameClient.left - 50, rcGameClient.top +25, 50, 50);
-	//rcMonster6 = RectMakeCenter(rcGameClient.right + 50, rcGameClient.top +25, 50, 50);
+	return true;
+}
 
+bool Monster::Init(const TCHAR * fileName, int x, int y)
+{
+	//// 충돌 위치 초기화 
+	//rcMonster = RectMakeCenter(GAMESYS->GetPosInfo().ptGameCenterLeft1.x, GAMESYS->GetPosInfo().ptGameCenterLeft1.y,
+	//	50, 50);
 
-	////rcObj = rcMonster1;
-	//rcObj = RectMakeCenter(rcGameClient.left - 50, WINSIZEY / 2, 50, 50);
-	////rcObjPos = { (rcObj.left + (rcObj.right - rcObj.left)), (rcObj.top + (rcObj.bottom - rcObj.top)) };
-	//rcPosX = (rcObj.left + ((rcObj.right - rcObj.left)/2));
-	//rcPosY = (rcObj.top + ((rcObj.bottom - rcObj.top)/2));
+	////SetPivotX(rcMonster.left + ((rcMonster.right - rcMonster.left) / 2));
+	////SetPivotY(rcMonster.bottom + ((rcMonster.bottom - rcMonster.top) / 2));
 
-	//================================================== 총알 연습 ================================
-	rcMonster = RectMakeCenter(x, y, 50, 50);
+	//SetCenterPivot(rcMonster);
 
-	SetCenterPivot(rcMonster);
+	//// 몬스터 이미지 생성 
+	//monsterImg = IMAGEMANAGER->FindImage(TEXT(fileName));
+	//
+	//// Gun 생성 
+	//_gun = new NormalGun();
+	//_gun->Init(GetPivotX(), GetPivotY());
 
-	//_gun = new Gun();
-	_gun = new NormalGun();
-	
-	_gun->Init(GetPivotX(), GetPivotY());
+	return true;
+}
 
-	fStartTime = GetTickCount();
+bool Monster::Init(const TCHAR * fileName)
+{
+	//// 몬스터 이미지 생성 
+	//monsterImg = IMAGEMANAGER->FindImage(TEXT(fileName));
+
+	//// 몬스터 초기 위치 
+	//rcMonster = RectMakeCenter(
+	//	GAMESYS->GetPosInfo().ptGameCenterLeft1.x,
+	//	GAMESYS->GetPosInfo().ptGameCenterLeft1.y,
+	//	monsterImg->GetFrameWidth(), monsterImg->GetFrameHeight()
+	//);
+
+	//monsterImg->SetX(rcMonster.left);
+	//monsterImg->SetY(rcMonster.top);
+
+	//SetCenterPivot(rcMonster);
+
+	//ptMonster.x = GetPivotX();
+	//ptMonster.y = GetPivotY();
+
+	//rcPosX = static_cast<float>(GetPivotX());
+	//rcPosY = static_cast<float>(GetPivotY());
+
+	////
+	//// Gun 생성 
+	//_gun = new NormalGun();
+	//_gun->Init(GetPivotX(), GetPivotY());
+	return true;
+}
+
+bool Monster::Init(const TCHAR * fileName, int number, GAMEPOS pos)
+{
 	return true;
 }
 
 void Monster::Update()
 {
-	CurrentTime = GetTickCount();
-
-	MonsterAI();
+	//MonsterAI();
 }
 
 void Monster::Render(HDC hdc)
 {
+	DrawObject(hdc, rcMonster, 1, RGB(0, 255, 255), RECTANGLE);
 
-
-	////
-	//TCHAR CurrentTime[100] = { 0, };
-	//_stprintf_s(CurrentTime, sizeof(CurrentTime), TEXT("CurrentTime : %d"), CurrentTime);
-	//TextOut(hdc, WINSIZEX / 2 - 270, 600, TEXT(CurrentTime), _tcslen(TEXT(CurrentTime)));
-
-	//TCHAR fStartTime[100] = { 0, };
-	//_stprintf_s(fStartTime, sizeof(fStartTime), TEXT("fStartTime : %d"), fStartTime);
-	//TextOut(hdc, WINSIZEX / 2 - 270, 650, TEXT(fStartTime), _tcslen(TEXT(fStartTime)));
-
-	//TCHAR deltaTime[100] = { 0, };
-	//_stprintf_s(deltaTime, sizeof(deltaTime), TEXT("deltaTime : %d"), deltaTime);
-	//TextOut(hdc, WINSIZEX / 2 - 270, 700, TEXT(deltaTime), _tcslen(TEXT(deltaTime)));
-	////
-
-
-
-
-
-
-	//DrawObject(hdc, rcGameClient, 1, RGB(0, 128, 128), OBJ_TYPE::RECTANGLE);
-	//DrawObject(hdc, rcMonster1, 1, RGB(0, 255, 0), OBJ_TYPE::RECTANGLE);
-	//DrawObject(hdc, rcMonster2, 1, RGB(0, 255, 0), OBJ_TYPE::RECTANGLE);
-	//DrawObject(hdc, rcMonster3, 1, RGB(0, 255, 0), OBJ_TYPE::RECTANGLE);
-	//DrawObject(hdc, rcMonster4, 1, RGB(0, 255, 0), OBJ_TYPE::RECTANGLE);
-	//DrawObject(hdc, rcMonster5, 1, RGB(0, 255, 0), OBJ_TYPE::RECTANGLE);
-	//DrawObject(hdc, rcMonster6, 1, RGB(0, 255, 0), OBJ_TYPE::RECTANGLE);
-	//DrawObject(hdc, rcObj, 1, RGB(0, 255, 255), OBJ_TYPE::RECTANGLE);
-	DrawObject(hdc, rcMonster, 1, RGB(0, 255, 255), OBJ_TYPE::RECTANGLE);
+	monsterImg->FrameRender(hdc, rcMonster.left, rcMonster.top, 0, 0);
 	_gun->Render(hdc);
 
 }
@@ -100,58 +119,32 @@ void Monster::Render(HDC hdc)
 void Monster::MonsterAI()
 {
 
-	//rcObj.right += cosf(0) * 2.0f;
-	//rcObj.left += cosf(0) * 2.0f;
-	//rcObj.top += -sinf(PI) * 2.0f;
-	//rcObj.bottom += -sinf(PI) * 2.0f;
-	//float angle = UTIL::GetAngle((rcObj.left + (rcObj.right - rcObj.left)), (rcObj.top + (rcObj.bottom - rcObj.top)),
-	//	(rcMonster2.left + ((rcMonster2.right - rcMonster2.left) /2)), (rcMonster2.top + ((rcMonster2.bottom - rcMonster2.top)/2)));
-	//rcObj.left += cosf(angle) * 2.0f;
-	//rcObj.right += cosf(angle) * 2.0f;
-	//rcObj.top += -sinf(angle) * 2.0f;
-	//rcObj.bottom += -sinf(angle) * 2.0f;
+	////
+	float _angle = UTIL::GetAngle(rcPosX, rcPosY,
+		GAMESYS->GetPosInfo().ptGameCenterRight1.x , GAMESYS->GetPosInfo().ptGameCenterRight1.y  );
 
+	rcPosX += (cosf(_angle) * 2.0f);
+	rcPosY += (-sinf(_angle) * 2.0f);
 
-	//float angle = UTIL::GetAngle(rcPosX, rcPosY,
-	//	(rcMonster4.left + ((rcMonster4.right - rcMonster4.left) / 2)), (rcMonster4.top + ((rcMonster4.bottom - rcMonster4.top) / 2)));
-	//rcPosX += cosf(angle) * 2.0f;
-	//rcPosY += -sinf(angle) * 2.0f;
+	////SetPivotX(GetPivotX() + (cosf(angle) * 2.0f));
+	////SetPivotY(GetPivotX() + (-sinf(angle) * 2.0f));
+
+	SetPivotX(rcPosX);
+	SetPivotY(rcPosY);
 
 
 	//
-	//rcObj = RectMakeCenter(rcPosX, rcPosY, 50, 50);
-	/*
-	if (KEYMANAGER->IsStayKeyDown(VK_LEFT))
-	{
-		SetPivotX(GetPivotX() - (cosf(0)) * 2.0f);
-	}
-
-	if (KEYMANAGER->IsStayKeyDown(VK_RIGHT))
-	{
-		SetPivotX(GetPivotX() + (cosf(0)) * 2.0f);
-	}
-
-	if (KEYMANAGER->IsOnceKeyDown(VK_SPACE))
-	{
-		_gun->BulletFire(GetPivotX(),GetPivotY());
-	}
-*/
-
-	float deltaTime = (CurrentTime - fStartTime) / 1000.f;
-	if (deltaTime >= 3.0f) // 3.0f초마다 쏨.
+	coolTime -= TIMEMANAGER->getElapsedTime();
+	if (coolTime <= 0.0f) // 3.0f초마다 쏨.
 	{
 		_gun->BulletFire(GetPivotX(), GetPivotY());
 		
-		fStartTime = GetTickCount();
+		CoolTimeReset();
 	}
 	_gun->BulletMove();
 
-	/*float test = TIMEMANAGER->getElapsedTime();
-	deltaTime += test;*/
-	//float _deltaTime = (CurrentTime - fStartTime) / 1000.f;
-	
 	//
-	rcMonster = RectMakeCenter(GetPivotX(), GetPivotY(), 50, 50);
+	rcMonster = RectMakeCenter(GetPivotX(), GetPivotY(), monsterImg->GetFrameWidth(), monsterImg->GetFrameHeight());
 
 }
 
@@ -184,4 +177,115 @@ void Monster::SetCenterPivot(RECT rc)
 {
 	fPivotX = static_cast<float>(rc.left + ((rc.right - rc.left) / 2));
 	fPivotY = static_cast<float>(rc.top + ((rc.bottom - rc.top) / 2));
+}
+
+void Monster::CoolTimeReset()
+{
+	coolTime = 2.0f;
+}
+
+void Monster::OffectX(float x)
+{
+	if (GAMEPOS::G_LEFT1 == startPos || GAMEPOS::G_LEFT2 == startPos || GAMEPOS::G_LEFT3 == startPos)
+	{
+		SetPivotX(GetPivotX() - x);
+	}
+	else if (GAMEPOS::G_RIGHT1 == startPos || GAMEPOS::G_RIGHT2 == startPos || GAMEPOS::G_RIGHT3 == startPos)
+	{
+		SetPivotX(GetPivotX() + x);
+	}
+}
+
+void Monster::OffectY(float y)
+{
+	if (GAMEPOS::G_LEFT1 == startPos || GAMEPOS::G_LEFT2 == startPos || GAMEPOS::G_LEFT3 == startPos)
+	{
+		SetPivotY(GetPivotY() - y);
+	}
+	else if (GAMEPOS::G_RIGHT1 == startPos || GAMEPOS::G_RIGHT2 == startPos || GAMEPOS::G_RIGHT3 == startPos)
+	{
+		SetPivotY(GetPivotY() + y);
+	}
+
+}
+
+void Monster::StartPosition(Image * img)
+{
+
+	switch (startPos)
+	{
+	case GAMEPOS::G_LEFT1:
+		rcMonster = RectMakeCenter(
+			GAMESYS->GetPosInfo().ptGameCenterLeft1.x,
+			GAMESYS->GetPosInfo().ptGameCenterLeft1.y,
+			monsterImg->GetFrameWidth(), monsterImg->GetFrameHeight()
+		);
+		break;
+	case GAMEPOS::G_LEFT2:
+		rcMonster = RectMakeCenter(
+			GAMESYS->GetPosInfo().ptGameCenterLeft2.x,
+			GAMESYS->GetPosInfo().ptGameCenterLeft2.y,
+			monsterImg->GetFrameWidth(), monsterImg->GetFrameHeight()
+		);
+		break;
+	case GAMEPOS::G_LEFT3:
+		rcMonster = RectMakeCenter(
+			GAMESYS->GetPosInfo().ptGameCenterLeft3.x,
+			GAMESYS->GetPosInfo().ptGameCenterLeft3.y,
+			monsterImg->GetFrameWidth(), monsterImg->GetFrameHeight()
+		);
+		break;
+	case GAMEPOS::G_RIGHT1:
+		rcMonster = RectMakeCenter(
+			GAMESYS->GetPosInfo().ptGameCenterRight1.x,
+			GAMESYS->GetPosInfo().ptGameCenterRight1.y,
+			monsterImg->GetFrameWidth(), monsterImg->GetFrameHeight()
+		);
+		break;
+	case GAMEPOS::G_RIGHT2:
+		rcMonster = RectMakeCenter(
+			GAMESYS->GetPosInfo().ptGameCenterRight2.x,
+			GAMESYS->GetPosInfo().ptGameCenterRight2.y,
+			monsterImg->GetFrameWidth(), monsterImg->GetFrameHeight()
+		);
+		break;
+	case GAMEPOS::G_RIGHT3:
+		rcMonster = RectMakeCenter(
+			GAMESYS->GetPosInfo().ptGameCenterRight3.x,
+			GAMESYS->GetPosInfo().ptGameCenterRight3.y,
+			monsterImg->GetFrameWidth(), monsterImg->GetFrameHeight()
+		);
+		break;
+	}
+}
+
+void Monster::LastPosition(GAMEPOS pos)
+{
+	switch (pos)
+	{
+	case GAMEPOS::G_LEFT1:
+		rcLastPos = GAMESYS->GetPosInfo().rcGameLeft1;
+		ptLastPos = GAMESYS->GetPosInfo().ptGameCenterLeft1;
+		break;
+	case GAMEPOS::G_LEFT2:
+		rcLastPos = GAMESYS->GetPosInfo().rcGameLeft2;
+		ptLastPos = GAMESYS->GetPosInfo().ptGameCenterLeft2;
+		break;
+	case GAMEPOS::G_LEFT3:
+		rcLastPos = GAMESYS->GetPosInfo().rcGameLeft3;
+		ptLastPos = GAMESYS->GetPosInfo().ptGameCenterLeft3;
+		break;
+	case GAMEPOS::G_RIGHT1:
+		rcLastPos = GAMESYS->GetPosInfo().rcGameRight1;
+		ptLastPos = GAMESYS->GetPosInfo().ptGameCenterRight1;
+		break;
+	case GAMEPOS::G_RIGHT2:
+		rcLastPos = GAMESYS->GetPosInfo().rcGameRight2;
+		ptLastPos = GAMESYS->GetPosInfo().ptGameCenterRight2;
+		break;
+	case GAMEPOS::G_RIGHT3:
+		rcLastPos = GAMESYS->GetPosInfo().rcGameRight3;
+		ptLastPos = GAMESYS->GetPosInfo().ptGameCenterRight3;
+		break;
+	}
 }

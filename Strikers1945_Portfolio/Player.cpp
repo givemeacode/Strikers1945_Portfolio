@@ -149,8 +149,9 @@ void Player::PositionInit()
 	speed = 8.f;
 
 	// 플레이어 이미지 초기화
-	playerImage = new Image;
-	playerImage->Init(TEXT("../Resource/Image/Player/Move_LR_A.bmp"), 223, 33, 7, 1, true, RGB(0, 0, 0));
+	//playerImage = new Image;
+	//playerImage->Init(TEXT("../Resource/Image/Player/Move_LR_A.bmp"), 223, 33, 7, 1, true, RGB(0, 0, 0));
+	playerImage = IMAGEMANAGER->FindImage("Move_LR_A");
 	playerImage->SetX(x - playerImage->GetFrameWidth() / 2 - 4); // 렉트는 중심부터 그려지고, 이미지는 left,top부터 그리니까 이미지프레임의 넓이의 반을 계산해줘서 중심으로 옴긴다.
 	playerImage->SetY(y - playerImage->GetFrameHeight() / 2);  // 렉트는 중심부터 그려지고, 이미지는 left,top부터 그리니까 이미지프레임의 높이의 반을 계산해줘서 중심으로 옴긴다.
 	playerImage->SetFrameX(3); // 4번째 프레임으로 초기화값.

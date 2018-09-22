@@ -29,3 +29,19 @@ struct SPERE
 	float x, y;
 	float r;
 };
+
+enum GAMEPOS
+{
+	G_NONE, 
+
+	G_LEFT1,
+	G_LEFT2,
+	G_LEFT3,
+
+	G_RIGHT1,
+	G_RIGHT2,
+	G_RIGHT3,
+
+
+
+};

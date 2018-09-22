@@ -18,7 +18,7 @@ protected:
 	std::list<Bullet*> bulletList;
 public:
 	Gun();
-	~Gun();
+	virtual ~Gun();
 public:
 	virtual bool Init(float x, float y);
 	virtual void Render(HDC hdc);

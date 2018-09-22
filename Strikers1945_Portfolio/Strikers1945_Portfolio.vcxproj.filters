@@ -16,12 +16,6 @@
     <ClCompile Include="CollisionFunction.cpp">
       <Filter>2DFrameWork\Util\System</Filter>
     </ClCompile>
-    <ClCompile Include="Monster.cpp">
-      <Filter>MainGame\Object\Character</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>MainGame\Object\Character</Filter>
-    </ClCompile>
     <ClCompile Include="GameNode.cpp">
       <Filter>2DFrameWork\GameNode</Filter>
     </ClCompile>
@@ -85,8 +79,35 @@
     <ClCompile Include="NormalGun.cpp">
       <Filter>MainGame\Object\Gun\GunType</Filter>
     </ClCompile>
+    <ClCompile Include="Effect.cpp">
+      <Filter>2DFrameWork\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="EffectManager.cpp">
+      <Filter>2DFrameWork\Manager</Filter>
+    </ClCompile>
     <ClCompile Include="Boss.cpp">
-      <Filter>MainGame\Object\Character</Filter>
+      <Filter>MainGame\Object\Character\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="Monster.cpp">
+      <Filter>MainGame\Object\Character\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>MainGame\Object\Character\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="AirMonster.cpp">
+      <Filter>MainGame\Object\Character\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="BigAirPlan.cpp">
+      <Filter>MainGame\Object\Character\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="Fish.cpp">
+      <Filter>MainGame\Object\Character\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="MidAirPlan.cpp">
+      <Filter>MainGame\Object\Character\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="NormalMonster.cpp">
+      <Filter>MainGame\Object\Character\Monster</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -119,12 +140,6 @@
     </ClInclude>
     <ClInclude Include="stdafx.h">
       <Filter>2DFrameWork\Func</Filter>
-    </ClInclude>
-    <ClInclude Include="Monster.h">
-      <Filter>MainGame\Object\Character</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>MainGame\Object\Character</Filter>
     </ClInclude>
     <ClInclude Include="GameNode.h">
       <Filter>2DFrameWork\GameNode</Filter>
@@ -189,8 +204,35 @@
     <ClInclude Include="NormalGun.h">
       <Filter>MainGame\Object\Gun\GunType</Filter>
     </ClInclude>
+    <ClInclude Include="Effect.h">
+      <Filter>2DFrameWork\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="EffectManager.h">
+      <Filter>2DFrameWork\Manager</Filter>
+    </ClInclude>
     <ClInclude Include="Boss.h">
-      <Filter>MainGame\Object\Character</Filter>
+      <Filter>MainGame\Object\Character\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="Monster.h">
+      <Filter>MainGame\Object\Character\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>MainGame\Object\Character\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="AirMonster.h">
+      <Filter>MainGame\Object\Character\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="BigAirPlan.h">
+      <Filter>MainGame\Object\Character\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="Fish.h">
+      <Filter>MainGame\Object\Character\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="MidAirPlan.h">
+      <Filter>MainGame\Object\Character\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="NormalMonster.h">
+      <Filter>MainGame\Object\Character\Monster</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -220,9 +262,6 @@
     </Filter>
     <Filter Include="2DFrameWork\Func">
       <UniqueIdentifier>{cf32ead8-c00a-4a58-aff4-e29064bc67ee}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="헤더 파일">
-      <UniqueIdentifier>{c6b2ef52-8648-43ac-b268-ec8f441ce0d0}</UniqueIdentifier>
     </Filter>
     <Filter Include="소스 파일">
       <UniqueIdentifier>{c61b5565-f19b-4a34-827b-b19e3025f020}</UniqueIdentifier>
@@ -259,6 +298,18 @@
     </Filter>
     <Filter Include="MainGame\Object\Gun\GunType">
       <UniqueIdentifier>{825e55fc-2dbf-41d8-b42c-fac5c6df22b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2DFrameWork\Effect">
+      <UniqueIdentifier>{df52427b-27bd-4970-99c7-6003370fdd3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일">
+      <UniqueIdentifier>{c6b2ef52-8648-43ac-b268-ec8f441ce0d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MainGame\Object\Character\Player">
+      <UniqueIdentifier>{0cefec42-c045-4f3c-823e-eb3052d846aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MainGame\Object\Character\Monster">
+      <UniqueIdentifier>{7e80becf-5872-4a18-8085-5c46cd93f390}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

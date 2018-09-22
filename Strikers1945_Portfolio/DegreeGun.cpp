@@ -78,19 +78,19 @@ void DegreeGun::BulletMove()
 				(*iter)->Update();
 
 				// 面倒贸府
-				if ((*iter)->GetPivotY() <= 15 || (*iter)->GetPivotY() >= WINSIZEY)
-				{
-			 		(*iter)->SetIsBulletFire(false);
-					(*iter)->SetIsCollision(true);
-					
-					//delete (*iter);
-					//iter = bulletList.erase(iter);
-					//
-					//if (bulletList.empty())
-					//{
-					//	break;
-					//}
-				}
+				//if ((*iter)->GetPivotY() <= 15 || (*iter)->GetPivotY() >= WINSIZEY)
+				//{
+				 //	(*iter)->SetIsBulletFire(false);
+				//	(*iter)->SetIsCollision(true);
+				//	
+				//	//delete (*iter);
+				//	//iter = bulletList.erase(iter);
+				//	//
+				//	//if (bulletList.empty())
+				//	//{
+				//	//	break;
+				//	//}
+				//}
 			}
 		}
 
@@ -100,17 +100,20 @@ void DegreeGun::BulletMove()
 		}
 
 		// 昏力 
-		for (it = bulletList.begin(); it != bulletList.end(); it++)
+		for (it = bulletList.begin(); it != bulletList.end();)
 		{
 			if (!(*it)->GetIsBulletFire() && (*it)->GetIsCollision())
 			{
-				delete (*it);
 				it = bulletList.erase(it);
 
 				if (bulletList.empty())
 				{
 					break;
 				}
+			}
+			else
+			{
+				it++;
 			}
 		}
 

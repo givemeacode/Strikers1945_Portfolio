@@ -115,13 +115,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AirMonster.cpp" />
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Backbuffer.cpp" />
+    <ClCompile Include="BigAirPlan.cpp" />
     <ClCompile Include="Boss.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="CollisionFunction.cpp" />
     <ClCompile Include="CollisionObject.cpp" />
     <ClCompile Include="DegreeGun.cpp" />
+    <ClCompile Include="Effect.cpp" />
+    <ClCompile Include="EffectManager.cpp" />
+    <ClCompile Include="Fish.cpp" />
     <ClCompile Include="GameNode.cpp" />
     <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="GameSystem.cpp" />
@@ -131,9 +136,11 @@
     <ClCompile Include="ImageManager.cpp" />
     <ClCompile Include="KeyManager.cpp" />
     <ClCompile Include="MainGame.cpp" />
+    <ClCompile Include="MidAirPlan.cpp" />
     <ClCompile Include="Monster.cpp" />
     <ClCompile Include="MultiGun.cpp" />
     <ClCompile Include="NormalGun.cpp" />
+    <ClCompile Include="NormalMonster.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerGun.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
@@ -146,14 +153,19 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AirMonster.h" />
     <ClInclude Include="Animation.h" />
     <ClInclude Include="Backbuffer.h" />
+    <ClInclude Include="BigAirPlan.h" />
     <ClInclude Include="Boss.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="CollisionFunction.h" />
     <ClInclude Include="CollisionObject.h" />
     <ClInclude Include="commonMacroFuntion.h" />
     <ClInclude Include="DegreeGun.h" />
+    <ClInclude Include="Effect.h" />
+    <ClInclude Include="EffectManager.h" />
+    <ClInclude Include="Fish.h" />
     <ClInclude Include="GameNode.h" />
     <ClInclude Include="GameScene.h" />
     <ClInclude Include="GameSystem.h" />
@@ -164,9 +176,11 @@
     <ClInclude Include="KeyManager.h" />
     <ClInclude Include="MacroDefine.h" />
     <ClInclude Include="MainGame.h" />
+    <ClInclude Include="MidAirPlan.h" />
     <ClInclude Include="Monster.h" />
     <ClInclude Include="MultiGun.h" />
     <ClInclude Include="NormalGun.h" />
+    <ClInclude Include="NormalMonster.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerGun.h" />
     <ClInclude Include="RandomFunction.h" />

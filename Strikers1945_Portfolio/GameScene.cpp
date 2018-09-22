@@ -5,6 +5,7 @@
 #include "Monster.h"
 #include "Timer.h"
 #include "Boss.h"
+#include "AirMonster.h"
 #pragma comment (lib,"winmm")
 
 GameScene::GameScene()
@@ -43,8 +44,8 @@ bool GameScene::Init()
 	//player = new Player;
 	//GAMESYS->SetPlayer(player);
 	
-	boss = new Boss();
-	boss->Init();
+	//boss = new Boss();
+	//boss->Init();
 	return true;
 }
 
@@ -72,11 +73,30 @@ void GameScene::Update()
 	player->Update();
 
 // 테스트
-	if (RunTimer == 5 * THOU) // 30초 : 1번 왼쪽 -> 오른쪽 위 [ 1]
+	if (RunTimer == 2 * THOU) // 30초 : 1번 왼쪽 -> 오른쪽 위 [ 1]
 	{
-		Monster* monster1 = new Monster();
-		monster1->Init(MONSTER_TYPE_NONE, WINSIZEX / 2, 100);
-		monsterList.push_back(monster1);
+		for (int i = 0; i < 100; i++)
+		{
+			Monster* monster1 = new AirMonster(GAMEPOS::G_LEFT1);
+			//monster1->Init(MONSTER_TYPE_NONE, WINSIZEX / 2, 100);
+			//monster1->Init(TEXT("air_Monster1"));
+			monster1->Init(TEXT("air_Monster"), 1, GAMEPOS::G_RIGHT1);
+
+			monsterList.push_back(monster1);
+		}
+
+		//
+		int offset = 100;
+		int width = 0;
+		int height = 0;
+		std::list<Monster*>::iterator it;
+		for (it = monsterList.begin(); it != monsterList.end(); it++)
+		{
+			width = (*it)->GetImage()->GetFrameWidth();
+			(*it)->OffectX(width + offset);
+			offset += 50;
+		}
+		
 	}
 //
 	// 몬스터
@@ -84,76 +104,46 @@ void GameScene::Update()
 
 	if (RunTimer == 30 * THOU) // 30초 : 1번 왼쪽 -> 오른쪽 위 [ 1]
 	{
-		Monster* monster1 = new Monster();
-		monster1->Init(MONSTER_TYPE_NONE, WINSIZEX / 2, 100);
-		monsterList.push_back(monster1);
+	
 	}
 	if (RunTimer == 32 * THOU) // 32초 :  오른쪽 -> 왼쪽 위 [2] 
 	{
-		Monster* monster1 = new Monster();
-		monster1->Init(MONSTER_TYPE_NONE, WINSIZEX / 2 - 200, 100);
-		monsterList.push_back(monster1);
+		
 	}
 	if (RunTimer == 35 * THOU) // 35초 : 위 -> 아래 중심으로 이동 (중간 캐릭터 ) 
 	{
-		Monster* monster1 = new Monster();
-		monster1->Init(MONSTER_TYPE_NONE, WINSIZEX / 2 - 200, 500);
-		monsterList.push_back(monster1);
+		
 	}
 	if (RunTimer == 40 * THOU) // 40초 : 1번 2번 같이 생성
 	{
-		Monster* monster1 = new Monster();
-		monster1->Init(MONSTER_TYPE_NONE, WINSIZEX / 2 - 200, 200);
-		monsterList.push_back(monster1);
+		
 	}
 	if (RunTimer == 50 * THOU) // 50초 : 중간 2 생성 -> 위 아래 
 	{
-		Monster* monster1 = new Monster();
-		monster1->Init(MONSTER_TYPE_NONE, WINSIZEX / 2 - 200, 200);
-		monsterList.push_back(monster1);
+
 	}
 
 	//=============================== 1분 ~ 1분30초 ===================================
 
 	if (RunTimer == 60 * THOU) // 1분 : 중간 크기 2마리 
 	{
-		Monster* monster1 = new Monster();
-		monster1->Init(MONSTER_TYPE_NONE, WINSIZEX / 2 - 200, 200);
-		monsterList.push_back(monster1);
+	
 	}
 	if (RunTimer == 65 * THOU) // 1분 5초 : 1번 2번 같이 생성
 	{
-		Monster* monster1 = new Monster();
-		monster1->Init(MONSTER_TYPE_NONE, WINSIZEX / 2 - 200, 200);
-		monsterList.push_back(monster1);
+	
 	}
 	if (RunTimer == 75 * THOU) // 1분 15초 : 중간3 2마리 양쪽 사이드 생성 
 	{
-		Monster* monster1 = new Monster();
-		monster1->Init(MONSTER_TYPE_NONE, WINSIZEX / 2 - 200, 200);
-		monsterList.push_back(monster1);
+	
 	}
 
 	//========================== 1분 30초! ( 보스 등장 ) ==============================
 
 	if (RunTimer == 90 * THOU) // 1분 30초 : 보스 
 	{
-		Monster* monster1 = new Monster();
-		monster1->Init(MONSTER_TYPE_NONE, WINSIZEX / 2 - 200, 200);
-		monsterList.push_back(monster1);
+		
 	}
-
-
-
-
-
-
-
-
-
-
-
-
 
 	std::list<Monster*>::iterator it;
 	for (it = monsterList.begin(); it != monsterList.end(); it++)
@@ -165,7 +155,7 @@ void GameScene::Update()
 	//monster2->Update();
 
 	//player->Update();
-	boss->Update();
+	//boss->Update();
 	//GAMESYS->CollisionCharacter(_monster, rcTest);
 	
 }
@@ -192,11 +182,8 @@ void GameScene::Render(HDC hdc)
 	//monster1->Render(hdc);
 	//monster2->Render(hdc);
 
-
-
-
 	//player->Render(hdc);
-	boss->Render(hdc);
+	//boss->Render(hdc);
 
 	//Rectangle(backDC, rcTest.left, rcTest.top, rcTest.right, rcTest.bottom);
 	//=========================================================

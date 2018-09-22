@@ -10,7 +10,7 @@
 // 윈도우 사이즈 관련 매크로
 #define WINSTYLE	WS_CAPTION | WS_SYSMENU
 
-#define WINSIZEX	1000
+#define WINSIZEX	1200
 #define WINSIZEY	800
 #define WINSTARTX	0
 #define WINSTARTY	0
@@ -22,7 +22,10 @@
 #define TIMEMANAGER		TimeManager::getSingleton()
 #define IMAGEMANAGER	ImageManager::getSingleton()
 #define RESOURCEMANAGER ResourceManager::getSingleton()
+#define EFFECTMANAGER	EffectManager::getSingleton()
+
 //
 #define PI			3.141592f
 #define PI2			PI*2
 #define THOU		1000
+#define COLOR_M		RGB(255,0,255)

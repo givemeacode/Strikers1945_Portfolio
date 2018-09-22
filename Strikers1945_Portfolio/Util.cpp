@@ -1,23 +1,19 @@
 #include "stdafx.h"
-#include "Util.h"
-
 
 namespace UTIL
 {
-	//float getDistance(float startX, float startY, float endX, float endY)
-	//{
-	//	float x = endX - startX;
-	//	float y = endY - startY;
+	/*float getDistance(float startX, float startY, float endX, float endY)
+	{
+		float x = endX - startX;
+		float y = endY - startY;
 
-
-	//	return sqrtf(x * x + y * y);
-	//}
+		return sqrtf(x * x + y * y);
+	}*/
 
 	float GetDistance(const float startX, const float startY, const float endX, const float endY)
 	{
 		float x = endX - startX;
 		float y = endY - startY;
-
 
 		return sqrtf(x * x + y * y);
 	}
@@ -26,11 +22,17 @@ namespace UTIL
 	{
 		float x = x2 - x1;
 		float y = y2 - y1;
-
+		float angle = 0;
 		float distance = sqrtf(x * x + y * y);
 
-		float angle = acosf(x / distance);
+		if (distance == 0)
+		{
 
+		}
+		else
+		{
+			angle = acosf(x / distance);
+		}
 
 		if (y2 > y1)
 		{
@@ -40,7 +42,7 @@ namespace UTIL
 				angle -= PI2;
 			}
 		}
+
 		return angle;
 	}
-
 }

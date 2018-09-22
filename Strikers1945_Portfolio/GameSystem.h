@@ -4,7 +4,7 @@
 
 class Player;
 
-struct sCharacterPositon
+typedef struct sCharacterPositon
 {
 
 	RECT rcGameLeft1;
@@ -15,21 +15,21 @@ struct sCharacterPositon
 	RECT rcGameRight2;
 	RECT rcGameRight3;
 
-	POINT ptGameLeft1;
-	POINT ptGameLeft2;
-	POINT ptGameLeft3;
+	POINT ptGameCenterLeft1;
+	POINT ptGameCenterLeft2;
+	POINT ptGameCenterLeft3;
 
-	POINT ptGameRight1;
-	POINT ptGameRight2;
-	POINT ptGameRight3;
+	POINT ptGameCenterRight1;
+	POINT ptGameCenterRight2;
+	POINT ptGameCenterRight3;
 
-};
+}CPOS;
 
 class GameSystem
 	: public SingletonBase<GameSystem>
 {
 private:
-	sCharacterPositon posInfo;
+	CPOS posInfo;
 	Player* player;
 private:
 	RECT rcClient;
@@ -41,7 +41,10 @@ public:
 public:
 	RECT GetGameClientRect();
 	void GamePositionInfoInit();
+	void GameResourceInit();
 	void SetPlayer(Player* _player);
+	CPOS& GetPosInfo();
+
 	Player* GetPlayer() { return player; }
 };
 
