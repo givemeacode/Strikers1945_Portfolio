@@ -306,7 +306,15 @@ void GameSystem::CollisionObject(std::list<Monster*> monsterlist)
 				{
 					 (*biter)->SetIsBulletFire(false);
 				}
-				
+				if (!player->GetIsDead())
+				{
+					if (CollisionCircleAndCircle((*biter)->GetRadius(), (*biter)->GetPivotX(), (*biter)->GetPivotY(),
+						player->GetRadius(),player->GetX(),player->GetY()))
+					{
+						player->SetIsDead(true);
+					}
+
+				}
 				
 			}
 		}

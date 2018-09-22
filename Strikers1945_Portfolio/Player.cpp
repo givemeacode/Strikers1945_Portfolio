@@ -10,7 +10,7 @@ Player::Player()
 
 	isDead = false;
 	isClear = false;
-
+	radius = 18.f;
 	// 시간체크
 	runTimer = GetTickCount();
 	deathTimer = 0; // 죽었을때 시점을 저장하기위해.
@@ -19,7 +19,7 @@ Player::Player()
 	responTime = 0.f; // 리스폰시간
 
 	//// 테스트용 ////
-	target = RectMakeCenter(WINSIZEX / 2, 50, 50, 50);
+	//target = RectMakeCenter(WINSIZEX / 2, 50, 50, 50);
 
 	//
 	gun = new PlayerGun;
@@ -46,10 +46,10 @@ void Player::Init()
 void Player::Update()
 {
 	RECT temp;
-	if (IntersectRect(&temp, &collisionBox, &target))
-	{
-		isDead = true;
-	}
+	//if (IntersectRect(&temp, &collisionBox, &target))
+	//{
+	//	isDead = true;
+	//}
 
 	IsDead();
 	IsClear();
@@ -128,7 +128,7 @@ void Player::Render(HDC hdc)
 	//	TextOut(hdc, WINSIZEX / 2 - 270, 180, TEXT(choiceTime1), _tcslen(TEXT(choiceTime1)));
 
 
-	Rectangle(hdc, target.left, target.top, target.right, target.bottom);
+	//Rectangle(hdc, target.left, target.top, target.right, target.bottom);
 
 	//
 	gun->Render(hdc);

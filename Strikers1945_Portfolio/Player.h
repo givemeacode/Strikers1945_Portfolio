@@ -20,7 +20,7 @@ private:
 	float endx, endy;
 	float length;
 	float speed;
-
+	float radius;
 	// 충돌처리할때, isDead와 isClear false 일때만 충돌처리.
 	bool	isDead;
 	bool	isClear;
@@ -43,7 +43,7 @@ private:
 	Animation*	deathAnimation;
 	// 테스트용
 	bool check;
-	RECT target;
+	//RECT target;
 
 public:
 	Player();
@@ -66,6 +66,9 @@ public:
 	int GetX() { return x; } // collisionBox( 충돌처리를 담당할 원 )의...   x값을 구해오는 함수
 	int GetY() { return y; } // collisionBox( 충돌처리를 담당할 원 )의...   y값을 구해오는 함수
 	Gun* GetGun() { return gun; }
+	void SetIsDead(bool _dead) { isDead = _dead; }
+	bool GetIsDead() { return isDead; }
+	float GetRadius() { return radius; }
 	//========================
 
 };
