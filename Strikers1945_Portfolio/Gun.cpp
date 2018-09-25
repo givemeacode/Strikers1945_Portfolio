@@ -44,6 +44,13 @@ void Gun::Render(HDC hdc)
 
 void Gun::Release()
 {
+	std::list<Bullet*>::iterator it;
+	for (it = bulletList.begin(); it != bulletList.end(); it++)
+	{
+		(*it)->Release();
+		delete (*it);
+	}
+	bulletList.clear();
 }
 
 void Gun::BulletFire(float x, float y)

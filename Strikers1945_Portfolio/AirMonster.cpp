@@ -3,6 +3,8 @@
 
 #include "Gun.h"
 #include "NormalGun.h"
+#include "GuidedMissileGun.h"
+
 
 AirMonster::AirMonster()
 {
@@ -101,13 +103,13 @@ bool AirMonster::Init(const TCHAR * fileName, int number, GAMEPOS pos)
 
 	_stprintf(file, TEXT("%s%d"), fileName,number);
 
-	monsterImg = IMAGEMANAGER->FindImage(TEXT(file));
-
-	StartPosition(monsterImg);
+	airMonsterImg = IMAGEMANAGER->FindImage(file);
+	monsterImg = airMonsterImg;
+	StartPosition(airMonsterImg);
 	LastPosition(pos);
 	
-	monsterImg->SetX(rcMonster.left);
-	monsterImg->SetY(rcMonster.top);
+	airMonsterImg->SetX(rcMonster.left);
+	airMonsterImg->SetY(rcMonster.top);
 
 	SetCenterPivot(rcMonster);
 
@@ -117,9 +119,13 @@ bool AirMonster::Init(const TCHAR * fileName, int number, GAMEPOS pos)
 	rcPosX = static_cast<float>(GetPivotX());
 	rcPosY = static_cast<float>(GetPivotY());
 
+	width = airMonsterImg->GetFrameWidth();
+	height = airMonsterImg->GetFrameHeight();
+
 	//
 	// Gun »ý¼º 
-	_gun = new NormalGun();
+	//_gun = new NormalGun();
+	_gun = new GuidedMissileGun();
 	_gun->Init(GetPivotX(), GetPivotY());
 
 
@@ -129,30 +135,46 @@ bool AirMonster::Init(const TCHAR * fileName, int number, GAMEPOS pos)
 void AirMonster::Update()
 { 
 	MonsterAI();
-	
+
 }
 
 void AirMonster::Render(HDC hdc)
 {
-	if (GetIsLive())
+	if (GetIsLive() )
 	{
 		DrawObject(hdc, rcMonster, 1, RGB(0, 255, 255), RECTANGLE);
-
-		monsterImg->FrameRender(hdc, rcMonster.left, rcMonster.top, 0, 0);
+		airMonsterImg->FrameRender(hdc, rcMonster.left, rcMonster.top, 0, 0);
 	}
-	
-	_gun->Render(hdc);
-	
 
+	_gun->Render(hdc);
+
+
+}
+
+void AirMonster::Release()
+{
+ 	_gun->Release();
+	SAFE_DELETE(_gun);
+	//SAFE_DELETE(monsterImg);
+	monsterImg->Release();
 }
 
 void AirMonster::MonsterAI()
 {
+	//
+	if (fHp <= 0)
+	{
+		isLive = false;
+	}
 
+
+	//
 	//////
 	//
 	//float _angle = UTIL::GetAngle(rcPosX, rcPosY,
 	//	GAMESYS->GetPosInfo().ptGameCenterRight1.x, GAMESYS->GetPosInfo().ptGameCenterRight1.y);
+
+
 
 	float _angle = UTIL::GetAngle(GetPivotX(), GetPivotY(),
 		ptLastPos.x, ptLastPos.y);
@@ -167,6 +189,13 @@ void AirMonster::MonsterAI()
 	SetPivotY(GetPivotY() + (-sinf(_angle) * 2.0f));
 
 
+	if (CollisionRectAndRect(rcMonster, rcLastPos))
+	{
+		//Release();
+		isLive = false;
+		isCollision = true;
+	}
+
 	//
 	coolTime -= TIMEMANAGER->getElapsedTime();
 	if (isLive)
@@ -179,8 +208,8 @@ void AirMonster::MonsterAI()
 		}
 	}
 	
-	_gun->BulletMove();
+	_gun->BulletMove(); 
 
-	rcMonster = RectMakeCenter(GetPivotX(), GetPivotY(), monsterImg->GetFrameWidth(), monsterImg->GetFrameHeight());
+	rcMonster = RectMakeCenter(GetPivotX(), GetPivotY(), width, height);
 
 }

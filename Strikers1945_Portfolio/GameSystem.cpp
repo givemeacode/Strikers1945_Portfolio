@@ -9,6 +9,7 @@
 GameSystem::GameSystem()
 {
 	GetClientRect(_hWnd, &rcClient);
+	deltaTime = 30.0f;
 }
 
 
@@ -78,7 +79,17 @@ void GameSystem::GamePositionInfoInit()
 		posInfo.rcGameRight3.top + ((posInfo.rcGameRight3.bottom - posInfo.rcGameRight3.top) / 2) };
 	}
 
+	// 상단 위 시작 <---------> 끝
+	{
+		posInfo.ptGameStart = { 0, 0 };
+		posInfo.ptGameEnd = { 0, 0 };
+	}
 
+
+	// POINT ( 중간 위치 ) 
+	{
+		posInfo.ptGameCenter = { 0, WINSIZEY / 2 };
+	}
 }
 
 void GameSystem::GameResourceInit()
@@ -265,7 +276,6 @@ void GameSystem::CollisionObject(std::list<Monster*> monsterlist)
 	// 플레이어 총알 충돌 ( 클라이언트 화면 ) 
 	for (biter = player->GetGun()->GetBulletList().begin(); biter != player->GetGun()->GetBulletList().end(); biter++)
 	{
-
 		// 몬스터 총알 발사 
 		if ((*biter)->GetIsBulletFire())
 		{
@@ -275,7 +285,7 @@ void GameSystem::CollisionObject(std::list<Monster*> monsterlist)
 				(*biter)->SetIsBulletFire(false);
 			}
 
-			// 몬스터 ( 플레이어 총알 -> 몬스터 순회 ) 
+			// 몬스터 ( 플레이어 총알 -> 몬스터 순회 )
 			for (it = monsterlist.begin(); it != monsterlist.end(); it++)
 			{
 				if (CollisionCircleAndRect((*biter)->GetRadius(), (*biter)->GetPivotX(), (*biter)->GetPivotY(),
@@ -283,7 +293,8 @@ void GameSystem::CollisionObject(std::list<Monster*> monsterlist)
 				{
 					if ((*it)->GetIsLive())
 					{
-						(*it)->SetIsLive(false);
+						(*it)->DeCreaseHp(player->GetDamage());
+						//(*it)->SetIsLive(false);
 						//DeleteObject(monsterlist);
 						(*biter)->SetIsBulletFire(false);
 
@@ -339,6 +350,7 @@ void GameSystem::CollisionObject(std::list<Monster*> monsterlist)
 					}
 					if (!player->GetIsDead())
 					{
+						
 						if (CollisionCircleAndCircle((*biter)->GetRadius(), (*biter)->GetPivotX(), (*biter)->GetPivotY(),
 							player->GetRadius(), player->GetX(), player->GetY()))
 						{
@@ -371,16 +383,21 @@ void GameSystem::CollisionObject(std::list<Monster*> monsterlist)
 		}
 	}
 
+
+	//DeleteObject(monsterlist);
+	
 }
 
 void GameSystem::DeleteObject(std::list<Monster*> monsterlist)
 {
 	// 몬스터 삭제 
+	
 	std::list<Monster*>::iterator it;
 	for (it = monsterlist.begin(); it != monsterlist.end(); )
 	{
-		if (!(*it)->GetIsLive())
+		if (!(*it)->GetIsLive() && (*it)->GetIsCollision())
 		{
+			(*it)->Release();
 			it = monsterlist.erase(it);
 		}
 		else
@@ -388,5 +405,13 @@ void GameSystem::DeleteObject(std::list<Monster*> monsterlist)
 			++it;
 		}
 	}
+
+
+
+}
+
+void GameSystem::DeleteObject(Monster * monster)
+{
+	monster->Release();
 }
 

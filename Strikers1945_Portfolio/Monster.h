@@ -13,12 +13,14 @@ protected:
 	float width;
 	float height;
 	bool isLive;
+	bool isCollision;
 protected:
 	float coolTime;
+
 protected:
 	RECT rcMonster;
 	POINT ptMonster;
-	RECT rcCollision;
+	RECT lastRect;
 
 	RECT rcLastPos;
 	POINT ptLastPos;
@@ -41,6 +43,7 @@ public:
 	virtual bool Init(const TCHAR* fileName, int number, GAMEPOS pos);
 	virtual void Update();
 	virtual void Render(HDC hdc);
+	virtual void Release();
 public:
 	void MonsterAI();
 
@@ -59,12 +62,17 @@ public:
 	
 	void StartPosition(Image* img);
 	void LastPosition(GAMEPOS pos);
+	
+	void DeCreaseHp(float _attackPoint);
+	
 	Gun* GetGun() { return _gun; }
 	bool GetIsLive() { return isLive; }
 	void SetIsLive(bool _isLive) { isLive = _isLive; }
 	Image* GetImage() { return monsterImg; }
 	RECT GetRectMonster() { return rcMonster; }
-
+	RECT GetRectCollision() { return lastRect; }
+	bool GetIsCollision() { return isCollision; }
+	void SetIsCollision(bool _col) { isCollision = _col; }
 	
 };
 

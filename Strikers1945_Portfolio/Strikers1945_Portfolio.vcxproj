@@ -121,6 +121,7 @@
     <ClCompile Include="BigAirPlan.cpp" />
     <ClCompile Include="Boss.cpp" />
     <ClCompile Include="Bullet.cpp" />
+    <ClCompile Include="CharacterSelectScene.cpp" />
     <ClCompile Include="CollisionFunction.cpp" />
     <ClCompile Include="DegreeGun.cpp" />
     <ClCompile Include="Effect.cpp" />
@@ -158,6 +159,7 @@
     <ClInclude Include="BigAirPlan.h" />
     <ClInclude Include="Boss.h" />
     <ClInclude Include="Bullet.h" />
+    <ClInclude Include="CharacterSelectScene.h" />
     <ClInclude Include="CollisionFunction.h" />
     <ClInclude Include="commonMacroFuntion.h" />
     <ClInclude Include="DegreeGun.h" />

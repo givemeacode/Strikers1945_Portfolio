@@ -10,7 +10,7 @@
 // 윈도우 사이즈 관련 매크로
 #define WINSTYLE	WS_CAPTION | WS_SYSMENU
 
-#define WINSIZEX	1200
+#define WINSIZEX	1000
 #define WINSIZEY	800
 #define WINSTARTX	0
 #define WINSTARTY	0

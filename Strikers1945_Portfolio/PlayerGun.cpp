@@ -107,6 +107,7 @@ void PlayerGun::BulletFire(float x, float y)
 		playerGunAni1->start();
 
 		playerDMG = 1;
+		
 	}
 	else if (GAMESYS->GetPlayer()->GetPlayerLevel() == 2)
 	{

@@ -6,8 +6,11 @@ class Scene;
 
 enum eSceneType
 {
-	SCENE_TEST1,
-	SCENE_TEST2,
+	SCENE_TITLE,
+	SCENE_CHARACTER,
+	SCENE_GAME1,
+	SCENE_CLEAR,
+	SCENE_END,
 };
 
 
@@ -23,5 +26,5 @@ public:
 	void ChangeScene(eSceneType type);
 	void Update();
 	void Render(HDC hdc);
-
+	void Release();
 };

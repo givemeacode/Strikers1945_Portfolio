@@ -10,7 +10,7 @@
 
 GameScene::GameScene()
 {
-	sceneType = eSceneType::SCENE_TEST1;
+	sceneType = eSceneType::SCENE_GAME1;
 }
 
 GameScene::~GameScene()
@@ -28,9 +28,9 @@ bool GameScene::Init()
 	startTimer = GetTickCount(); // 전체 시작시간
 
 	// 플레이어
-	player = new Player;
-	GAMESYS->SetPlayer(player);
-
+	//player = new Player;
+	//GAMESYS->SetPlayer(player);
+	player = GAMESYS->GetPlayer();
 	// 몬스터
 
 
@@ -98,13 +98,14 @@ void GameScene::Update()
 		}
 		
 	}
-//
+	
+	
 	// 몬스터
 	//=============================== 30초 ~ 1분 ===================================
 
 	if (RunTimer == 30 * THOU) // 30초 : 1번 왼쪽 -> 오른쪽 위 [ 1]
 	{
-	
+		GAMESYS->DeleteObject(monsterList);
 	}
 	if (RunTimer == 32 * THOU) // 32초 :  오른쪽 -> 왼쪽 위 [2] 
 	{
@@ -112,7 +113,8 @@ void GameScene::Update()
 	}
 	if (RunTimer == 35 * THOU) // 35초 : 위 -> 아래 중심으로 이동 (중간 캐릭터 ) 
 	{
-		
+		// 한번 삭제 해 준다.
+
 	}
 	if (RunTimer == 40 * THOU) // 40초 : 1번 2번 같이 생성
 	{
@@ -148,7 +150,7 @@ void GameScene::Update()
 	std::list<Monster*>::iterator it;
 	for (it = monsterList.begin(); it != monsterList.end(); it++)
 	{
-			(*it)->Update();
+		(*it)->Update();
 	}
 
 	GAMESYS->CollisionObject(monsterList);

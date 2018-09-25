@@ -4,6 +4,8 @@
 class AirMonster
 	: public Monster
 {
+private:
+	Image* airMonsterImg;
 public:
 	AirMonster();
 	AirMonster(GAMEPOS ePos);
@@ -16,6 +18,7 @@ public:
 
 	void Update();
 	void Render(HDC hdc);
+	void Release();
 public:
 	void MonsterAI();
 };

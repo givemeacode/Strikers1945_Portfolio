@@ -5,6 +5,42 @@
 
 Player::Player()
 {
+//	// 플레이어 위치 초기값 설정.
+//	PositionInit();
+//
+//	isDead = false;
+//	isClear = false;
+//	radius = 10.f;
+//	// 시간체크
+//	runTimer = GetTickCount();
+//	deathTimer = 0; // 죽었을때 시점을 저장하기위해.
+//	damage = 1.f;
+////	deathMotionTime = 0; // 죽었을때 잠깐 없어지는 시간 ( 폭파 모션 )
+//	responTime = 0.f; // 리스폰시간
+//
+//	//// 테스트용 ////
+//	//target = RectMakeCenter(WINSIZEX / 2, 50, 50, 50);
+//
+//	//
+//	gun = new PlayerGun;
+//	gun->Init(endx, endy);
+//
+//	// 애니메이션
+//	deathEffect = IMAGEMANAGER->FindImage(TEXT("Effect_7"));
+//	deathAnimation = new Animation;
+//	deathAnimation->Init(deathEffect);
+//	deathAnimation->setDefPlayFrame(false, true);
+//	deathAnimation->setFPS(5.f); //
+}
+
+Player::~Player()
+{
+	SAFE_DELETE(playerImage);
+	SAFE_DELETE(deathAnimation);
+}
+
+void Player::Init()
+{
 	// 플레이어 위치 초기값 설정.
 	PositionInit();
 
@@ -14,8 +50,8 @@ Player::Player()
 	// 시간체크
 	runTimer = GetTickCount();
 	deathTimer = 0; // 죽었을때 시점을 저장하기위해.
-
-//	deathMotionTime = 0; // 죽었을때 잠깐 없어지는 시간 ( 폭파 모션 )
+	damage = 1.f;
+	//	deathMotionTime = 0; // 죽었을때 잠깐 없어지는 시간 ( 폭파 모션 )
 	responTime = 0.f; // 리스폰시간
 
 	//// 테스트용 ////
@@ -33,14 +69,34 @@ Player::Player()
 	deathAnimation->setFPS(5.f); //
 }
 
-Player::~Player()
+void Player::Init(std::string fileName)
 {
-	SAFE_DELETE(playerImage);
-	SAFE_DELETE(deathAnimation);
-}
+	// 플레이어 위치 초기값 설정.
+	PositionInit(fileName);
 
-void Player::Init()
-{
+	isDead = false;
+	isClear = false;
+	radius = 10.f;
+	// 시간체크
+	runTimer = GetTickCount();
+	deathTimer = 0; // 죽었을때 시점을 저장하기위해.
+	damage = 1.f;
+	//	deathMotionTime = 0; // 죽었을때 잠깐 없어지는 시간 ( 폭파 모션 )
+	responTime = 0.f; // 리스폰시간
+
+	//// 테스트용 ////
+	//target = RectMakeCenter(WINSIZEX / 2, 50, 50, 50);
+
+	//
+	gun = new PlayerGun;
+	gun->Init(endx, endy);
+
+	// 애니메이션
+	deathEffect = IMAGEMANAGER->FindImage(TEXT("Effect_7"));
+	deathAnimation = new Animation;
+	deathAnimation->Init(deathEffect);
+	deathAnimation->setDefPlayFrame(false, true);
+	deathAnimation->setFPS(5.f); //
 }
 
 void Player::Update()
@@ -152,6 +208,29 @@ void Player::PositionInit()
 	//playerImage = new Image;
 	//playerImage->Init(TEXT("../Resource/Image/Player/Move_LR_A.bmp"), 223, 33, 7, 1, true, RGB(0, 0, 0));
 	playerImage = IMAGEMANAGER->FindImage("Move_LR_A");
+	playerImage->SetX(x - playerImage->GetFrameWidth() / 2 - 4); // 렉트는 중심부터 그려지고, 이미지는 left,top부터 그리니까 이미지프레임의 넓이의 반을 계산해줘서 중심으로 옴긴다.
+	playerImage->SetY(y - playerImage->GetFrameHeight() / 2);  // 렉트는 중심부터 그려지고, 이미지는 left,top부터 그리니까 이미지프레임의 높이의 반을 계산해줘서 중심으로 옴긴다.
+	playerImage->SetFrameX(3); // 4번째 프레임으로 초기화값.
+}
+
+void Player::PositionInit(std::string fileName)
+{
+	playerLevel = 1;
+	// 플레이어 객체 ( 렉트 ) 초기화
+	angle = PI / 2.f;
+	x = static_cast<float>(WINSIZEX) / 2;
+	y = static_cast<float>(WINSIZEY) - 100;
+	endx = x;
+	endy = y - length + 20;
+	length = PLAYERSIZE / 2;
+	collisionBox = RectMakeCenter(x, y, PLAYERSIZE, PLAYERSIZE);
+	rc = RectMakeCenter(x, y, 32, 32); // 32는 이미지 크기
+	speed = 8.f;
+
+	// 플레이어 이미지 초기화
+	//playerImage = new Image;
+	//playerImage->Init(TEXT("../Resource/Image/Player/Move_LR_A.bmp"), 223, 33, 7, 1, true, RGB(0, 0, 0));
+	playerImage = IMAGEMANAGER->FindImage(fileName);
 	playerImage->SetX(x - playerImage->GetFrameWidth() / 2 - 4); // 렉트는 중심부터 그려지고, 이미지는 left,top부터 그리니까 이미지프레임의 넓이의 반을 계산해줘서 중심으로 옴긴다.
 	playerImage->SetY(y - playerImage->GetFrameHeight() / 2);  // 렉트는 중심부터 그려지고, 이미지는 left,top부터 그리니까 이미지프레임의 높이의 반을 계산해줘서 중심으로 옴긴다.
 	playerImage->SetFrameX(3); // 4번째 프레임으로 초기화값.

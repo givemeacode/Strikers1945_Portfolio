@@ -24,6 +24,11 @@ typedef struct sCharacterPositon
 	POINT ptGameCenterRight2;
 	POINT ptGameCenterRight3;
 
+	POINT ptGameStart;
+	POINT ptGameEnd;
+
+	POINT ptGameCenter;
+
 }CPOS;
 
 class GameSystem
@@ -32,7 +37,8 @@ class GameSystem
 private:
 	CPOS posInfo;
 	Player* player;
-	
+private:
+	float deltaTime;
 private:
 	RECT rcClient;
 public:
@@ -48,6 +54,7 @@ public:
 	CPOS& GetPosInfo();
 	void CollisionObject(std::list<Monster*> monsterlist);
 	void DeleteObject(std::list<Monster*> monsterlist);
+	void DeleteObject(Monster* monster);
 	Player* GetPlayer() { return player; }
 };
 

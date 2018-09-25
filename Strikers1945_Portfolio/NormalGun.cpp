@@ -36,6 +36,13 @@ void NormalGun::Render(HDC hdc)
 
 void NormalGun::Release()
 {
+	std::list<Bullet*>::iterator it;
+	for (it = bulletList.begin(); it != bulletList.end(); it++)
+	{
+		(*it)->Release();
+		delete (*it);
+	}
+	bulletList.clear();
 }
 
 void NormalGun::BulletFire(float x, float y)

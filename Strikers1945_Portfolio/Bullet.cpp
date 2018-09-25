@@ -81,6 +81,14 @@ void Bullet::Render(HDC hdc , int )
 
 }
 
+void Bullet::Release()
+{
+	SAFE_DELETE(aniBullet);
+	//SAFE_DELETE(bulletImg);
+	//aniBullet->Release();
+	bulletImg->Release();
+}
+
 void Bullet::SetIsBulletFire(bool _isBulletFire)
 {
 	isBulletFire = _isBulletFire;

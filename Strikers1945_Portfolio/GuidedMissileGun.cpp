@@ -47,7 +47,9 @@ void GuidedMissileGun::BulletFire(float x, float y)
 {
 	// 총알이 생성 
 	Bullet* bullet = new Bullet();
-	bullet->Init(x, y, 10);				// 반지름 사용 
+	//bullet->Init(x, y, 10);				// 반지름 사용 
+	bullet->Init(TEXT("MBasic_Bullet"),x, y, 10);				// 반지름 사용 
+
 	bullet->SetIsBulletFire(true);
 	bulletList.push_back(bullet);
 

@@ -4,7 +4,7 @@
 
 class PlayerGun :public Gun
 {
-	int playerDMG;
+	float playerDMG;
 
 	Image*		playerGunImage1;
 	Animation*	playerGunAni1;
@@ -29,5 +29,7 @@ public:
 public:
 	void BulletFire(float x, float y);
 	void BulletMove();
+	float PlayerDMG() { return playerDMG; }
+
 };
 

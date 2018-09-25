@@ -30,6 +30,8 @@ public:
 	void Render(HDC hdc);
 	void Render(HDC hdc, int);
 
+	void Release();
+
 public:
 	void SetIsBulletFire(bool isBulletFire);
 	bool GetIsBulletFire();

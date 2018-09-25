@@ -15,6 +15,8 @@ Monster::Monster()
 	startPos = GAMEPOS::G_NONE;
 	lastPos = GAMEPOS::G_NONE;
 	isLive = true;
+	fHp = 10.0f;
+	isCollision = false;
 }
 
 
@@ -115,6 +117,10 @@ void Monster::Render(HDC hdc)
 	monsterImg->FrameRender(hdc, rcMonster.left, rcMonster.top, 0, 0);
 	_gun->Render(hdc);
 
+}
+
+void Monster::Release()
+{
 }
 
 void Monster::MonsterAI()
@@ -219,42 +225,42 @@ void Monster::StartPosition(Image * img)
 		rcMonster = RectMakeCenter(
 			GAMESYS->GetPosInfo().ptGameCenterLeft1.x,
 			GAMESYS->GetPosInfo().ptGameCenterLeft1.y,
-			monsterImg->GetFrameWidth(), monsterImg->GetFrameHeight()
+			img->GetFrameWidth(), img->GetFrameHeight()
 		);
 		break;
 	case GAMEPOS::G_LEFT2:
 		rcMonster = RectMakeCenter(
 			GAMESYS->GetPosInfo().ptGameCenterLeft2.x,
 			GAMESYS->GetPosInfo().ptGameCenterLeft2.y,
-			monsterImg->GetFrameWidth(), monsterImg->GetFrameHeight()
+			img->GetFrameWidth(), img->GetFrameHeight()
 		);
 		break;
 	case GAMEPOS::G_LEFT3:
 		rcMonster = RectMakeCenter(
 			GAMESYS->GetPosInfo().ptGameCenterLeft3.x,
 			GAMESYS->GetPosInfo().ptGameCenterLeft3.y,
-			monsterImg->GetFrameWidth(), monsterImg->GetFrameHeight()
+			img->GetFrameWidth(), img->GetFrameHeight()
 		);
 		break;
 	case GAMEPOS::G_RIGHT1:
 		rcMonster = RectMakeCenter(
 			GAMESYS->GetPosInfo().ptGameCenterRight1.x,
 			GAMESYS->GetPosInfo().ptGameCenterRight1.y,
-			monsterImg->GetFrameWidth(), monsterImg->GetFrameHeight()
+			img->GetFrameWidth(), img->GetFrameHeight()
 		);
 		break;
 	case GAMEPOS::G_RIGHT2:
 		rcMonster = RectMakeCenter(
 			GAMESYS->GetPosInfo().ptGameCenterRight2.x,
 			GAMESYS->GetPosInfo().ptGameCenterRight2.y,
-			monsterImg->GetFrameWidth(), monsterImg->GetFrameHeight()
+			img->GetFrameWidth(), img->GetFrameHeight()
 		);
 		break;
 	case GAMEPOS::G_RIGHT3:
 		rcMonster = RectMakeCenter(
 			GAMESYS->GetPosInfo().ptGameCenterRight3.x,
 			GAMESYS->GetPosInfo().ptGameCenterRight3.y,
-			monsterImg->GetFrameWidth(), monsterImg->GetFrameHeight()
+			img->GetFrameWidth(), img->GetFrameHeight()
 		);
 		break;
 	}
@@ -289,4 +295,9 @@ void Monster::LastPosition(GAMEPOS pos)
 		ptLastPos = GAMESYS->GetPosInfo().ptGameCenterRight3;
 		break;
 	}
+}
+
+void Monster::DeCreaseHp(float _attackPoint)
+{
+	fHp -= _attackPoint;
 }

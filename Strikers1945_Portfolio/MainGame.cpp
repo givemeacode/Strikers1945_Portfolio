@@ -15,9 +15,7 @@ MainGame::~MainGame()
 bool MainGame::Init() // ÃÊ±âÈ­
 {
 	GameNode::Init(true);
-	SceneManager::getSingleton()->ChangeScene(eSceneType::SCENE_TEST1);
-
-	
+	SceneManager::getSingleton()->ChangeScene(eSceneType::SCENE_CHARACTER);
 
 	return true;
 }

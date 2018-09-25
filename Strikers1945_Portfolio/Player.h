@@ -21,6 +21,7 @@ private:
 	float length;
 	float speed;
 	float radius;
+	float damage;
 	// 面倒贸府且锭, isDead客 isClear false 老锭父 面倒贸府.
 	bool	isDead;
 	bool	isClear;
@@ -50,12 +51,14 @@ public:
 	~Player();
 public:
 	void Init();
+	void Init(std::string fileName);
 	void Update();
 	void Render(HDC hdc);
 public:
 	int GetPlayerLevel() { return playerLevel; }
 public:
 	void PositionInit();
+	void PositionInit(std::string fileName);
 
 	void IsDead();
 	void IsClear();
@@ -70,6 +73,8 @@ public:
 	bool GetIsDead() { return isDead; }
 	float GetRadius() { return radius; }
 	//========================
+	void SetDamage(float _damage) { damage = _damage; }
+	float GetDamage() { return damage; }
 
 };
 
