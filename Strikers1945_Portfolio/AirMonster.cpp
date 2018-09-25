@@ -11,11 +11,12 @@ AirMonster::AirMonster()
 AirMonster::AirMonster(GAMEPOS ePos)
 {
 	startPos = ePos;
+	isLive = true;
 }
 
 
 AirMonster::~AirMonster()
- {
+{
 }
 
 bool AirMonster::Init(int x, int y)
@@ -128,15 +129,21 @@ bool AirMonster::Init(const TCHAR * fileName, int number, GAMEPOS pos)
 void AirMonster::Update()
 { 
 	MonsterAI();
+	
 }
 
 void AirMonster::Render(HDC hdc)
 {
-	DrawObject(hdc, rcMonster, 1, RGB(0, 255, 255), RECTANGLE);
+	if (GetIsLive())
+	{
+		DrawObject(hdc, rcMonster, 1, RGB(0, 255, 255), RECTANGLE);
 
-	monsterImg->FrameRender(hdc, rcMonster.left, rcMonster.top, 0, 0);
-
+		monsterImg->FrameRender(hdc, rcMonster.left, rcMonster.top, 0, 0);
+	}
+	
 	_gun->Render(hdc);
+	
+
 }
 
 void AirMonster::MonsterAI()
@@ -162,14 +169,18 @@ void AirMonster::MonsterAI()
 
 	//
 	coolTime -= TIMEMANAGER->getElapsedTime();
-	if (coolTime <= 0.0f) // 3.0fÃÊ¸¶´Ù ½ô.
+	if (isLive)
 	{
-		_gun->BulletFire(GetPivotX(), GetPivotY());
+		if (coolTime <= 0.0f) // 3.0fÃÊ¸¶´Ù ½ô.
+		{
+			_gun->BulletFire(GetPivotX(), GetPivotY());
 
-		CoolTimeReset();
+			CoolTimeReset();
+		}
 	}
+	
 	_gun->BulletMove();
 
-	//
 	rcMonster = RectMakeCenter(GetPivotX(), GetPivotY(), monsterImg->GetFrameWidth(), monsterImg->GetFrameHeight());
+
 }

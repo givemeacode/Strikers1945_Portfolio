@@ -75,7 +75,7 @@ void GameScene::Update()
 // 테스트
 	if (RunTimer == 2 * THOU) // 30초 : 1번 왼쪽 -> 오른쪽 위 [ 1]
 	{
-		for (int i = 0; i < 100; i++)
+		for (int i = 0; i < 10; i++)
 		{
 			Monster* monster1 = new AirMonster(GAMEPOS::G_LEFT1);
 			//monster1->Init(MONSTER_TYPE_NONE, WINSIZEX / 2, 100);

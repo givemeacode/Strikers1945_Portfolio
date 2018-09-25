@@ -14,6 +14,7 @@ Monster::Monster()
 	coolTime = 2.0f;
 	startPos = GAMEPOS::G_NONE;
 	lastPos = GAMEPOS::G_NONE;
+	isLive = true;
 }
 
 

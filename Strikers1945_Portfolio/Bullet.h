@@ -3,6 +3,11 @@ class Bullet
 {
 private:
 	RECT rcBullet;			// 面倒 贸府 按眉拳? 
+	POINT ptBullet;
+
+	Image* bulletImg;
+	Animation* aniBullet;
+
 	float fPosX;
 	float fPosY;
 	float fPivotX;
@@ -11,13 +16,20 @@ private:
 	bool isBulletFire;
 	bool isCollision;
 	float fAngle;
+	float width;
+	float height;
 public:
 	Bullet();
 	~Bullet();
 public:
 	bool Init(float x, float y, float _radius);
+	bool Init(const TCHAR* fileName, float x, float y, float _radius);
 	void Update();
+	void Update(int);
+
 	void Render(HDC hdc);
+	void Render(HDC hdc, int);
+
 public:
 	void SetIsBulletFire(bool isBulletFire);
 	bool GetIsBulletFire();

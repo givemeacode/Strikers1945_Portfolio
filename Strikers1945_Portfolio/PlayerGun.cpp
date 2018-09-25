@@ -173,17 +173,15 @@ void PlayerGun::BulletMove()
 		}
 
 		// »èÁ¦ 
-		for (it = bulletList.begin(); it != bulletList.end(); it++)
+		for (it = bulletList.begin(); it != bulletList.end();)
 		{
-			if (!(*it)->GetIsBulletFire() && (*it)->GetIsCollision())
+			if (!(*it)->GetIsBulletFire())
 			{
-				delete (*it);
 				it = bulletList.erase(it);
-
-				if (bulletList.empty())
-				{
-					break;
-				}
+			}
+			else
+			{
+				++it;
 			}
 		}
 

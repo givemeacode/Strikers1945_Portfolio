@@ -265,6 +265,8 @@ void GameSystem::CollisionObject(std::list<Monster*> monsterlist)
 	// 플레이어 총알 충돌 ( 클라이언트 화면 ) 
 	for (biter = player->GetGun()->GetBulletList().begin(); biter != player->GetGun()->GetBulletList().end(); biter++)
 	{
+
+		// 몬스터 총알 발사 
 		if ((*biter)->GetIsBulletFire())
 		{
 			if ((*biter)->GetPivotX() <= 15 || (*biter)->GetPivotX() >= WINSIZEX + 15 ||
@@ -273,11 +275,30 @@ void GameSystem::CollisionObject(std::list<Monster*> monsterlist)
 				(*biter)->SetIsBulletFire(false);
 			}
 
-			// 몬스터 
+			// 몬스터 ( 플레이어 총알 -> 몬스터 순회 ) 
+			for (it = monsterlist.begin(); it != monsterlist.end(); it++)
+			{
+				if (CollisionCircleAndRect((*biter)->GetRadius(), (*biter)->GetPivotX(), (*biter)->GetPivotY(),
+					(*it)->GetRectMonster()))
+				{
+					if ((*it)->GetIsLive())
+					{
+						(*it)->SetIsLive(false);
+						//DeleteObject(monsterlist);
+						(*biter)->SetIsBulletFire(false);
 
+					}
+					
+
+				}
+
+			}
+			
 		}
 	}
 
+
+	// 플레이어 총알 삭제 
 	for (biter = player->GetGun()->GetBulletList().begin(); biter != player->GetGun()->GetBulletList().end(); )
 	{
 		if (!(*biter)->GetIsBulletFire())
@@ -297,29 +318,44 @@ void GameSystem::CollisionObject(std::list<Monster*> monsterlist)
 	// 몬스터 총알 충돌 ( 클라이언트 화면 ) 
 	for (it = monsterlist.begin(); it != monsterlist.end(); it++)
 	{
-		for (biter = (*it)->GetGun()->GetBulletList().begin(); biter != (*it)->GetGun()->GetBulletList().end(); biter++)
+		if ((*it)->GetIsLive())
 		{
-			if ((*biter)->GetIsBulletFire())
+
+			// 몬스터 플레이어 충돌 
+			if (CollisionCircleAndRect(player->GetRadius(), player->GetX(), player->GetY(), (*it)->GetRectMonster()))
 			{
-				if ((*biter)->GetPivotX() <= 15 || (*biter)->GetPivotX() >= WINSIZEX + 15 ||
-					(*biter)->GetPivotY() <= 15 || (*biter)->GetPivotY() >= WINSIZEY)
+				player->SetIsDead(true);
+			}
+
+			// 몬스터와 총알 충돌 
+			for (biter = (*it)->GetGun()->GetBulletList().begin(); biter != (*it)->GetGun()->GetBulletList().end(); biter++)
+			{
+				if ((*biter)->GetIsBulletFire())
 				{
-					 (*biter)->SetIsBulletFire(false);
-				}
-				if (!player->GetIsDead())
-				{
-					if (CollisionCircleAndCircle((*biter)->GetRadius(), (*biter)->GetPivotX(), (*biter)->GetPivotY(),
-						player->GetRadius(),player->GetX(),player->GetY()))
+					if ((*biter)->GetPivotX() <= 15 || (*biter)->GetPivotX() >= WINSIZEX + 15 ||
+						(*biter)->GetPivotY() <= 15 || (*biter)->GetPivotY() >= WINSIZEY)
 					{
-						player->SetIsDead(true);
+						(*biter)->SetIsBulletFire(false);
+					}
+					if (!player->GetIsDead())
+					{
+						if (CollisionCircleAndCircle((*biter)->GetRadius(), (*biter)->GetPivotX(), (*biter)->GetPivotY(),
+							player->GetRadius(), player->GetX(), player->GetY()))
+						{
+							player->SetIsDead(true);
+							(*biter)->SetIsBulletFire(false);
+
+						}
+
 					}
 
 				}
-				
 			}
 		}
 	}
 
+
+	// 총알 삭제 
 	for (it = monsterlist.begin(); it != monsterlist.end(); it++)
 	{
 		for (biter = (*it)->GetGun()->GetBulletList().begin(); biter != (*it)->GetGun()->GetBulletList().end(); )
@@ -335,6 +371,22 @@ void GameSystem::CollisionObject(std::list<Monster*> monsterlist)
 		}
 	}
 
-	
+}
+
+void GameSystem::DeleteObject(std::list<Monster*> monsterlist)
+{
+	// 몬스터 삭제 
+	std::list<Monster*>::iterator it;
+	for (it = monsterlist.begin(); it != monsterlist.end(); )
+	{
+		if (!(*it)->GetIsLive())
+		{
+			it = monsterlist.erase(it);
+		}
+		else
+		{
+			++it;
+		}
+	}
 }
 

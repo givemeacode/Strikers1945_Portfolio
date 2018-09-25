@@ -10,7 +10,7 @@ Player::Player()
 
 	isDead = false;
 	isClear = false;
-	radius = 18.f;
+	radius = 10.f;
 	// 시간체크
 	runTimer = GetTickCount();
 	deathTimer = 0; // 죽었을때 시점을 저장하기위해.

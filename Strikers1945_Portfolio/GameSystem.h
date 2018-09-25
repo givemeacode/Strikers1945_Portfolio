@@ -47,6 +47,7 @@ public:
 	void SetPlayer(Player* _player);
 	CPOS& GetPosInfo();
 	void CollisionObject(std::list<Monster*> monsterlist);
+	void DeleteObject(std::list<Monster*> monsterlist);
 	Player* GetPlayer() { return player; }
 };
 

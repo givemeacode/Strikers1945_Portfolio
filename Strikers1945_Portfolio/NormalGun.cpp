@@ -6,6 +6,7 @@
 NormalGun::NormalGun()
 {
 	fAngle = PI + PI / 2;
+	fSpeed = 3.0f;
 }
 
 
@@ -15,6 +16,9 @@ NormalGun::~NormalGun()
 
 bool NormalGun::Init(float x, float y)
 {
+	// ÃÊ±âÈ­
+	fPosX = x;
+	fPosY = y;
 	return true;
 }
 
@@ -25,7 +29,7 @@ void NormalGun::Render(HDC hdc)
 	{
 		for (it = bulletList.begin(); it != bulletList.end(); it++)
 		{
-			(*it)->Render(hdc);
+			(*it)->Render(hdc,1);
 		}
 	}
 }
@@ -37,7 +41,7 @@ void NormalGun::Release()
 void NormalGun::BulletFire(float x, float y)
 {
 	Bullet* bullet = new Bullet();
-	bullet->Init(x, y, 2);
+	bullet->Init(TEXT("MBasic_Bullet"),x, y, 2);
 	bullet->SetIsBulletFire(true);
 	bulletList.push_back(bullet);
 	bullet->SetAngle(fAngle);
@@ -54,7 +58,7 @@ void NormalGun::BulletMove()
 			(*it)->SetPivotX((*it)->GetPivotX() + cosf((*it)->GetAngle()) * fSpeed);
 			(*it)->SetPivotY((*it)->GetPivotY() + -sinf((*it)->GetAngle()) * fSpeed);
 
-			(*it)->Update();
+			(*it)->Update(1);
 
 		}
 	}

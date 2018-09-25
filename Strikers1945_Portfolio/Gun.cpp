@@ -15,7 +15,7 @@ Gun::~Gun()
 }
 
 bool Gun::Init(float x, float y)
-{
+{	
 	/*fPosX = x;
 	fPosY = y + 3;
 	*/

@@ -170,7 +170,7 @@ void ResourceManager::ParsingData(eReSourceType type, const TCHAR* _fileName)
 		wsprintf(_fileImagePath, TEXT("../Resource/Image/Bomb/%s.bmp"), _fileName);
 		break;
 	case eReSourceType::R_BULLET:
-		wsprintf(_fileImagePath, TEXT("../Resource/Image/Bomb/%s.bmp"), _fileName);
+		wsprintf(_fileImagePath, TEXT("../Resource/Image/Bullet/%s.bmp"), _fileName);
 		break;
 	case eReSourceType::R_EFFECT:
 		wsprintf(_fileImagePath, TEXT("../Resource/Image/Effect/%s.bmp"), _fileName);

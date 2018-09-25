@@ -17,6 +17,8 @@ class PlayerGun :public Gun
 
 	Image*		playerGunImage4;
 	Animation*	playerGunAni4;
+
+	
 public:
 	PlayerGun();
 	~PlayerGun();

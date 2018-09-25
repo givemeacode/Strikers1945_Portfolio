@@ -14,6 +14,7 @@ Bullet::~Bullet()
 {
 }
 
+
 bool Bullet::Init(float _x, float _y, float _radius)
 {
 	rcBullet = RectMakeCenter(_x, _y, _radius * 2, _radius * 2);
@@ -23,15 +24,61 @@ bool Bullet::Init(float _x, float _y, float _radius)
 	return true;
 }
 
+bool Bullet::Init(const TCHAR* fileName, float _x, float _y, float _radius)
+{
+	// 이미지 검색 
+
+	bulletImg = IMAGEMANAGER->FindImage(fileName);
+
+	// 초기화
+
+	rcBullet = RectMakeCenter(_x, _y, _radius * 2, _radius * 2);
+	fPosX = _x;
+	fPosY = _y;
+	fRadius = _radius;
+	width = bulletImg->GetFrameWidth();
+	height = bulletImg->GetFrameHeight();
+
+
+	// 이미지 애니메이션  ( 계속 루프 ) 
+	aniBullet = new Animation();
+	aniBullet->Init(bulletImg);
+	aniBullet->setFPS(1);
+	aniBullet->setDefPlayFrame(false, true); 
+	aniBullet->start();
+
+	return true;
+}
+
 void Bullet::Update()
 {
 	// 충돌 처리를 할 총알 갱신 
-	rcBullet = RectMakeCenter(fPosX, fPosY, 30, 30); // 총알 크기가 안바뀌는건 이부분 30
+	rcBullet = RectMakeCenter(fPosX + width / 2 , fPosY + height + 2, width, height); // 총알 크기가 안바뀌는건 이부분 30
+	//aniBullet->frameUpdate(TIMEMANAGER->getElapsedTime() * 10.f);
+
+}
+
+void Bullet::Update(int)
+{
+	// 충돌 처리를 할 총알 갱신 
+	rcBullet = RectMakeCenter(fPosX + width / 2, fPosY + height / 2, width, height); // 총알 크기가 안바뀌는건 이부분 30
+
+	aniBullet->frameUpdate(TIMEMANAGER->getElapsedTime() * 10.f);
+
 }
 
 void Bullet::Render(HDC hdc)
 {
 	DrawObject(hdc, rcBullet, 1, RGB(255, 0, 255), ELLIPSE);
+	//bulletImg->AniRender(hdc, fPosX, fPosY, aniBullet);
+	
+}
+
+void Bullet::Render(HDC hdc , int )
+{
+	DrawObject(hdc, rcBullet, 1, RGB(255, 0, 255), ELLIPSE);
+	bulletImg->AniRender(hdc, fPosX, fPosY, aniBullet);
+
 }
 
 void Bullet::SetIsBulletFire(bool _isBulletFire)

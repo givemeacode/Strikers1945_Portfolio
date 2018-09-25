@@ -63,6 +63,8 @@ public:
 	bool GetIsLive() { return isLive; }
 	void SetIsLive(bool _isLive) { isLive = _isLive; }
 	Image* GetImage() { return monsterImg; }
+	RECT GetRectMonster() { return rcMonster; }
+
 	
 };
 
