@@ -7,7 +7,6 @@
 GuidedMissileGun::GuidedMissileGun()
 {
 	fAngle = PI + PI /2 ;
-
 }
 
 
@@ -33,7 +32,7 @@ void GuidedMissileGun::Render(HDC hdc)
 
 			if ((*iter)->GetIsBulletFire())
 			{
-				(*iter)->Render(hdc);
+				(*iter)->Render(hdc,1);
 			}
 		}
 	}
@@ -47,8 +46,7 @@ void GuidedMissileGun::BulletFire(float x, float y)
 {
 	// 총알이 생성 
 	Bullet* bullet = new Bullet();
-	//bullet->Init(x, y, 10);				// 반지름 사용 
-	bullet->Init(TEXT("MBasic_Bullet"),x, y, 10);				// 반지름 사용 
+	bullet->Init(TEXT("MGuide_Bullet"),x, y, 6);				// 반지름 사용 
 
 	bullet->SetIsBulletFire(true);
 	bulletList.push_back(bullet);
@@ -67,11 +65,7 @@ void GuidedMissileGun::BulletMove()
 			(*it)->SetPivotX((*it)->GetPivotX() + cosf((*it)->GetAngle()) * fSpeed);
 			(*it)->SetPivotY((*it)->GetPivotY() + (-sinf((*it)->GetAngle()) * fSpeed));
 
-			(*it)->Update();
-
+			(*it)->Update(1);
 		}
 	}
-}	
-
-
-
+}

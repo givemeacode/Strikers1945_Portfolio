@@ -7,7 +7,7 @@
 
 
 AirMonster::AirMonster()
-{
+{	
 }
 
 AirMonster::AirMonster(GAMEPOS ePos)
@@ -39,7 +39,7 @@ bool AirMonster::Init(int x, int y)
 	//SetPivotY(y);
 
 	//_gun = new Gun();
-	_gun = new NormalGun();
+	_gun = new GuidedMissileGun();
 
 	_gun->Init(GetPivotX(), GetPivotY());
 
@@ -61,7 +61,7 @@ bool AirMonster::Init(const TCHAR * fileName, int x, int y)
 	monsterImg = IMAGEMANAGER->FindImage(TEXT(fileName));
 
 	// Gun 持失 
-	_gun = new NormalGun();
+	_gun = new GuidedMissileGun();
 	_gun->Init(GetPivotX(), GetPivotY());
 
 	return true;
@@ -92,7 +92,7 @@ bool AirMonster::Init(const TCHAR * fileName)
 
 	//
 	// Gun 持失 
-	_gun = new NormalGun();
+	_gun = new GuidedMissileGun();
 	_gun->Init(GetPivotX(), GetPivotY());
 	return true;
 }
@@ -122,6 +122,42 @@ bool AirMonster::Init(const TCHAR * fileName, int number, GAMEPOS pos)
 	width = airMonsterImg->GetFrameWidth();
 	height = airMonsterImg->GetFrameHeight();
 
+	//
+	// Gun 持失 
+	//_gun = new NormalGun();
+	_gun = new GuidedMissileGun();
+	_gun->Init(GetPivotX(), GetPivotY());
+
+
+	return true;
+}
+
+bool AirMonster::Init(const TCHAR * fileName, int number, MonsterType _mType, GAMEPOS pos)
+{
+	TCHAR file[256] = { 0, };
+
+	_stprintf(file, TEXT("%s%d"), fileName, number);
+
+	airMonsterImg = IMAGEMANAGER->FindImage(file);
+	monsterImg = airMonsterImg;
+	StartPosition(airMonsterImg);
+	LastPosition(pos);
+
+	airMonsterImg->SetX(rcMonster.left);
+	airMonsterImg->SetY(rcMonster.top);
+
+	SetCenterPivot(rcMonster);
+
+	ptMonster.x = GetPivotX();
+	ptMonster.y = GetPivotY();
+
+	rcPosX = static_cast<float>(GetPivotX());
+	rcPosY = static_cast<float>(GetPivotY());
+
+	width = airMonsterImg->GetFrameWidth();
+	height = airMonsterImg->GetFrameHeight();
+
+	mType = _mType;
 	//
 	// Gun 持失 
 	//_gun = new NormalGun();
@@ -211,5 +247,4 @@ void AirMonster::MonsterAI()
 	_gun->BulletMove(); 
 
 	rcMonster = RectMakeCenter(GetPivotX(), GetPivotY(), width, height);
-
 }

@@ -77,6 +77,20 @@ void Player::Init(std::string fileName)
 {
 	// 플레이어 위치 초기값 설정.
 	PositionInit(fileName);
+	playerInfoFileName = fileName;
+
+	//
+	playerLifeCountImage = new Image;
+	playerLifeCountImage = IMAGEMANAGER->FindImage(TEXT("AV_8_Player_1"));
+	playerLifeCountImage->SetFrameX(3);
+
+
+	playerLifeCount = 3;
+
+	playerLifeContinueCountTimer = 0;
+	playerLifeContinueCount = 9;
+
+
 
 	isDead = false;
 	isClear = false;
@@ -110,8 +124,8 @@ void Player::Update()
 	//{
 	//	isDead = true;
 	//}
-
-	IsDead();
+	damage = playerLevel;
+	IsDead(playerInfoFileName);
 	IsClear();
 
 	// 이동 ( 키보드 방향키 )
@@ -119,7 +133,7 @@ void Player::Update()
 
 	// 발사 ( 스페이스 바 )
 	FireKey();
-
+	
 	// ====== 테스트용 ... D를 누르면 플레이어의 렉트 출력===============
 	if (KEYMANAGER->IsStayKeyDown(0x44))
 	{
@@ -133,15 +147,27 @@ void Player::Update()
 	endx = x;
 	endy = y - (length + 7);
 
-
 	collisionBox = RectMakeCenter(x, y, PLAYERSIZE, PLAYERSIZE);
 	rc = RectMakeCenter(x, y, 32, 32);
 
 	// 애니메이션
 	deathAnimation->frameUpdate(TIMEMANAGER->getElapsedTime() * 2);
 
+	if (playerLifeCount != 0)
+	{
+		playerLifeContinueCountTimerIndex = GetTickCount();
+	}
+	if (playerLifeCount == 0)
+	{
+		playerLifeContinueCount = 9 - (playerLifeContinueCountTimer / 1000);
+		if (playerLifeCount == 0) //  9 - (runTimer / 1000) 값이 ...  0이되면 선택시간이 종료된 것.
+		{
+			playerLifeContinueCountTimer = GetTickCount() - playerLifeContinueCountTimerIndex; // 전체시간
+		}
+	}
 	/////////// 테스트 ///////////////////
 	//OffsetRect(&target, 0, 5);
+
 }
 
 void Player::Render(HDC hdc)
@@ -158,7 +184,21 @@ void Player::Render(HDC hdc)
 			deathEffect->AniRender(hdc, x-64, y-64, deathAnimation); // 64는 이미지 사이즈/2
 		}
 	}
+	// 목숨 ( 그림으로 표시 )
+	PlayerLifeCountFunc(hdc, playerInfoFileName);
 
+	if (playerLifeCount <= 0)
+	{
+		TCHAR tempChoiceTime[100] = { 0, };
+		_stprintf_s(tempChoiceTime, sizeof(tempChoiceTime), TEXT("Continue : %d"), playerLifeContinueCount);
+		TextOut(hdc, WINSIZEX/2, WINSIZEY/2, TEXT(tempChoiceTime), _tcslen(TEXT(tempChoiceTime)));
+
+		if (KEYMANAGER->IsOnceKeyDown(VK_RETURN))
+		{
+			playerLifeCount = 3;
+			PositionInit(playerInfoFileName);
+		}
+	}
 
 	///////////////        테스트        ///////////////////////////
 	if (check) // 체크 버튼은 D
@@ -251,7 +291,6 @@ void Player::IsDead()
 	{
 		deathTimer = GetTickCount(); // 죽었을떄 흘러가는시간.
 
-
 		if (responTime < 3000) // 런타임( 전체 )에서 데스타임( 죽은 시간 )을 빼면 -> 죽었던 시간이됨.
 		{
 			responTime = ((deathTimer - runTimer));
@@ -278,6 +317,70 @@ void Player::IsDead()
 	}
 }
 
+void Player::IsDead(std::string fileName)
+{
+	if (!isDead) // 살아있을떄 흘러가는 타이머 ... 죽었을떄 멈추는걸 이용해서 죽은시간을 체크해보자.
+	{
+		runTimer = GetTickCount();
+	}
+
+	if (isDead)
+	{
+
+		deathTimer = GetTickCount(); // 죽었을떄 흘러가는시간.
+
+		if (responTime < 3000) // 런타임( 전체 )에서 데스타임( 죽은 시간 )을 빼면 -> 죽었던 시간이됨.
+		{
+			responTime = ((deathTimer - runTimer));
+			//deathMotionTime = ((deathTimer - runTimer) / 1000);
+
+			if (responTime < 1000)
+			{
+				deathAnimation->resume();
+				// 폭파되는 이미지.. 애니메이션?
+			}
+			else if (responTime == 1000)
+			{
+				playerLifeCount--;
+				if (playerLifeCount == 0)
+				{
+					x = WINSIZEX/2;
+					y = WINSIZEY+100;
+					responTime = 3000;
+				}
+			}
+			else if (responTime > 1000 && responTime < 3000)
+			{
+				PositionInit(fileName); // 자리 초기화하고
+
+				y = -(responTime / 20) + WINSIZEY + 50; // 계산기로 계산한값. responTomer 3000~4999
+				playerImage->SetY(y - playerImage->GetFrameHeight() / 2);  // 렉트는 중심부터 그려지고, 이미지는 left,top부터 그리니까 이미지프레임의 높이의 반을 계산해줘서 중심으로 옴긴다.
+			
+			}
+		}
+		else
+		{
+			responTime = 0;
+			isDead = false;					// 리스폰시간이 되면 isDead( 상태 )는 false가 되서 이프문을 나감.
+		}
+	}
+}
+
+void Player::PlayerLifeCountFunc(HDC hdc, std::string fileName)
+{
+	for (int i = playerLifeCount; i > 0; i--)
+	{	
+		playerLifeCountImage->SetX(50 + i*30);
+
+		playerLifeCountImage->SetY(WINSIZEY - 100);
+
+		playerLifeCountImage->FrameRender(hdc, playerLifeCountImage->GetX(), playerLifeCountImage->GetY(),
+			playerLifeCountImage->GetFrameX(), playerLifeCountImage->GetFrameY());
+	}
+
+	
+}
+
 void Player::IsClear()
 {
 	if (isClear)
@@ -293,7 +396,7 @@ void Player::IsClear()
 void Player::MoveKey()
 {
 	//======= 키 조작 .... 플레이어1의 x,y값을 이용해 클라이언트 영역 밖으로 나가는걸 제한함 =========
-	if (!isDead && !isClear)
+	if (!isDead && !isClear && playerLifeCount > 0)
 	{
 		if (KEYMANAGER->IsStayKeyDown(VK_LEFT) && rc.left > 100) // 100은 나중에 양쪽에 까만부분 추가했을때를 생각해서 ,,, 움직일 부분 제한
 		{
@@ -349,16 +452,14 @@ void Player::MoveKey()
 void Player::FireKey()
 {
 	// 스페이스 바를 누르면 총알 발사
-	if (!isDead && !isClear)
+	if (!isDead && !isClear && playerLifeCount > 0)
 	{
 		if (KEYMANAGER->IsOnceKeyDown(VK_SPACE))
 		{
 			// 총알발사 함수
 			gun->BulletFire(endx, endy);
-			PlaySound(TEXT("../Resource/Sound/Missile.wav"), NULL, SND_ASYNC);
+			//PlaySound(TEXT("../Resource/Sound/Missile.wav"), NULL, SND_ASYNC);
 		}
 	}
 	gun->BulletMove();
 }
-
-

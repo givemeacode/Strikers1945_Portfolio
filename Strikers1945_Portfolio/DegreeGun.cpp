@@ -35,10 +35,9 @@ void DegreeGun::Render(HDC hdc)
 	{
 		for (iter = bulletList.begin(); iter != bulletList.end(); iter++)
 		{
-
 			if ((*iter)->GetIsBulletFire())
 			{
-				(*iter)->Render(hdc);
+				(*iter)->Render(hdc,1);
 			}
 		}
 	}
@@ -51,7 +50,7 @@ void DegreeGun::Release()
 void DegreeGun::BulletFire(float x, float y)
 {
 	Bullet* bullet = new Bullet();
-	bullet->Init(x, y, 15);				// 반지름 사용 
+	bullet->Init(TEXT("BossBullet"), x, y, 25);
 	bullet->SetIsBulletFire(true);
 	bulletList.push_back(bullet);			
 }
@@ -75,7 +74,7 @@ void DegreeGun::BulletMove()
 				//(*iter)->SetPivotY((*iter)->GetPivotY() + 3.0f);
 
 				// 위치 갱신
-				(*iter)->Update();
+				(*iter)->Update(1);
 
 				// 충돌처리
 				//if ((*iter)->GetPivotY() <= 15 || (*iter)->GetPivotY() >= WINSIZEY)
@@ -116,6 +115,5 @@ void DegreeGun::BulletMove()
 				it++;
 			}
 		}
-
 	}	
 }

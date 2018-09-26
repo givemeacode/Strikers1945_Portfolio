@@ -64,7 +64,6 @@ void Bullet::Update(int)
 	rcBullet = RectMakeCenter(fPosX + width / 2, fPosY + height / 2, width, height); // 총알 크기가 안바뀌는건 이부분 30
 
 	aniBullet->frameUpdate(TIMEMANAGER->getElapsedTime() * 10.f);
-
 }
 
 void Bullet::Render(HDC hdc)
@@ -76,7 +75,7 @@ void Bullet::Render(HDC hdc)
 
 void Bullet::Render(HDC hdc , int )
 {
-	DrawObject(hdc, rcBullet, 1, RGB(255, 0, 255), ELLIPSE);
+	//DrawObject(hdc, rcBullet, 1, RGB(255, 0, 255), ELLIPSE);
 	bulletImg->AniRender(hdc, fPosX, fPosY, aniBullet);
 
 }

@@ -28,7 +28,7 @@ void RevolvingGun::Render(HDC hdc)
 	{
 		for (it = bulletList.begin(); it != bulletList.end(); it++)
 		{
-			(*it)->Render(hdc);
+			(*it)->Render(hdc,1);
 		}
 	}
 }
@@ -42,6 +42,7 @@ void RevolvingGun::BulletFire(float x, float y)
 	for (int i = 0; i < 50; i++)
 	{
 		Bullet* bullet = new Bullet();
+		bullet->Init(TEXT("LMBullet_Straight"), x, y, 12);
 		bullet->Init(x, y, 10);
 		bullet->SetIsBulletFire(true);
 		bulletList.push_back(bullet);
@@ -66,8 +67,7 @@ void RevolvingGun::BulletMove()
 			(*it)->SetPivotX((*it)->GetPivotX() + cosf((*it)->GetAngle()) * fSpeed);
 			(*it)->SetPivotY((*it)->GetPivotY() + -sinf((*it)->GetAngle()) * fSpeed);
 
-			(*it)->Update();
-
+			(*it)->Update(1);
 		}
 	}
 }

@@ -109,6 +109,9 @@
     <ClCompile Include="CharacterSelectScene.cpp">
       <Filter>MainGame\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="UI.cpp">
+      <Filter>2DFrameWork\Util\System</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Backbuffer.h">
@@ -233,6 +236,9 @@
     </ClInclude>
     <ClInclude Include="CharacterSelectScene.h">
       <Filter>MainGame\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="UI.h">
+      <Filter>2DFrameWork\Util\System</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

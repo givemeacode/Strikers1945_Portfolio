@@ -2,6 +2,16 @@
 
 class Gun;
 
+enum MonsterType
+{
+	RandomType,
+	Type1,
+	Type2,
+	MiddleType1, // BigAirPlan
+	MiddleType2, // MidAirPlan
+	MiddleType3, // Fish
+
+};
 class Monster
 {
 protected:
@@ -16,6 +26,7 @@ protected:
 	bool isCollision;
 protected:
 	float coolTime;
+	MonsterType mType;
 
 protected:
 	RECT rcMonster;
@@ -41,6 +52,7 @@ public:
 	virtual bool Init(const TCHAR* fileName, int x, int y);
 	virtual bool Init(const TCHAR* fileName);
 	virtual bool Init(const TCHAR* fileName, int number, GAMEPOS pos);
+	virtual bool Init(const TCHAR* fileName, int number, MonsterType _mType, GAMEPOS pos);
 	virtual void Update();
 	virtual void Render(HDC hdc);
 	virtual void Release();
@@ -73,6 +85,6 @@ public:
 	RECT GetRectCollision() { return lastRect; }
 	bool GetIsCollision() { return isCollision; }
 	void SetIsCollision(bool _col) { isCollision = _col; }
-	
+	MonsterType GetType() { return mType; }
 };
 

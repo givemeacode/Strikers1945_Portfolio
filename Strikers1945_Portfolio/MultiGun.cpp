@@ -30,7 +30,7 @@ void MultiGun::Render(HDC hdc)
 	{
 		for (it = bulletList.begin(); it != bulletList.end(); it++)
 		{
-			(*it)->Render(hdc);
+			(*it)->Render(hdc,1);
 		}
 	}
 }
@@ -61,6 +61,7 @@ void MultiGun::BulletFire(float x, float y)
 	for (int i = 0; i < 5; i++)
 	{
 		Bullet* bullet = new Bullet();
+		bullet->Init(TEXT("MBasic_Bullet2"), x, y, 10);				// 반지름 사용 
 		bullet->Init(x, y, 10);
 		bullet->SetIsBulletFire(true);
 		bulletList.push_back(bullet);
@@ -104,7 +105,7 @@ void MultiGun::BulletMove()
 			(*it)->SetPivotX((*it)->GetPivotX() + cosf((*it)->GetAngle()) * fSpeed);
 			(*it)->SetPivotY((*it)->GetPivotY() + -sinf((*it)->GetAngle()) * fSpeed);
 
-			(*it)->Update();
+			(*it)->Update(1);
 
 		}
 	}

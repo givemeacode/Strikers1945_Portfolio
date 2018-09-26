@@ -129,6 +129,11 @@ bool NormalMonster::Init(const TCHAR * fileName, int number, GAMEPOS pos)
 	return true;
 }
 
+bool NormalMonster::Init(const TCHAR * fileName, int number, MonsterType _mType, GAMEPOS pos)
+{
+	return false;
+}
+
 void NormalMonster::Update()
 {
 	MonsterAI();
@@ -208,5 +213,4 @@ void NormalMonster::MonsterAI()
 	_gun->BulletMove();
 
 	rcMonster = RectMakeCenter(GetPivotX(), GetPivotY(), width, height);
-
 }

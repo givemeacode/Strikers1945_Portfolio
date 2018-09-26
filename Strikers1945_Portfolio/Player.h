@@ -9,11 +9,15 @@ class Player
 {
 private:
 
-	Image* playerImage;
+	Image*	playerImage;
 	int		playerLevel;
 	int		dirChange;
 	int		nCount;
 	int		iIndex;
+	Image*	playerLifeCountImage;
+	int		playerLifeCount;
+
+	std::string playerInfoFileName; // 선택된 기체의 이름정보를 담고있는 변수
 
 	float x, y;
 	float angle;
@@ -35,6 +39,10 @@ private:
 	// 시간체크에 필요한것들
 	DWORD runTimer;	  // 전체 진행시간 체크
 	DWORD deathTimer; // 죽은시간.
+
+	DWORD playerLifeContinueCountTimer;
+	DWORD playerLifeContinueCountTimerIndex;
+	int playerLifeContinueCount;
 
 	//int deathMotionTime;
 	float responTime;
@@ -61,6 +69,10 @@ public:
 	void PositionInit(std::string fileName);
 
 	void IsDead();
+	void IsDead(std::string fileName);
+
+	void PlayerLifeCountFunc(HDC hdc, std::string fileName);
+
 	void IsClear();
 
 	void MoveKey();

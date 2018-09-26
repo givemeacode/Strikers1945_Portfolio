@@ -162,7 +162,7 @@ void GameSystem::GameResourceInit()
 		RESOURCEMANAGER->AddResource(eReSourceType::R_MONSTER, TEXT("air_Monster7"));
 		RESOURCEMANAGER->AddResource(eReSourceType::R_MONSTER, TEXT("air_Monster8"));
 		RESOURCEMANAGER->AddResource(eReSourceType::R_MONSTER, TEXT("air_Monster9"));
-		RESOURCEMANAGER->AddResource(eReSourceType::R_MONSTER, TEXT("BigAirPlan"));
+		RESOURCEMANAGER->AddResource(eReSourceType::R_MONSTER, TEXT("BigAirPlan1"));
 		RESOURCEMANAGER->AddResource(eReSourceType::R_MONSTER, TEXT("BigAirPlan2"));
 		RESOURCEMANAGER->AddResource(eReSourceType::R_MONSTER, TEXT("Boss_body"));
 		RESOURCEMANAGER->AddResource(eReSourceType::R_MONSTER, TEXT("Boss_body2"));
@@ -175,9 +175,9 @@ void GameSystem::GameResourceInit()
 		RESOURCEMANAGER->AddResource(eReSourceType::R_MONSTER, TEXT("Boss_propeller"));
 		RESOURCEMANAGER->AddResource(eReSourceType::R_MONSTER, TEXT("Boss_right"));
 		RESOURCEMANAGER->AddResource(eReSourceType::R_MONSTER, TEXT("Boss_right2"));
-		RESOURCEMANAGER->AddResource(eReSourceType::R_MONSTER, TEXT("fish"));
+		RESOURCEMANAGER->AddResource(eReSourceType::R_MONSTER, TEXT("fish1"));
 		RESOURCEMANAGER->AddResource(eReSourceType::R_MONSTER, TEXT("fish2"));
-		RESOURCEMANAGER->AddResource(eReSourceType::R_MONSTER, TEXT("MidAirPlan"));
+		RESOURCEMANAGER->AddResource(eReSourceType::R_MONSTER, TEXT("MidAirPlan1"));
 		RESOURCEMANAGER->AddResource(eReSourceType::R_MONSTER, TEXT("Monster_1"));
 		RESOURCEMANAGER->AddResource(eReSourceType::R_MONSTER, TEXT("Monster_2"));
 		RESOURCEMANAGER->AddResource(eReSourceType::R_MONSTER, TEXT("Monster_3"));
@@ -297,14 +297,9 @@ void GameSystem::CollisionObject(std::list<Monster*> monsterlist)
 						//(*it)->SetIsLive(false);
 						//DeleteObject(monsterlist);
 						(*biter)->SetIsBulletFire(false);
-
 					}
-					
-
 				}
-
-			}
-			
+			}			
 		}
 	}
 

@@ -123,19 +123,19 @@ void CharacterSelectScene::SelectKeyAndTimeOver()
 		switch (++characterSelectIndex)
 		{
 		case 1:
-			file = TEXT("AV_8_Player_1");
+			file = TEXT("Player");
 			break;
 		case 2:
-			file = TEXT("F4_Player");
+			file = TEXT("F117_Player_1");
 			break;
 		case 3:
 			file = TEXT("F22_Player");
 			break;
 		case 4:
-			file = TEXT("Player");
+			file = TEXT("AV_8_Player_1");
 			break;
 		case 5:
-			file = TEXT("F117_Player_1");
+			file = TEXT("F4_Player");
 			break;
 		}
 		Player* player = new Player();
@@ -145,6 +145,5 @@ void CharacterSelectScene::SelectKeyAndTimeOver()
 		choiceTime = 0;
 		SetSelect(characterSelectIndex);
 		SceneManager::getSingleton()->ChangeScene(eSceneType::SCENE_GAME1);
-
 	}
 }

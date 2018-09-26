@@ -2,7 +2,7 @@
 #include "MidAirPlan.h"
 
 #include "Gun.h"
-#include "NormalGun.h"
+#include "DegreeGun.h"
 
 MidAirPlan::MidAirPlan()
 {
@@ -37,7 +37,7 @@ bool MidAirPlan::Init(int x, int y)
 	//SetPivotY(y);
 
 	//_gun = new Gun();
-	_gun = new NormalGun();
+	_gun = new DegreeGun();
 
 	_gun->Init(GetPivotX(), GetPivotY());
 
@@ -59,7 +59,7 @@ bool MidAirPlan::Init(const TCHAR * fileName, int x, int y)
 	monsterImg = IMAGEMANAGER->FindImage(TEXT(fileName));
 
 	// Gun 持失 
-	_gun = new NormalGun();
+	_gun = new DegreeGun();
 	_gun->Init(GetPivotX(), GetPivotY());
 
 	return true;
@@ -90,7 +90,7 @@ bool MidAirPlan::Init(const TCHAR * fileName)
 
 	//
 	// Gun 持失 
-	_gun = new NormalGun();
+	_gun = new DegreeGun();
 	_gun->Init(GetPivotX(), GetPivotY());
 	return true;
 }
@@ -122,7 +122,42 @@ bool MidAirPlan::Init(const TCHAR * fileName, int number, GAMEPOS pos)
 
 	//
 	// Gun 持失 
-	_gun = new NormalGun();
+	_gun = new DegreeGun();
+	_gun->Init(GetPivotX(), GetPivotY());
+
+
+	return true;
+}
+
+bool MidAirPlan::Init(const TCHAR * fileName, int number, MonsterType _mType, GAMEPOS pos)
+{
+	TCHAR file[256] = { 0, };
+
+	_stprintf(file, TEXT("%s%d"), fileName, number);
+
+	monsterImg = IMAGEMANAGER->FindImage(file);
+	//monsterImg = airMonsterImg;
+	StartPosition(monsterImg);
+	LastPosition(pos);
+
+	monsterImg->SetX(rcMonster.left);
+	monsterImg->SetY(rcMonster.top);
+
+	SetCenterPivot(rcMonster);
+
+	ptMonster.x = GetPivotX();
+	ptMonster.y = GetPivotY();
+
+	rcPosX = static_cast<float>(GetPivotX());
+	rcPosY = static_cast<float>(GetPivotY());
+
+	width = monsterImg->GetFrameWidth();
+	height = monsterImg->GetFrameHeight();
+
+	mType = _mType;
+	//
+	// Gun 持失 
+	_gun = new DegreeGun();
 	_gun->Init(GetPivotX(), GetPivotY());
 
 
@@ -208,5 +243,4 @@ void MidAirPlan::MonsterAI()
 	_gun->BulletMove();
 
 	rcMonster = RectMakeCenter(GetPivotX(), GetPivotY(), width, height);
-
 }

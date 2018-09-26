@@ -105,6 +105,11 @@ bool Monster::Init(const TCHAR * fileName, int number, GAMEPOS pos)
 	return true;
 }
 
+bool Monster::Init(const TCHAR * fileName, int number, MonsterType _mType, GAMEPOS pos)
+{
+	return true;
+}
+
 void Monster::Update()
 {
 	//MonsterAI();

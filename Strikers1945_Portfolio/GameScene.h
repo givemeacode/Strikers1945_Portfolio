@@ -6,6 +6,7 @@
 class Player;
 class Monster;
 class Boss;
+class UI;
 
 class GameScene
 	: public Scene
@@ -13,6 +14,8 @@ class GameScene
 private:
 	Player * player;
 
+
+	UI*	ui;
 	//Monster* monster1;
 	//Monster* monster2;
 
@@ -36,5 +39,8 @@ public:
 	void Release();
 	void Update();
 	void Render(HDC hdc);
+public:
+	void AppearType1();
+	void AppearType2();
 };
 

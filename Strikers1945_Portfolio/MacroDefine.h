@@ -11,7 +11,7 @@
 #define WINSTYLE	WS_CAPTION | WS_SYSMENU
 
 #define WINSIZEX	1000
-#define WINSIZEY	800
+#define WINSIZEY	900
 #define WINSTARTX	0
 #define WINSTARTY	0
 
@@ -23,6 +23,7 @@
 #define IMAGEMANAGER	ImageManager::getSingleton()
 #define RESOURCEMANAGER ResourceManager::getSingleton()
 #define EFFECTMANAGER	EffectManager::getSingleton()
+
 
 //
 #define PI			3.141592f

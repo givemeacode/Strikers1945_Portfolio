@@ -15,4 +15,3 @@ public:
 	void BulletFire(float x, float y);
 	void BulletMove();
 };
-

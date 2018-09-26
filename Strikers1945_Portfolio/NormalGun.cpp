@@ -48,7 +48,7 @@ void NormalGun::Release()
 void NormalGun::BulletFire(float x, float y)
 {
 	Bullet* bullet = new Bullet();
-	bullet->Init(TEXT("MBasic_Bullet"),x, y, 2);
+	bullet->Init(TEXT("MBasic_Bullet"),x, y, 3);
 	bullet->SetIsBulletFire(true);
 	bulletList.push_back(bullet);
 	bullet->SetAngle(fAngle);
@@ -66,7 +66,6 @@ void NormalGun::BulletMove()
 			(*it)->SetPivotY((*it)->GetPivotY() + -sinf((*it)->GetAngle()) * fSpeed);
 
 			(*it)->Update(1);
-
 		}
 	}
 }
