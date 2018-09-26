@@ -3,6 +3,10 @@
 #include "Gun.h"
 #include "PlayerGun.h"
 
+#pragma comment (lib,"winmm")
+
+
+
 Player::Player()
 {
 //	// 플레이어 위치 초기값 설정.
@@ -351,6 +355,7 @@ void Player::FireKey()
 		{
 			// 총알발사 함수
 			gun->BulletFire(endx, endy);
+			PlaySound(TEXT("../Resource/Sound/Missile.wav"), NULL, SND_ASYNC);
 		}
 	}
 	gun->BulletMove();

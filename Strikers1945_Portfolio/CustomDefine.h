@@ -42,6 +42,9 @@ enum GAMEPOS
 	G_RIGHT2,
 	G_RIGHT3,
 
+	G_UPDOWN,
 
+	G_CENTER,
+	
 
 };
