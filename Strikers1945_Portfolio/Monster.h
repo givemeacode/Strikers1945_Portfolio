@@ -10,11 +10,13 @@ enum MonsterType
 	MiddleType1, // BigAirPlan
 	MiddleType2, // MidAirPlan
 	MiddleType3, // Fish
+	BOSS,
 
 };
 class Monster
 {
 protected:
+	int score;
 	float fPivotX;
 	float fPivotY;
 	float fHp;
@@ -24,6 +26,9 @@ protected:
 	float height;
 	bool isLive;
 	bool isCollision;
+	bool isDeadEffect;
+	float effectX;
+	float effectY;
 protected:
 	float coolTime;
 	MonsterType mType;
@@ -86,5 +91,8 @@ public:
 	bool GetIsCollision() { return isCollision; }
 	void SetIsCollision(bool _col) { isCollision = _col; }
 	MonsterType GetType() { return mType; }
-};
 
+	int GetScore() { return score; }
+	void SetScore(int _score) { score = _score; }
+
+};

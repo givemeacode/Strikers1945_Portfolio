@@ -1,11 +1,15 @@
 #pragma once
 
 #include "Monster.h"
+
 class AirMonster
 	: public Monster
 {
 private:
 	Image* airMonsterImg;
+
+	Image* effectDeadImg;
+	Effect* effectDead;
 public:
 	AirMonster();
 	AirMonster(GAMEPOS ePos);

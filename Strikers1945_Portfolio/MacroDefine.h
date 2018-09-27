@@ -23,6 +23,7 @@
 #define IMAGEMANAGER	ImageManager::getSingleton()
 #define RESOURCEMANAGER ResourceManager::getSingleton()
 #define EFFECTMANAGER	EffectManager::getSingleton()
+#define SCENEMANAGER	SceneManager::getSingleton()
 
 
 //

@@ -14,16 +14,22 @@ class GameScene
 private:
 	Player * player;
 
-
-	UI*	ui;
+	UI* ui;
 	//Monster* monster1;
 	//Monster* monster2;
 
 	std::list<Monster*> monsterList;
-	
+	Image* backImg;
 	
 	bool stage1;
 	
+	RECT rcGameClient;
+	
+	RECT leftRect;
+	RECT rightRect;
+
+	float _y;
+
 	// 시간관련	
 	DWORD startTimer; // 전체 시작시간
 

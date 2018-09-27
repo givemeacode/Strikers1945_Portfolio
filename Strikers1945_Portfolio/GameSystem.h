@@ -4,6 +4,7 @@
 
 class Player;
 class Monster;
+class Boss;
 
 typedef struct sCharacterPositon
 {
@@ -37,8 +38,13 @@ class GameSystem
 private:
 	CPOS posInfo;
 	Player* player;
+	Boss* boss;
 private:
 	float deltaTime;
+	bool gameOver;
+	int score;
+	bool isScore;
+	bool isGameClear;
 private:
 	RECT rcClient;
 public:
@@ -55,6 +61,25 @@ public:
 	void CollisionObject(std::list<Monster*> monsterlist);
 	void DeleteObject(std::list<Monster*> monsterlist);
 	void DeleteObject(Monster* monster);
-	Player* GetPlayer() { return player; }
-};
+	void GameOver();
 
+
+	Player* GetPlayer() { return player; }
+
+	void SetBoss(Boss* _boss) { boss = _boss; }
+	Boss* GetBoss() { return boss; }
+
+	bool IsGameOver() { return gameOver; }
+	void SetIsGameOver(bool _isGameOver) { gameOver = _isGameOver; }
+
+	void SetScore(int _score) { score = _score; }
+	int GetScore() { return score; }
+	void AddScore(int _score) { score += _score; }
+	void IsScore(bool _isScore) { isScore = _isScore; }
+	bool GetIsScore() { return isScore; }
+
+	bool IsGameClear() { return isGameClear; }
+	void SetIsGameClear(bool _isGameClear) { isGameClear = _isGameClear; }
+
+
+};

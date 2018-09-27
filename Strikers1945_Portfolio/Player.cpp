@@ -35,6 +35,8 @@ Player::Player()
 //	deathAnimation->Init(deathEffect);
 //	deathAnimation->setDefPlayFrame(false, true);
 //	deathAnimation->setFPS(5.f); //
+	isReset = false;
+	isClear = false;
 }
 
 Player::~Player()
@@ -85,7 +87,7 @@ void Player::Init(std::string fileName)
 	playerLifeCountImage->SetFrameX(3);
 
 
-	playerLifeCount = 3;
+	playerLifeCount = 30;
 
 	playerLifeContinueCountTimer = 0;
 	playerLifeContinueCount = 9;
@@ -119,13 +121,38 @@ void Player::Init(std::string fileName)
 
 void Player::Update()
 {
+	if (GAMESYS->IsGameClear())
+	{
+		isClear = true;
+		IsClear();
+		endingAni->frameUpdate(3.0f);
+	}
+
 	RECT temp;
 	//if (IntersectRect(&temp, &collisionBox, &target))
 	//{
 	//	isDead = true;
 	//}
 	damage = playerLevel;
-	IsDead(playerInfoFileName);
+
+	score = GAMESYS->GetScore();
+
+	
+	if (500 <= score)
+	{
+		playerLevel = 2;
+	}
+
+	if (1000 <= score)
+	{
+		playerLevel = 3;
+	}
+	
+	
+
+	{
+		IsDead(playerInfoFileName);
+	}
 	IsClear();
 
 	// 이동 ( 키보드 방향키 )
@@ -162,9 +189,13 @@ void Player::Update()
 		playerLifeContinueCount = 9 - (playerLifeContinueCountTimer / 1000);
 		if (playerLifeCount == 0) //  9 - (runTimer / 1000) 값이 ...  0이되면 선택시간이 종료된 것.
 		{
-			playerLifeContinueCountTimer = GetTickCount() - playerLifeContinueCountTimerIndex; // 전체시간
+			//playerLifeContinueCountTimer = GetTickCount() - playerLifeContinueCountTimerIndex; // 전체시간
+			GAMESYS->GameOver();
+			return;
 		}
 	}
+
+	
 	/////////// 테스트 ///////////////////
 	//OffsetRect(&target, 0, 5);
 
@@ -173,8 +204,17 @@ void Player::Update()
 void Player::Render(HDC hdc)
 {
 	//이미지
-	playerImage->FrameRender(hdc, playerImage->GetX(), playerImage->GetY(),
-		playerImage->GetFrameX(), playerImage->GetFrameY());
+	if (GAMESYS->IsGameClear())
+	{
+		endingImage->AniRender(hdc, playerImage->GetX(), playerImage->GetY(),
+			endingAni);
+	}
+	else
+	{
+		playerImage->FrameRender(hdc, playerImage->GetX(), playerImage->GetY(),
+			playerImage->GetFrameX(), playerImage->GetFrameY());
+	}
+	
 
 	//애니메이션
 	if (isDead)
@@ -234,6 +274,20 @@ void Player::Render(HDC hdc)
 	gun->Render(hdc);
 }
 
+void Player::Release()
+{
+	playerImage->Release();
+	playerLifeCountImage->Release();
+	deathEffect->Release();
+	
+	gun->Release();
+	SAFE_DELETE(gun);
+	SAFE_DELETE(playerImage);
+	SAFE_DELETE(playerLifeCountImage);
+	SAFE_DELETE(deathAnimation);
+
+}
+
 void Player::PositionInit()
 {
 	playerLevel = 1;
@@ -278,6 +332,20 @@ void Player::PositionInit(std::string fileName)
 	playerImage->SetX(x - playerImage->GetFrameWidth() / 2 - 4); // 렉트는 중심부터 그려지고, 이미지는 left,top부터 그리니까 이미지프레임의 넓이의 반을 계산해줘서 중심으로 옴긴다.
 	playerImage->SetY(y - playerImage->GetFrameHeight() / 2);  // 렉트는 중심부터 그려지고, 이미지는 left,top부터 그리니까 이미지프레임의 높이의 반을 계산해줘서 중심으로 옴긴다.
 	playerImage->SetFrameX(3); // 4번째 프레임으로 초기화값.
+
+	std::string file;
+	file = fileName + "_Ending";
+	//wsprintf(file, TEXT("%s_Ending"), TEXT(fileName));
+	endingImage = IMAGEMANAGER->FindImage(file);
+
+	endingImage->SetX(x - playerImage->GetFrameWidth() / 2 - 4); // 렉트는 중심부터 그려지고, 이미지는 left,top부터 그리니까 이미지프레임의 넓이의 반을 계산해줘서 중심으로 옴긴다.
+	endingImage->SetY(y - playerImage->GetFrameHeight() / 2);
+
+	endingAni = new Animation();
+	endingAni->Init(endingImage);
+	endingAni->setDefPlayFrame();
+	endingAni->setFPS(1.f);
+
 }
 
 void Player::IsDead()
@@ -398,7 +466,7 @@ void Player::MoveKey()
 	//======= 키 조작 .... 플레이어1의 x,y값을 이용해 클라이언트 영역 밖으로 나가는걸 제한함 =========
 	if (!isDead && !isClear && playerLifeCount > 0)
 	{
-		if (KEYMANAGER->IsStayKeyDown(VK_LEFT) && rc.left > 100) // 100은 나중에 양쪽에 까만부분 추가했을때를 생각해서 ,,, 움직일 부분 제한
+		if (!isClear&& KEYMANAGER->IsStayKeyDown(VK_LEFT) && rc.left > 100) // 100은 나중에 양쪽에 까만부분 추가했을때를 생각해서 ,,, 움직일 부분 제한
 		{
 			angle += 0.04f;
 			x -= speed;
@@ -407,7 +475,7 @@ void Player::MoveKey()
 			dirChange = true;
 			playerImage->SetFrameX(3);
 		}
-		if (KEYMANAGER->IsStayKeyDown(VK_RIGHT) && rc.right < WINSIZEX - 100) // 100은 나중에 양쪽에 까만부분 추가했을때를 생각해서 ,,, 움직일 부분 제한
+		if (!isClear&&KEYMANAGER->IsStayKeyDown(VK_RIGHT) && rc.right < WINSIZEX - 100) // 100은 나중에 양쪽에 까만부분 추가했을때를 생각해서 ,,, 움직일 부분 제한
 		{
 			angle -= 0.04f;
 			x += speed;
@@ -416,7 +484,7 @@ void Player::MoveKey()
 			dirChange = false;
 			playerImage->SetFrameX(3);
 		}
-		if (KEYMANAGER->IsStayKeyDown(VK_UP) && rc.top > 0)
+		if (!isClear && KEYMANAGER->IsStayKeyDown(VK_UP) && rc.top > 0)
 		{
 			y -= speed;
 			//playerImage->SetY(playerImage->GetY() - speed);
@@ -438,10 +506,18 @@ void Player::MoveKey()
 		if (KEYMANAGER->IsOnceKeyDown('3'))
 		{
 			playerLevel = 3;
+			
 		}
 		if (KEYMANAGER->IsOnceKeyDown('4'))
 		{
 			playerLevel = 4;
+			GAMESYS->SetIsGameClear(true);
+			isClear = true;
+		}
+
+		if (KEYMANAGER->IsOnceKeyDown('5'))
+		{
+			playerLevel = 100;
 		}
 		// 플레이어 x,y값에 따라 이미지가 따라와야되니까 업데이트하는 곳에 넣어줌
 	}

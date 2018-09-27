@@ -6,12 +6,18 @@
 
 BigAirPlan::BigAirPlan()
 {
+	
 }
 
 BigAirPlan::BigAirPlan(GAMEPOS ePos)
 {
 	startPos = ePos;
 	isLive = true;
+	isMove = false;
+	deltaTime = 10.f;
+	fHp = 30.f;
+	score = 500;
+
 }
 
 
@@ -162,6 +168,7 @@ bool BigAirPlan::Init(const TCHAR * fileName, int number, MonsterType _mType, GA
 	_gun->Init(GetPivotX(), GetPivotY());
 
 
+	//
 	return true;
 }
 
@@ -175,8 +182,12 @@ void BigAirPlan::Render(HDC hdc)
 {
 	if (GetIsLive())
 	{
-		DrawObject(hdc, rcMonster, 1, RGB(0, 255, 255), RECTANGLE);
+		//DrawObject(hdc, rcMonster, 1, RGB(0, 255, 255), RECTANGLE);
 		monsterImg->FrameRender(hdc, rcMonster.left, rcMonster.top, 0, 0);
+	}
+	else
+	{
+		EFFECTMANAGER->Render(hdc);
 	}
 
 	_gun->Render(hdc);
@@ -194,10 +205,27 @@ void BigAirPlan::Release()
 
 void BigAirPlan::MonsterAI()
 {
-	//
-	if (fHp <= 0)
+	if (_gun == NULL)
 	{
+		return;
+	}
+	//
+	if (isLive && fHp <= 0)
+	{
+		GAMESYS->AddScore(GetScore());
+		GAMESYS->IsScore(true);
+		//SetScore(GetScore() + 100);
 		isLive = false;
+	}
+
+	if (isStop)
+	{
+		deltaTime -= TIMEMANAGER->getElapsedTime();
+
+		if (deltaTime <= 0.0f)
+		{
+			isMove = true;
+		}
 	}
 
 
@@ -218,9 +246,31 @@ void BigAirPlan::MonsterAI()
 	////SetPivotX(GetPivotX() + (cosf(angle) * 2.0f));
 	////SetPivotY(GetPivotX() + (-sinf(angle) * 2.0f));
 
-	SetPivotX(GetPivotX() + (cosf(_angle) * 2.0f));
-	SetPivotY(GetPivotY() + (-sinf(_angle) * 2.0f));
+	//SetPivotX(GetPivotX() + (cosf(_angle) * 2.0f));
+	if (isStop == false)
+	{
+		SetPivotY(GetPivotY() + 3.f);
+	}
 
+	if (!isMove)
+	{
+		if (ptLastPos.y < GetPivotY())
+		{
+			isStop = true;
+			SetPivotY(ptLastPos.y);
+		}
+	}
+	else
+	{
+		SetPivotY(GetPivotY() + 3.f);
+
+		if (GetPivotY() >= WINSIZEY + monsterImg->GetFrameHeight() + 200.f)
+		{
+			isLive = false;
+			isCollision = true;
+		}
+	}
+	
 
 	if (CollisionRectAndRect(rcMonster, rcLastPos))
 	{
@@ -240,6 +290,24 @@ void BigAirPlan::MonsterAI()
 			CoolTimeReset();
 		}
 	}
+
+	if (!isDeadEffect)
+	{
+		if (!isLive && !isCollision)
+		{
+			effectX = GetPivotX();
+			effectY = GetPivotY(); 
+  			EFFECTMANAGER->Play(TEXT("Effect_5"), effectX, effectY);
+			isDeadEffect = true;
+
+		}
+
+	}
+	else
+	{
+		EFFECTMANAGER->Update();
+	}
+
 
 	_gun->BulletMove();
 

@@ -1,4 +1,5 @@
 #include "stdafx.h"
+#include "GameSystem.h"
 #include "UI.h"
 
 UI::UI()
@@ -43,10 +44,12 @@ void UI::Release()
 
 void UI::Update()
 {
-
-
 	// 스코어에 따라서 글자 프레임을 결정하는... scoreIndex 값을 구해주는 함수.
-	ScoreFunc(score);
+	if (GAMESYS->GetIsScore())
+	{
+		ScoreFunc(GAMESYS->GetScore());
+		GAMESYS->IsScore(false);
+	}
 }
 
 void UI::Render(HDC hdc)
@@ -65,7 +68,6 @@ void UI::Render(HDC hdc)
 
 	scoreImage10000->FrameRender(hdc, 100, 50,
 		scoreImage10000->GetFrameX(), scoreIndex10000);
-
 }
 
 void UI::ScoreFunc(int _score)
@@ -107,6 +109,6 @@ void UI::ScoreFunc(int _score)
 		scoreIndex100 = (_score % 1000 - scoreIndex10) / 100;
 		scoreIndex1000 = (_score % 10000 - scoreIndex100) / 1000;
 		scoreIndex10000 = (_score % 100000 - scoreIndex1000) / 10000;
-	}	
+	}
 	//99999가 최대.
 }

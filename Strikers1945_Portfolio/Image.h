@@ -63,13 +63,15 @@ private:
 	TCHAR*			_fileName;		// 파일 이름
 	bool			_trans;		// 트렌스컬러 유무
 	COLORREF		_transColor;		// 키 컬러(제거할 색)
-
+	BLENDFUNCTION	_blend;
 public:
 	Image();
 	virtual ~Image();
 
+	//
+
 	// 빈 비트맵에 사용할 Init ... 파일이름 없다.
-	bool	Init(int width, int whight);
+	bool	Init(int width, int height);
 
 	// 파일로부터의 로딩용
 	bool	Init(const TCHAR* fileName, int width, int height, bool trans = false, COLORREF transColor = false); // COLORREF = 3바이트 자료형... false면 (0,0,0)
@@ -101,6 +103,9 @@ public:
 	// 스프라이트 이미지 랜더용
 	void	FrameRender(HDC hdc, int destX, int destY);
 	void	FrameRender(HDC hdc, int destX, int destY, int currentframeX, int currentframeY);
+
+	//
+	void	AlphaRender(HDC hdc, int destX, int destY, int _alpha);
 
 	/*
 	 inline 은 함수 호출 비용을없앰.. = 함수호출시 그전 내용을 멈추고 호출된 함수로 점프(넘어가게)되는데.. 그걸 없앰.

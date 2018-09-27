@@ -268,6 +268,17 @@ void Monster::StartPosition(Image * img)
 			img->GetFrameWidth(), img->GetFrameHeight()
 		);
 		break;
+	case GAMEPOS::G_UPDOWN1:
+		rcMonster = RectMakeCenter(
+			WINSIZEX / 3 , -(img->GetFrameHeight()), img->GetFrameWidth(), img->GetFrameHeight()
+		);
+		break;
+	case GAMEPOS::G_UPDOWN2:
+		rcMonster = RectMakeCenter(
+			(WINSIZEX - WINSIZEX / 3), -(img->GetFrameHeight()), img->GetFrameWidth(), img->GetFrameHeight()
+		);
+
+		break;
 	}
 }
 
@@ -298,6 +309,12 @@ void Monster::LastPosition(GAMEPOS pos)
 	case GAMEPOS::G_RIGHT3:
 		rcLastPos = GAMESYS->GetPosInfo().rcGameRight3;
 		ptLastPos = GAMESYS->GetPosInfo().ptGameCenterRight3;
+		break;
+	case GAMEPOS::G_CENTER1:
+		ptLastPos = { WINSIZEX / 3 , WINSIZEY / 2 - 150 };
+		break;
+	case GAMEPOS::G_CENTER2:
+		ptLastPos = { (WINSIZEX - WINSIZEX / 3), WINSIZEY / 2 - 300 };
 		break;
 	}
 }

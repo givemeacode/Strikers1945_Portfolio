@@ -112,6 +112,15 @@
     <ClCompile Include="UI.cpp">
       <Filter>2DFrameWork\Util\System</Filter>
     </ClCompile>
+    <ClCompile Include="GameOver.cpp">
+      <Filter>MainGame\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="GameClear.cpp">
+      <Filter>MainGame\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleScene.cpp">
+      <Filter>MainGame\Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Backbuffer.h">
@@ -239,6 +248,15 @@
     </ClInclude>
     <ClInclude Include="UI.h">
       <Filter>2DFrameWork\Util\System</Filter>
+    </ClInclude>
+    <ClInclude Include="GameOver.h">
+      <Filter>MainGame\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="GameClear.h">
+      <Filter>MainGame\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleScene.h">
+      <Filter>MainGame\Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

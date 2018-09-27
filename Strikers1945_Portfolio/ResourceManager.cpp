@@ -197,7 +197,7 @@ void ResourceManager::ParsingData(eReSourceType type, const TCHAR* _fileName)
 	if (type == eReSourceType::R_EFFECT)
 	{
 		EFFECTMANAGER->AddEffect(fileKey, _fileImagePath, width, height,
-			IMAGEMANAGER->FindImage(fileKey)->GetFrameWidth(), IMAGEMANAGER->FindImage(fileKey)->GetFrameHeight(), 1, 1.0f, 100, transColor);
+			IMAGEMANAGER->FindImage(fileKey)->GetFrameWidth(), IMAGEMANAGER->FindImage(fileKey)->GetFrameHeight(), 1, 0.1f, 1, transColor);
 	}
 	
 }

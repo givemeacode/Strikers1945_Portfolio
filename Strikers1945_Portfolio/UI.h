@@ -1,5 +1,7 @@
 #pragma once
 
+
+
 class UI
 {
 	Image* scoreImage;
@@ -14,8 +16,6 @@ class UI
 	int scoreIndex1000;
 	int scoreIndex10000;
 
-	int score;
-
 public:
 	UI();
 	~UI();
@@ -27,7 +27,9 @@ public:
 public:
 	void ScoreFunc(int _score);
 public:
-	int getScore() { return score; }
+
+	int score;
+	int GetScore() { return score; }
 	void SetScore(int _score) { score = _score; }
 };
 

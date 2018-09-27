@@ -3,12 +3,12 @@
 
 #pragma comment(lib, "msimg32.lib") // GdiTransparentBlt를 사용하기위해서는 msimg32.lib를 추가시켜야 한다.
 
-Image::Image() 
+Image::Image()
 	: _imageInfo(NULL),
 	_fileName(NULL),
 	_trans(false),
-	_transColor(RGB(0,0,0))
-{	
+	_transColor(RGB(0, 0, 0))
+{
 }
 
 Image::~Image()
@@ -67,7 +67,7 @@ bool Image::Init(const TCHAR * fileName, int width, int height, bool trans, COLO
 	_fileName = new TCHAR[len + 1];
 	strcpy_s(_fileName, len + 1, fileName);
 
-	
+
 	_trans = trans;
 	_transColor = transColor;
 
@@ -367,7 +367,7 @@ void Image::LoopRender(HDC hdc, const LPRECT drawArea, int offsetX, int offsetY)
 			rcSour.bottom -= (y + sourHeight) - drawAreaH;	// sour렉트의 바텀값에서 .. sour의높이에서 그릴영역의 높이를뺸값을 ... 빼서 대입해줌.
 			sourHeight = rcSour.bottom - rcSour.top;		// sour의 높이에 ... 다시 대입.
 		}
-		
+
 		rcDest.top = y + drawAreaY;							// dest의 탑값에 .. 그릴영역의 탑값..을 점점 더하면서 대입시켜줌.
 		rcDest.bottom = rcDest.top + sourHeight;			// dest의 바텀값을 지정.
 
@@ -474,3 +474,28 @@ void Image::FrameRender(HDC hdc, int destX, int destY, int currentframeX, int cu
 		);
 	}
 }
+
+void Image::AlphaRender(HDC hdc, int destX, int destY, int _alpha)
+{
+
+
+	_blend.BlendOp = AC_SRC_OVER;
+	_blend.BlendFlags = 0;
+	_blend.AlphaFormat = 0;
+	_blend.SourceConstantAlpha = _alpha;
+
+
+	GdiAlphaBlend(
+		hdc,
+		destX,
+		destY,
+		_imageInfo->width,
+		_imageInfo->height,
+		_imageInfo->hMemDC,
+		0, 0,
+		_imageInfo->width,
+		_imageInfo->height,
+		_blend);
+
+}
+

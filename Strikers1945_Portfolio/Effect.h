@@ -18,7 +18,7 @@ public:
 	Effect();
 	~Effect();
 public:
-	bool Init(Image* effectImage, int frameW, int frameY, int fps, float elapsedTime);
+	bool Init(Image* effectImage, int frameW, int frameY, float fps, float elapsedTime);
 	void Release();
 	void Update();
 	void Render(HDC hdc);

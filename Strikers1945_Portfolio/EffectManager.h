@@ -24,7 +24,7 @@ public:
 	void AddEffect(std::string effectName,
 		const TCHAR* imageName, int imageWidth, int imageHeight,
 		int effectWidth, int effectHeight,
-		int fps, float elapsedTime, int beffer,
+		float fps, float elapsedTime, int beffer,
 		COLORREF color = COLOR_M);
 
 	void Play(std::string effectName, int x, int y);

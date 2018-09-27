@@ -66,7 +66,7 @@ void EffectManager::Render(HDC hdc)
 // 애니메이션 객체를 만들고 객체 풀을 만들고 호풀이 되면 객체를 실행 시킨다. ( 사용 ) 
 // 
 void EffectManager::AddEffect(std::string effectName, const TCHAR * imageName, int imageWidth, int imageHeight,
-	int effectWidth, int effectHeight, int fps, float elapsedTime, int buffer, COLORREF color)
+	int effectWidth, int effectHeight, float fps, float elapsedTime, int buffer, COLORREF color)
 {
 	Image* img;
 

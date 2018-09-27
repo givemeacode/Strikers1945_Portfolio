@@ -14,6 +14,9 @@ AirMonster::AirMonster(GAMEPOS ePos)
 {
 	startPos = ePos;
 	isLive = true;
+	fHp = 1;
+	score = 100;
+	
 }
 
 
@@ -163,8 +166,10 @@ bool AirMonster::Init(const TCHAR * fileName, int number, MonsterType _mType, GA
 	//_gun = new NormalGun();
 	_gun = new GuidedMissileGun();
 	_gun->Init(GetPivotX(), GetPivotY());
-
-
+	//effectDeadImg = IMAGEMANAGER->FindImage(TEXT("Effect_5"));
+	/*effectDead->Init(effectDeadImg, airMonsterImg->GetFrameWidth(), airMonsterImg->GetFrameHeight(),
+		1, 1.0f);*/
+	
 	return true;
 }
 
@@ -178,8 +183,12 @@ void AirMonster::Render(HDC hdc)
 {
 	if (GetIsLive() )
 	{
-		DrawObject(hdc, rcMonster, 1, RGB(0, 255, 255), RECTANGLE);
+		//DrawObject(hdc, rcMonster, 1, RGB(0, 255, 255), RECTANGLE);
 		airMonsterImg->FrameRender(hdc, rcMonster.left, rcMonster.top, 0, 0);
+	}
+	else
+	{
+		EFFECTMANAGER->Render(hdc);
 	}
 
 	_gun->Render(hdc);
@@ -197,12 +206,19 @@ void AirMonster::Release()
 
 void AirMonster::MonsterAI()
 {
-	//
-	if (fHp <= 0)
+	//\
+	
+	if (_gun == NULL)
 	{
+		return;
+	}
+	if (isLive && fHp <= 0)
+	{
+		GAMESYS->AddScore(GetScore());
+		GAMESYS->IsScore(true);
+		//SetScore(GetScore() + 100);
 		isLive = false;
 	}
-
 
 	//
 	//////
@@ -230,6 +246,7 @@ void AirMonster::MonsterAI()
 		//Release();
 		isLive = false;
 		isCollision = true;
+		//EFFECTMANAGER->Update();
 	}
 
 	//
@@ -244,7 +261,24 @@ void AirMonster::MonsterAI()
 		}
 	}
 	
+	if (!isDeadEffect)
+	{
+		if (!isLive && !isCollision)
+		{
+			effectX = GetPivotX();
+			effectY = GetPivotY();
+			EFFECTMANAGER->Play(TEXT("Effect_1"), effectX, effectY);
+			isDeadEffect = true;
+		}
+		
+	}
+	else
+	{
+		EFFECTMANAGER->Update();
+	}
+
 	_gun->BulletMove(); 
 
 	rcMonster = RectMakeCenter(GetPivotX(), GetPivotY(), width, height);
+
 }

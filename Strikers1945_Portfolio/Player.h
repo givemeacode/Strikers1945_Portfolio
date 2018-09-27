@@ -16,7 +16,8 @@ private:
 	int		iIndex;
 	Image*	playerLifeCountImage;
 	int		playerLifeCount;
-
+	int		score;
+	bool	isReset;
 	std::string playerInfoFileName; // 선택된 기체의 이름정보를 담고있는 변수
 
 	float x, y;
@@ -49,6 +50,8 @@ private:
 
 	// 애니메이션
 	Image *		deathEffect;
+	Image*		endingImage;
+	Animation*  endingAni;
 	Animation*	deathAnimation;
 	// 테스트용
 	bool check;
@@ -62,6 +65,7 @@ public:
 	void Init(std::string fileName);
 	void Update();
 	void Render(HDC hdc);
+	void Release();
 public:
 	int GetPlayerLevel() { return playerLevel; }
 public:

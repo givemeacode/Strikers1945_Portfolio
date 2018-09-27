@@ -5,11 +5,13 @@
 #include "Player.h"
 #include "Gun.h"
 #include "Bullet.h"
+#include "Boss.h"
 
 GameSystem::GameSystem()
 {
 	GetClientRect(_hWnd, &rcClient);
 	deltaTime = 30.0f;
+	gameOver = false;
 }
 
 
@@ -199,7 +201,7 @@ void GameSystem::GameResourceInit()
 		RESOURCEMANAGER->AddResource(eReSourceType::R_PLAYER, TEXT("AV_8_Player_Bullet2"));
 		RESOURCEMANAGER->AddResource(eReSourceType::R_PLAYER, TEXT("AV_8_Player_Bullet3"));
 		RESOURCEMANAGER->AddResource(eReSourceType::R_PLAYER, TEXT("AV_8_Player_Bullet4"));
-		RESOURCEMANAGER->AddResource(eReSourceType::R_PLAYER, TEXT("AV_8_Player_Ending"));
+		RESOURCEMANAGER->AddResource(eReSourceType::R_PLAYER, TEXT("AV_8_Player_1_Ending"));
 		RESOURCEMANAGER->AddResource(eReSourceType::R_PLAYER, TEXT("Effect_7"));
 
 		RESOURCEMANAGER->AddResource(eReSourceType::R_PLAYER, TEXT("F4_Player"));
@@ -231,13 +233,12 @@ void GameSystem::GameResourceInit()
 		RESOURCEMANAGER->AddResource(eReSourceType::R_PLAYER, TEXT("F117_Player_Bullet6"));
 		RESOURCEMANAGER->AddResource(eReSourceType::R_PLAYER, TEXT("F117_Player_Bullet7"));
 		RESOURCEMANAGER->AddResource(eReSourceType::R_PLAYER, TEXT("F117_Player_Bullet8"));
-		RESOURCEMANAGER->AddResource(eReSourceType::R_PLAYER, TEXT("F117_Player_Ending"));
-		RESOURCEMANAGER->AddResource(eReSourceType::R_PLAYER, TEXT("F117_Player_Obj"));
+		RESOURCEMANAGER->AddResource(eReSourceType::R_PLAYER, TEXT("F117_Player_1_Ending"));
 
 		RESOURCEMANAGER->AddResource(eReSourceType::R_PLAYER, TEXT("Helper"));
 		RESOURCEMANAGER->AddResource(eReSourceType::R_PLAYER, TEXT("Helper2"));
 		RESOURCEMANAGER->AddResource(eReSourceType::R_PLAYER, TEXT("Move_LR_A"));
-		RESOURCEMANAGER->AddResource(eReSourceType::R_PLAYER, TEXT("Move_TB_A"));
+		RESOURCEMANAGER->AddResource(eReSourceType::R_PLAYER, TEXT("Player_Ending"));
 		RESOURCEMANAGER->AddResource(eReSourceType::R_PLAYER, TEXT("Player"));
 		RESOURCEMANAGER->AddResource(eReSourceType::R_PLAYER, TEXT("Player_left"));
 		RESOURCEMANAGER->AddResource(eReSourceType::R_PLAYER, TEXT("Player_right"));
@@ -299,8 +300,26 @@ void GameSystem::CollisionObject(std::list<Monster*> monsterlist)
 						(*biter)->SetIsBulletFire(false);
 					}
 				}
-			}			
+			}		
+
+			// º¸½º 
+			if (NULL != boss)
+			{
+				if (CollisionCircleAndRect((*biter)->GetRadius(), (*biter)->GetPivotX(), (*biter)->GetPivotY(),
+					boss->GetRectBossBody()) ||
+					CollisionCircleAndRect((*biter)->GetRadius(), (*biter)->GetPivotX(), (*biter)->GetPivotY(),
+						boss->GetRectBossLeft()) ||
+					CollisionCircleAndRect((*biter)->GetRadius(), (*biter)->GetPivotX(), (*biter)->GetPivotY(),
+						boss->GetRectBossRight()))
+				{
+					boss->DeCreaseHp(player->GetDamage());
+					(*biter)->SetIsBulletFire(false);
+				}
+			}
+			
 		}
+
+
 	}
 
 
@@ -378,7 +397,210 @@ void GameSystem::CollisionObject(std::list<Monster*> monsterlist)
 		}
 	}
 
+	// BOSS
 
+	if (NULL != boss)
+	{
+		for (biter = boss->GetGun1()->GetBulletList().begin(); 
+			biter != boss->GetGun1()->GetBulletList().end(); biter++)
+		{
+			if ((*biter)->GetIsBulletFire())
+			{
+				if ((*biter)->GetPivotX() <= 15 || (*biter)->GetPivotX() >= WINSIZEX + 15 ||
+					(*biter)->GetPivotY() <= 15 || (*biter)->GetPivotY() >= WINSIZEY)
+				{
+					(*biter)->SetIsBulletFire(false);
+				}
+
+				if (!player->GetIsDead())
+				{
+
+					if (CollisionCircleAndCircle((*biter)->GetRadius(), (*biter)->GetPivotX(), (*biter)->GetPivotY(),
+						player->GetRadius(), player->GetX(), player->GetY()))
+					{
+						player->SetIsDead(true);
+						(*biter)->SetIsBulletFire(false);
+
+					}
+
+				}
+			}
+		}
+
+		for (biter = boss->GetGun2()->GetBulletList().begin();
+			biter != boss->GetGun2()->GetBulletList().end(); biter++)
+		{
+			if ((*biter)->GetIsBulletFire())
+			{
+				if ((*biter)->GetPivotX() <= 15 || (*biter)->GetPivotX() >= WINSIZEX + 15 ||
+					(*biter)->GetPivotY() <= 15 || (*biter)->GetPivotY() >= WINSIZEY)
+				{
+					(*biter)->SetIsBulletFire(false);
+				}
+
+				if (!player->GetIsDead())
+				{
+
+					if (CollisionCircleAndCircle((*biter)->GetRadius(), (*biter)->GetPivotX(), (*biter)->GetPivotY(),
+						player->GetRadius(), player->GetX(), player->GetY()))
+					{
+						player->SetIsDead(true);
+						(*biter)->SetIsBulletFire(false);
+
+					}
+
+				}
+			}
+		}
+
+		for (biter = boss->GetGun3()->GetBulletList().begin();
+			biter != boss->GetGun3()->GetBulletList().end(); biter++)
+		{
+			if ((*biter)->GetIsBulletFire())
+			{
+				if ((*biter)->GetPivotX() <= 15 || (*biter)->GetPivotX() >= WINSIZEX + 15 ||
+					(*biter)->GetPivotY() <= 15 || (*biter)->GetPivotY() >= WINSIZEY)
+				{
+					(*biter)->SetIsBulletFire(false);
+				}
+
+				if (!player->GetIsDead())
+				{
+
+					if (CollisionCircleAndCircle((*biter)->GetRadius(), (*biter)->GetPivotX(), (*biter)->GetPivotY(),
+						player->GetRadius(), player->GetX(), player->GetY()))
+					{
+						player->SetIsDead(true);
+						(*biter)->SetIsBulletFire(false);
+
+					}
+
+				}
+			}
+		}
+
+		for (biter = boss->GetGun4()->GetBulletList().begin();
+			biter != boss->GetGun4()->GetBulletList().end(); biter++)
+		{
+			if ((*biter)->GetIsBulletFire())
+			{
+				if ((*biter)->GetPivotX() <= 15 || (*biter)->GetPivotX() >= WINSIZEX + 15 ||
+					(*biter)->GetPivotY() <= 15 || (*biter)->GetPivotY() >= WINSIZEY)
+				{
+					(*biter)->SetIsBulletFire(false);
+				}
+
+				if (!player->GetIsDead())
+				{
+
+					if (CollisionCircleAndCircle((*biter)->GetRadius(), (*biter)->GetPivotX(), (*biter)->GetPivotY(),
+						player->GetRadius(), player->GetX(), player->GetY()))
+					{
+						player->SetIsDead(true);
+						(*biter)->SetIsBulletFire(false);
+
+					}
+
+				}
+			}
+		}
+
+		for (biter = boss->GetGun5()->GetBulletList().begin();
+			biter != boss->GetGun5()->GetBulletList().end(); biter++)
+		{
+			if ((*biter)->GetIsBulletFire())
+			{
+				if ((*biter)->GetPivotX() <= 15 || (*biter)->GetPivotX() >= WINSIZEX + 15 ||
+					(*biter)->GetPivotY() <= 15 || (*biter)->GetPivotY() >= WINSIZEY)
+				{
+					(*biter)->SetIsBulletFire(false);
+				}
+
+				if (!player->GetIsDead())
+				{
+
+					if (CollisionCircleAndCircle((*biter)->GetRadius(), (*biter)->GetPivotX(), (*biter)->GetPivotY(),
+						player->GetRadius(), player->GetX(), player->GetY()))
+					{
+						player->SetIsDead(true);
+						(*biter)->SetIsBulletFire(false);
+
+					}
+
+				}
+			}
+		}
+
+	}
+
+	if (NULL != boss)
+	{
+		for (biter = boss->GetGun1()->GetBulletList().begin();
+			biter != boss->GetGun1()->GetBulletList().end(); )
+		{
+			if (!(*biter)->GetIsBulletFire())
+			{
+				biter = boss->GetGun1()->GetBulletList().erase(biter);
+			}
+			else
+			{
+				++biter;
+			}
+		}
+
+		for (biter = boss->GetGun2()->GetBulletList().begin();
+			biter != boss->GetGun2()->GetBulletList().end();)
+		{
+			if (!(*biter)->GetIsBulletFire())
+			{
+				biter = boss->GetGun2()->GetBulletList().erase(biter);
+			}
+			else
+			{
+				++biter;
+			}
+		}
+
+		for (biter = boss->GetGun3()->GetBulletList().begin();
+			biter != boss->GetGun3()->GetBulletList().end(); )
+		{
+			if (!(*biter)->GetIsBulletFire())
+			{
+				biter = boss->GetGun3()->GetBulletList().erase(biter);
+			}
+			else
+			{
+				++biter;
+			}
+		}
+
+		for (biter = boss->GetGun4()->GetBulletList().begin();
+			biter != boss->GetGun4()->GetBulletList().end(); )
+		{
+			if (!(*biter)->GetIsBulletFire())
+			{
+				biter = boss->GetGun4()->GetBulletList().erase(biter);
+			}
+			else
+			{
+				++biter;
+			}
+		}
+
+		for (biter = boss->GetGun5()->GetBulletList().begin();
+			biter != boss->GetGun5()->GetBulletList().end(); )
+		{
+			if (!(*biter)->GetIsBulletFire())
+			{
+				biter = boss->GetGun5()->GetBulletList().erase(biter);
+			}
+			else
+			{
+				++biter;
+			}
+		}
+
+	}
 	//DeleteObject(monsterlist);
 	
 }
@@ -392,7 +614,7 @@ void GameSystem::DeleteObject(std::list<Monster*> monsterlist)
 	{
 		if (!(*it)->GetIsLive() && (*it)->GetIsCollision())
 		{
-			(*it)->Release();
+			//(*it)->Release();
 			it = monsterlist.erase(it);
 		}
 		else
@@ -408,5 +630,11 @@ void GameSystem::DeleteObject(std::list<Monster*> monsterlist)
 void GameSystem::DeleteObject(Monster * monster)
 {
 	monster->Release();
+}
+
+void GameSystem::GameOver()
+{
+	SCENEMANAGER->ChangeScene(eSceneType::SCENE_END);
+	gameOver = true;
 }
 

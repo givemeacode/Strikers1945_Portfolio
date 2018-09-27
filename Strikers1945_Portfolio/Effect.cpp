@@ -15,7 +15,7 @@ Effect::~Effect()
 {
 }
 
-bool Effect::Init(Image * effectImage, int frameW, int frameH, int fps, float elapsedTime)
+bool Effect::Init(Image * effectImage, int frameW, int frameH, float fps, float elapsedTime)
 {
 	if (!effectImage)
 	{

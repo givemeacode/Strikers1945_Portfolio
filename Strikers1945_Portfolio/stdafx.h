@@ -17,6 +17,7 @@
 #include <string>
 
 
+
 // 사용자 정의 헤더
 #include "MacroDefine.h"
 #include "CustomDefine.h"
@@ -31,9 +32,10 @@
 #include "GameNode.h"
 #include "GameSystem.h"
 #include "Animation.h"
-
+#include "Effect.h"
 #include "KeyManager.h"
 #include "TimeManager.h"
 #include "ImageManager.h"
 #include "ResourceManager.h"
 #include "EffectManager.h"
+#include "SceneManager.h"

@@ -81,6 +81,10 @@ void PlayerGun::Render(HDC hdc)
 				{
 					playerGunImage4->AniRender(hdc, (*iter)->GetPivotX() - 17, (*iter)->GetPivotY() - 25, playerGunAni4);
 				}
+				if (GAMESYS->GetPlayer()->GetPlayerLevel() == 100)
+				{
+					playerGunImage4->AniRender(hdc, (*iter)->GetPivotX() - 17, (*iter)->GetPivotY() - 25, playerGunAni4);
+				}
 			}
 		}
 	}
@@ -126,6 +130,12 @@ void PlayerGun::BulletFire(float x, float y)
 		playerGunAni4->start();
 
 		playerDMG = 4;
+	}
+	else if (GAMESYS->GetPlayer()->GetPlayerLevel() == 100)
+	{
+		playerGunAni4->start();
+
+ 		playerDMG = 100;
 	}
 }
 

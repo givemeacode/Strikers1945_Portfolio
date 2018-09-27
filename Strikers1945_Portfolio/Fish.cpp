@@ -12,6 +12,9 @@ Fish::Fish(GAMEPOS ePos)
 {
 	startPos = ePos;
 	isLive = true;
+	fHp = 20.0f;
+	score = 500;
+
 }
 
 
@@ -174,10 +177,13 @@ void Fish::Render(HDC hdc)
 {
 	if (GetIsLive())
 	{
-		DrawObject(hdc, rcMonster, 1, RGB(0, 255, 255), RECTANGLE);
+		//DrawObject(hdc, rcMonster, 1, RGB(0, 255, 255), RECTANGLE);
 		monsterImg->FrameRender(hdc, rcMonster.left, rcMonster.top, 0, 0);
 	}
-
+	else
+	{
+		EFFECTMANAGER->Render(hdc);
+	}
 	_gun->Render(hdc);
 
 
@@ -193,9 +199,17 @@ void Fish::Release()
 
 void Fish::MonsterAI()
 {
-	//
-	if (fHp <= 0)
+	if (_gun == NULL)
 	{
+		return;
+	}
+
+	//
+	if (isLive && fHp <= 0)
+	{
+		GAMESYS->AddScore(GetScore());
+		GAMESYS->IsScore(true);
+		//SetScore(GetScore() + 100);
 		isLive = false;
 	}
 
@@ -238,6 +252,22 @@ void Fish::MonsterAI()
 
 			CoolTimeReset();
 		}
+	}
+
+	if (!isDeadEffect)
+	{
+		if (!isLive && !isCollision)
+		{
+			effectX = GetPivotX();
+			effectY = GetPivotY();
+			EFFECTMANAGER->Play(TEXT("Effect_4"), effectX, effectY);
+			isDeadEffect = true;
+		}
+
+	}
+	else
+	{
+		EFFECTMANAGER->Update();
 	}
 
 	_gun->BulletMove();

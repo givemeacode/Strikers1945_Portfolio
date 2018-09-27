@@ -9,6 +9,7 @@
 #include "BigAirPlan.h"
 #include "MidAirPlan.h"
 #include "Fish.h"
+#include "UI.h"
 
 #pragma comment (lib,"winmm")
 
@@ -26,11 +27,23 @@ bool GameScene::Init()
 {
 	//GameNode::Init(true);
 	//=========================================================
-	
+	GAMESYS->SetScore(0);
+
 	// 시간
 	RunTimer = 0;
 	startTimer = GetTickCount(); // 전체 시작시간
+	backImg = IMAGEMANAGER->FindImage("Stage_1");
+	backImg->SetX(100.f);
+	backImg->SetY((-18165.f + static_cast<float>(WINSIZEY)));
+	_y = backImg->GetY();
 
+	rcGameClient.left = 100.0f;
+	rcGameClient.right = 900.0f;
+	rcGameClient.top = 0.f;
+	rcGameClient.bottom = static_cast<float>(WINSIZEY);
+
+	ui = new UI();
+	ui->Init();
 	// 플레이어
 	//player = new Player;
 	//GAMESYS->SetPlayer(player);
@@ -49,6 +62,13 @@ bool GameScene::Init()
 	
 	//boss = new Boss();
 	//boss->Init();
+
+	//=========================
+	leftRect = RectMake(0, 0, 100, WINSIZEY);
+	rightRect = RectMake(900, 0, 100, WINSIZEY);
+
+	//=========================
+
 	return true;
 }
 
@@ -56,9 +76,16 @@ void GameScene::Release()
 {
 	//GameNode::Release();
 	//=========================================================
-
-//	SAFE_DELETE(player);
-
+	std::list<Monster*>::iterator it;
+	for (it = monsterList.begin(); it != monsterList.end(); it++)
+	{
+		(*it)->Release();
+	}
+	monsterList.clear();
+	backImg->Release();
+	player->Release();
+	SAFE_DELETE(player);
+	SAFE_DELETE(boss);
 	//=========================================================
 	//=========================================================
 
@@ -66,6 +93,12 @@ void GameScene::Release()
 
 void GameScene::Update()
 {
+	ui->Update();
+	// BackGround
+	_y -= 2.f;
+	backImg->SetY(_y);
+
+	//
 	//GameNode::Update();
 	//=========================================================
 	// 시간
@@ -74,8 +107,24 @@ void GameScene::Update()
 	// 플레이어
 	player->Update();
 
+	if (GAMESYS->IsGameClear())
+	{
+		if (player->GetY() <= 0)
+		{
+			SCENEMANAGER->ChangeScene(eSceneType::SCENE_CLEAR);
+			GAMESYS->SetIsGameClear(false);
+			return;
+		}
+	}
+
 // 테스트
-	
+	if(GAMESYS->IsGameOver())
+	{
+		RunTimer = 0;
+		startTimer = GetTickCount();
+		GAMESYS->SetIsGameOver(false);
+		return;
+	}
 	if (RunTimer % 2000 == 500  && RunTimer < 60 * THOU) // 2초마다 나옴 60초 이전까지 랜덤한 위치에서 나옴
 	{
 		int iRand = RAND->getInt(6); // 0~5의 값을 랜덤하게 가져옴
@@ -126,10 +175,10 @@ void GameScene::Update()
 	{
 		AppearType2();
 	}
-	if (RunTimer == 30 * THOU) // 35초 : 위 -> 아래 중심으로 이동 (중간 캐릭터 ) 
+	if (RunTimer == 5 * THOU) // 35초 : 위 -> 아래 중심으로 이동 (중간 캐릭터 ) 
 	{
-		Monster* bigAirPlan = new BigAirPlan(GAMEPOS::G_UPDOWN); 
-		bigAirPlan->Init(TEXT("BigAirPlan"), 1, MonsterType::MiddleType1, GAMEPOS::G_RIGHT1);
+		Monster* bigAirPlan = new BigAirPlan(GAMEPOS::G_UPDOWN1); 
+		bigAirPlan->Init(TEXT("BigAirPlan"), 1, MonsterType::MiddleType1, GAMEPOS::G_CENTER1);
 
 		monsterList.push_back(bigAirPlan);
 		
@@ -173,13 +222,13 @@ void GameScene::Update()
 
 	if (RunTimer == 50 * THOU) // 1분 : 중간 크기 2마리
 	{
-		Monster* bigAirPlan1 = new BigAirPlan(GAMEPOS::G_UPDOWN);
-		bigAirPlan1->Init(TEXT("BigAirPlan"),2, MonsterType::MiddleType1, GAMEPOS::G_RIGHT1);
+		Monster* bigAirPlan1 = new BigAirPlan(GAMEPOS::G_UPDOWN1);
+		bigAirPlan1->Init(TEXT("BigAirPlan"),2, MonsterType::MiddleType1, GAMEPOS::G_CENTER1);
 
 		monsterList.push_back(bigAirPlan1);
 
-		Monster* bigAirPlan2 = new BigAirPlan(GAMEPOS::G_UPDOWN);
-		bigAirPlan2->Init(TEXT("BigAirPlan"),2, MonsterType::MiddleType1, GAMEPOS::G_RIGHT2);
+		Monster* bigAirPlan2 = new BigAirPlan(GAMEPOS::G_UPDOWN2);
+ 		bigAirPlan2->Init(TEXT("BigAirPlan"),2, MonsterType::MiddleType1, GAMEPOS::G_CENTER2);
 
 		monsterList.push_back(bigAirPlan2);
 
@@ -228,13 +277,25 @@ void GameScene::Update()
 	//========================== 1분 30초! ( 보스 등장 ) ==============================
 	
 	//GAMESYS->DeleteObject(monsterList); // 지우는함수 부분
-
+	//80
 	if (RunTimer == 80 * THOU) // 1분 20초 : 보스 
 	{
-		
+		boss = new Boss();
+		boss->Init(WINSIZEX /2 , -500);
+		GAMESYS->SetBoss(boss);
+
 	}
-
-
+	if (RunTimer >= 90 * THOU)
+	{
+		GAMESYS->DeleteObject(monsterList);
+		if (!boss->GetIsLive())
+		{
+			GAMESYS->SetIsGameClear(true);
+			//boss->Release();
+			//SAFE_DELETE(boss);
+		}
+	}
+	
 	
 	std::list<Monster*>::iterator it;
 
@@ -243,6 +304,10 @@ void GameScene::Update()
 		(*it)->Update();
 	}
 
+	if (NULL != boss)
+	{
+		boss->Update();
+	}
 	GAMESYS->CollisionObject(monsterList);
 	//monster1->Update();
 	//monster2->Update();
@@ -260,10 +325,13 @@ void GameScene::Render(HDC hdc)
 	//PatBlt(backDC, 0, 0, WINSIZEX, WINSIZEY, WHITENESS);
 	//=========================================================
 	
+	backImg->LoopRender(hdc, &rcGameClient, 0, _y);
+
+	ui->Render(hdc);
 	TIMEMANAGER->Render(hdc);
 
+
 	// 플레이어
-	player->Render(hdc);
 
 	// 몬스터
 	std::list<Monster*>::iterator it;
@@ -271,6 +339,14 @@ void GameScene::Render(HDC hdc)
 	{
 		(*it)->Render(hdc);
 	}
+	DrawObject(hdc, leftRect, 1, RGB(0, 0, 0), RECTANGLE);
+	DrawObject(hdc, rightRect, 1, RGB(0, 0, 0), RECTANGLE);
+
+	if (NULL != boss)
+	{
+		boss->Render(hdc);
+	}
+	player->Render(hdc);
 
 
 	//monster1->Render(hdc);

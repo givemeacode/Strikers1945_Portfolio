@@ -5,6 +5,11 @@
 class BigAirPlan
 	: public Monster
 {
+private:
+	bool isStop;
+	bool isMove;
+	float deltaTime;
+
 public:
 	BigAirPlan();
 	BigAirPlan(GAMEPOS pos);

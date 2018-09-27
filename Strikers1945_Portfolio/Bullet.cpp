@@ -83,6 +83,7 @@ void Bullet::Render(HDC hdc , int )
 void Bullet::Release()
 {
 	SAFE_DELETE(aniBullet);
+	//aniBullet->Release();
 	//SAFE_DELETE(bulletImg);
 	//aniBullet->Release();
 	bulletImg->Release();
