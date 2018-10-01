@@ -271,9 +271,46 @@ CPOS & GameSystem::GetPosInfo()
 
 void GameSystem::CollisionObject(std::list<Monster*> monsterlist)
 {
+	CollisionPlayer(monsterlist);
+	CollisionMonster(monsterlist);
+	CollisionBoss(monsterlist);
+
+}
+
+void GameSystem::DeleteObject(std::list<Monster*> monsterlist)
+{
+	// 몬스터 삭제 
+	
+	std::list<Monster*>::iterator it;
+	for (it = monsterlist.begin(); it != monsterlist.end(); )
+	{
+		if (!(*it)->GetIsLive() && (*it)->GetIsCollision())
+		{
+			//(*it)->Release();
+			it = monsterlist.erase(it);
+		}
+		else
+		{
+			++it;
+		}
+	}
+}
+
+void GameSystem::DeleteObject(Monster * monster)
+{
+	monster->Release();
+}
+
+void GameSystem::GameOver()
+{
+	SCENEMANAGER->ChangeScene(eSceneType::SCENE_END);
+	gameOver = true;
+}
+
+void GameSystem::CollisionPlayer(std::list<Monster*> monsterlist)
+{
 	std::list<Monster*>::iterator it;
 	std::list<Bullet*>::iterator biter;
-
 	// 플레이어 총알 충돌 ( 클라이언트 화면 ) 
 	for (biter = player->GetGun()->GetBulletList().begin(); biter != player->GetGun()->GetBulletList().end(); biter++)
 	{
@@ -300,7 +337,7 @@ void GameSystem::CollisionObject(std::list<Monster*> monsterlist)
 						(*biter)->SetIsBulletFire(false);
 					}
 				}
-			}		
+			}
 
 			// 보스 
 			if (NULL != boss)
@@ -316,7 +353,7 @@ void GameSystem::CollisionObject(std::list<Monster*> monsterlist)
 					(*biter)->SetIsBulletFire(false);
 				}
 			}
-			
+
 		}
 
 
@@ -337,8 +374,12 @@ void GameSystem::CollisionObject(std::list<Monster*> monsterlist)
 		}
 	}
 
+}
 
-
+void GameSystem::CollisionMonster(std::list<Monster*> monsterlist)
+{
+	std::list<Monster*>::iterator it;
+	std::list<Bullet*>::iterator biter;
 	//===========================================================================================================
 	// 몬스터 총알 충돌 ( 클라이언트 화면 ) 
 	for (it = monsterlist.begin(); it != monsterlist.end(); it++)
@@ -347,9 +388,13 @@ void GameSystem::CollisionObject(std::list<Monster*> monsterlist)
 		{
 
 			// 몬스터 플레이어 충돌 
-			if (CollisionCircleAndRect(player->GetRadius(), player->GetX(), player->GetY(), (*it)->GetRectMonster()))
+			if (!player->GetIsDead())
 			{
-				player->SetIsDead(true);
+				if (CollisionCircleAndRect(player->GetRadius(), player->GetX(), player->GetY(), (*it)->GetRectMonster()))
+				{
+					player->SetIsDead(true);
+					player->DeCreaseLife();
+				}
 			}
 
 			// 몬스터와 총알 충돌 
@@ -364,13 +409,13 @@ void GameSystem::CollisionObject(std::list<Monster*> monsterlist)
 					}
 					if (!player->GetIsDead())
 					{
-						
+
 						if (CollisionCircleAndCircle((*biter)->GetRadius(), (*biter)->GetPivotX(), (*biter)->GetPivotY(),
 							player->GetRadius(), player->GetX(), player->GetY()))
 						{
 							player->SetIsDead(true);
 							(*biter)->SetIsBulletFire(false);
-
+							player->DeCreaseLife();
 						}
 
 					}
@@ -396,12 +441,17 @@ void GameSystem::CollisionObject(std::list<Monster*> monsterlist)
 			}
 		}
 	}
+}
+
+void GameSystem::CollisionBoss(std::list<Monster*> monsterlist)
+{
 
 	// BOSS
-
+	std::list<Monster*>::iterator it;
+	std::list<Bullet*>::iterator biter;
 	if (NULL != boss)
 	{
-		for (biter = boss->GetGun1()->GetBulletList().begin(); 
+		for (biter = boss->GetGun1()->GetBulletList().begin();
 			biter != boss->GetGun1()->GetBulletList().end(); biter++)
 		{
 			if ((*biter)->GetIsBulletFire())
@@ -420,6 +470,7 @@ void GameSystem::CollisionObject(std::list<Monster*> monsterlist)
 					{
 						player->SetIsDead(true);
 						(*biter)->SetIsBulletFire(false);
+						player->DeCreaseLife();
 
 					}
 
@@ -446,6 +497,7 @@ void GameSystem::CollisionObject(std::list<Monster*> monsterlist)
 					{
 						player->SetIsDead(true);
 						(*biter)->SetIsBulletFire(false);
+						player->DeCreaseLife();
 
 					}
 
@@ -472,7 +524,7 @@ void GameSystem::CollisionObject(std::list<Monster*> monsterlist)
 					{
 						player->SetIsDead(true);
 						(*biter)->SetIsBulletFire(false);
-
+						player->DeCreaseLife();
 					}
 
 				}
@@ -498,7 +550,7 @@ void GameSystem::CollisionObject(std::list<Monster*> monsterlist)
 					{
 						player->SetIsDead(true);
 						(*biter)->SetIsBulletFire(false);
-
+						player->DeCreaseLife();
 					}
 
 				}
@@ -524,7 +576,7 @@ void GameSystem::CollisionObject(std::list<Monster*> monsterlist)
 					{
 						player->SetIsDead(true);
 						(*biter)->SetIsBulletFire(false);
-
+						player->DeCreaseLife();
 					}
 
 				}
@@ -601,40 +653,6 @@ void GameSystem::CollisionObject(std::list<Monster*> monsterlist)
 		}
 
 	}
-	//DeleteObject(monsterlist);
-	
-}
 
-void GameSystem::DeleteObject(std::list<Monster*> monsterlist)
-{
-	// 몬스터 삭제 
-	
-	std::list<Monster*>::iterator it;
-	for (it = monsterlist.begin(); it != monsterlist.end(); )
-	{
-		if (!(*it)->GetIsLive() && (*it)->GetIsCollision())
-		{
-			//(*it)->Release();
-			it = monsterlist.erase(it);
-		}
-		else
-		{
-			++it;
-		}
-	}
-
-
-
-}
-
-void GameSystem::DeleteObject(Monster * monster)
-{
-	monster->Release();
-}
-
-void GameSystem::GameOver()
-{
-	SCENEMANAGER->ChangeScene(eSceneType::SCENE_END);
-	gameOver = true;
 }
 

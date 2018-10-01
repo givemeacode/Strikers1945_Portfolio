@@ -29,7 +29,9 @@ private:
 	RECT rightRect;
 
 	float _y;
-
+	float deltaTime;
+	float currentTime;
+	float coolTime;
 	// 시간관련	
 	DWORD startTimer; // 전체 시작시간
 
@@ -37,6 +39,18 @@ private:
 		//RECT rcTest;
 	Boss* boss;
 	//RECT rcTest;
+private:
+	bool isStart1;
+	bool isStart2;
+	bool isStart3;
+	bool isStart4;
+	bool isStart5;
+	bool isStart6;
+	bool isStart7;
+	bool isStart8;
+	bool isStart9;
+	bool isStart10;
+
 public:
 	GameScene();
 	~GameScene();

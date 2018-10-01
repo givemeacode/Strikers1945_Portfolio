@@ -16,6 +16,18 @@
 GameScene::GameScene()
 {
 	sceneType = eSceneType::SCENE_GAME1;
+	coolTime = 2.0f;
+
+	isStart1 = true;
+	isStart2 = true;
+	isStart3 = true;
+	isStart4 = true;
+	isStart5 = true;
+	isStart6 = true;
+	isStart7 = true;
+	isStart8 = true;
+	isStart9 = true;
+	isStart10 = true;
 }
 
 GameScene::~GameScene()
@@ -66,7 +78,7 @@ bool GameScene::Init()
 	//=========================
 	leftRect = RectMake(0, 0, 100, WINSIZEY);
 	rightRect = RectMake(900, 0, 100, WINSIZEY);
-
+	deltaTime = TIMEMANAGER->getElapsedTime();
 	//=========================
 
 	return true;
@@ -103,7 +115,8 @@ void GameScene::Update()
 	//=========================================================
 	// 시간
 	RunTimer = GetTickCount() - startTimer; // 전체시간
-
+	currentTime += TIMEMANAGER->getElapsedTime();
+	coolTime -= deltaTime;
 	// 플레이어
 	player->Update();
 
@@ -125,8 +138,9 @@ void GameScene::Update()
 		GAMESYS->SetIsGameOver(false);
 		return;
 	}
-	if (RunTimer % 2000 == 500  && RunTimer < 60 * THOU) // 2초마다 나옴 60초 이전까지 랜덤한 위치에서 나옴
+	if (coolTime <= 0.0f  && currentTime < 60 + deltaTime) // 2초마다 나옴 60초 이전까지 랜덤한 위치에서 나옴
 	{
+ 		coolTime = 2.0f;
 		int iRand = RAND->getInt(6); // 0~5의 값을 랜덤하게 가져옴
 		GAMEPOS randIndex1;
 		GAMEPOS randIndex2;
@@ -167,134 +181,184 @@ void GameScene::Update()
 	// 몬스터
 	//=============================== 30초 ~ 1분 ===================================
 
-	if (RunTimer == 20 * THOU) // 30초 : 1번 왼쪽 -> 오른쪽 위 [ 1]
+	if (currentTime > 15.0f && currentTime < 16.f) // 30초 : 1번 왼쪽 -> 오른쪽 위 [ 1]
 	{
-		AppearType1();
+		if (isStart1)
+		{
+			AppearType1();
+			isStart1 = false;
+		}
 	}
-	if (RunTimer == 25 * THOU) // 32초 :  오른쪽 -> 왼쪽 위 [2] 
+	if (currentTime > 25.0f && currentTime < 3326.0f) // 32초 :  오른쪽 -> 왼쪽 위 [2] 
 	{
-		AppearType2();
+		if (isStart2)
+		{
+			AppearType2();
+			isStart2 = false;
+		}
 	}
-	if (RunTimer == 5 * THOU) // 35초 : 위 -> 아래 중심으로 이동 (중간 캐릭터 ) 
+	if (currentTime > 35.0f && currentTime < 36.0f) // 35초 : 위 -> 아래 중심으로 이동 (중간 캐릭터 ) 
 	{
-		Monster* bigAirPlan = new BigAirPlan(GAMEPOS::G_UPDOWN1); 
-		bigAirPlan->Init(TEXT("BigAirPlan"), 1, MonsterType::MiddleType1, GAMEPOS::G_CENTER1);
+		if (isStart3)
+		{
+			isStart3 = false;
+			Monster* bigAirPlan = new BigAirPlan(GAMEPOS::G_UPDOWN1);
+			bigAirPlan->Init(TEXT("BigAirPlan"), 1, MonsterType::MiddleType1, GAMEPOS::G_CENTER1);
 
-		monsterList.push_back(bigAirPlan);
+			monsterList.push_back(bigAirPlan);
+
+
+			int width = 0;
+			std::list<Monster*>::iterator it;
+			for (it = monsterList.begin(); it != monsterList.end(); it++)
+			{
+				if ((*it)->GetType() == MonsterType::MiddleType1)
+				{
+					width = (*it)->GetImage()->GetFrameWidth();
+					(*it)->OffectX(width);
+				}
+			}
+		}
 		
-
-		int width = 0;
-		std::list<Monster*>::iterator it;
-		for (it = monsterList.begin(); it != monsterList.end(); it++)
+	}
+	if (currentTime > 40.0f && currentTime < 41.0f) // 40초 : 1번 2번 같이 생성
+	{
+		if (isStart4)
 		{
-			if ((*it)->GetType() == MonsterType::MiddleType1)
-			{
-				width = (*it)->GetImage()->GetFrameWidth();
-				(*it)->OffectX(width);
-			}
+			AppearType1();
+			AppearType2();
+			isStart4 = false;
 		}
 	}
-	if (RunTimer == 40 * THOU) // 40초 : 1번 2번 같이 생성
+	if (currentTime > 50.0f && currentTime < 51.0f) // 50초 : 중간 2 생성 -> 위 아래 
 	{
-		AppearType1();
-		AppearType2();
-	}
-	if (RunTimer == 45 * THOU) // 50초 : 중간 2 생성 -> 위 아래 
-	{
-		Monster* midAirPlan = new MidAirPlan(GAMEPOS::G_LEFT3);
-		midAirPlan->Init(TEXT("MidAirPlan"), 1, MonsterType::MiddleType2, GAMEPOS::G_RIGHT3);
-
-		monsterList.push_back(midAirPlan);
-
-		int width = 0;
-		std::list<Monster*>::iterator it;
-		for (it = monsterList.begin(); it != monsterList.end(); it++)
+		if (isStart5)
 		{
-			if ((*it)->GetType() == MonsterType::MiddleType2)
+			isStart5 = false;
+			Monster* midAirPlan = new MidAirPlan(GAMEPOS::G_LEFT3);
+			midAirPlan->Init(TEXT("MidAirPlan"), 1, MonsterType::MiddleType2, GAMEPOS::G_RIGHT3);
+
+			monsterList.push_back(midAirPlan);
+
+			int width = 0;
+			std::list<Monster*>::iterator it;
+			for (it = monsterList.begin(); it != monsterList.end(); it++)
 			{
-				width = (*it)->GetImage()->GetFrameWidth();
-				(*it)->OffectX(width);
+				if ((*it)->GetType() == MonsterType::MiddleType2)
+				{
+					width = (*it)->GetImage()->GetFrameWidth();
+					(*it)->OffectX(width);
+				}
 			}
 		}
+		
 	}
 
 	//=============================== 1분 ~ 1분30초 ===================================
 
-	if (RunTimer == 50 * THOU) // 1분 : 중간 크기 2마리
+	if (currentTime > 60.0f && currentTime < 61.0f) // 1분 : 중간 크기 2마리
 	{
-		Monster* bigAirPlan1 = new BigAirPlan(GAMEPOS::G_UPDOWN1);
-		bigAirPlan1->Init(TEXT("BigAirPlan"),2, MonsterType::MiddleType1, GAMEPOS::G_CENTER1);
-
-		monsterList.push_back(bigAirPlan1);
-
-		Monster* bigAirPlan2 = new BigAirPlan(GAMEPOS::G_UPDOWN2);
- 		bigAirPlan2->Init(TEXT("BigAirPlan"),2, MonsterType::MiddleType1, GAMEPOS::G_CENTER2);
-
-		monsterList.push_back(bigAirPlan2);
-
-
-		int width = 0;
-		std::list<Monster*>::iterator it;
-		for (it = monsterList.begin(); it != monsterList.end(); it++)
+		if (isStart6)
 		{
-			if ((*it)->GetType() == MonsterType::MiddleType1)
+			isStart6 = false;
+			Monster* bigAirPlan1 = new BigAirPlan(GAMEPOS::G_UPDOWN1);
+			bigAirPlan1->Init(TEXT("BigAirPlan"), 2, MonsterType::MiddleType1, GAMEPOS::G_CENTER1);
+
+			monsterList.push_back(bigAirPlan1);
+
+			Monster* bigAirPlan2 = new BigAirPlan(GAMEPOS::G_UPDOWN2);
+			bigAirPlan2->Init(TEXT("BigAirPlan"), 2, MonsterType::MiddleType1, GAMEPOS::G_CENTER2);
+
+			monsterList.push_back(bigAirPlan2);
+
+
+			int width = 0;
+			std::list<Monster*>::iterator it;
+			for (it = monsterList.begin(); it != monsterList.end(); it++)
 			{
-				width = (*it)->GetImage()->GetFrameWidth();
-				(*it)->OffectX(width);
+				if ((*it)->GetType() == MonsterType::MiddleType1)
+				{
+					width = (*it)->GetImage()->GetFrameWidth();
+					(*it)->OffectX(width);
+				}
 			}
 		}
+		
 	}
-	if (RunTimer == 55 * THOU) // 1분 5초 : 1번 2번 같이 생성
+	if (currentTime > 65.0f && currentTime < 66.0f) // 1분 5초 : 1번 2번 같이 생성
 	{
-		AppearType1();
-		AppearType2();	
-	}
-	if (RunTimer == 65 * THOU) // 1분 15초 : 중간3 2마리 양쪽 사이드 생성 
-	{
-		Monster* fish1 = new Fish(GAMEPOS::G_LEFT3);
-		fish1->Init(TEXT("fish"), 1, MonsterType::MiddleType3, GAMEPOS::G_RIGHT3);
-
-		monsterList.push_back(fish1);
-
-		Monster* fish2 = new Fish(GAMEPOS::G_RIGHT3);
-		fish2->Init(TEXT("fish"), 2, MonsterType::MiddleType3, GAMEPOS::G_LEFT3);
-
-		monsterList.push_back(fish2);
-
-
-		int width = 0;
-		std::list<Monster*>::iterator it;
-		for (it = monsterList.begin(); it != monsterList.end(); it++)
+		if (isStart7)
 		{
-			if ((*it)->GetType() == MonsterType::MiddleType3)
-			{
-				width = (*it)->GetImage()->GetFrameWidth();
-				(*it)->OffectX(width);
-			}
+			isStart7 = false;
+			AppearType1();
+			AppearType2();
 		}
+		
+	}
+	if (currentTime > 65.0f && currentTime < 66.0f) // 1분 15초 : 중간3 2마리 양쪽 사이드 생성 
+	{
+		if (isStart8)
+		{
+			isStart8 = false;
+			Monster* fish1 = new Fish(GAMEPOS::G_LEFT3);
+			fish1->Init(TEXT("fish"), 1, MonsterType::MiddleType3, GAMEPOS::G_RIGHT3);
+
+			monsterList.push_back(fish1);
+
+			Monster* fish2 = new Fish(GAMEPOS::G_RIGHT3);
+			fish2->Init(TEXT("fish"), 2, MonsterType::MiddleType3, GAMEPOS::G_LEFT3);
+
+			monsterList.push_back(fish2);
+
+			int width = 0;
+			std::list<Monster*>::iterator it;
+			for (it = monsterList.begin(); it != monsterList.end(); it++)
+			{
+				if ((*it)->GetType() == MonsterType::MiddleType3)
+				{
+					width = (*it)->GetImage()->GetFrameWidth();
+					(*it)->OffectX(width);
+				}
+			}
+
+		}
+
+
+
+		
 	}
 
 	//========================== 1분 30초! ( 보스 등장 ) ==============================
 	
 	//GAMESYS->DeleteObject(monsterList); // 지우는함수 부분
 	//80
-	if (RunTimer == 80 * THOU) // 1분 20초 : 보스 
+	if( currentTime > 80.0f && currentTime < 81.0f) // 1분 20초 : 보스 
 	{
-		boss = new Boss();
-		boss->Init(WINSIZEX /2 , -500);
-		GAMESYS->SetBoss(boss);
+		if (isStart9)
+		{
+			isStart9 = false;
+			boss = new Boss();
+			boss->Init(WINSIZEX / 2, -500);
+			GAMESYS->SetBoss(boss);
+		}
+		
 
 	}
-	if (RunTimer >= 90 * THOU)
+
+	if (!monsterList.empty())
 	{
-		GAMESYS->DeleteObject(monsterList);
-		if (!boss->GetIsLive())
+		if (currentTime >= 80.f)
 		{
-			GAMESYS->SetIsGameClear(true);
-			//boss->Release();
-			//SAFE_DELETE(boss);
+			GAMESYS->DeleteObject(monsterList);
+			if (!boss->GetIsLive())
+			{
+				GAMESYS->SetIsGameClear(true);
+				//boss->Release();
+				//SAFE_DELETE(boss);
+			}
 		}
 	}
+	
 	
 	
 	std::list<Monster*>::iterator it;
@@ -330,6 +394,9 @@ void GameScene::Render(HDC hdc)
 	ui->Render(hdc);
 	TIMEMANAGER->Render(hdc);
 
+	TCHAR choiceTime1[100] = { 0, };
+	_stprintf_s(choiceTime1, sizeof(choiceTime1), TEXT("runTimer : %d"), RunTimer);
+	TextOut(hdc, WINSIZEX / 2 - 270, 180, TEXT(choiceTime1), _tcslen(TEXT(choiceTime1)));
 
 	// 플레이어
 
@@ -365,6 +432,7 @@ void GameScene::Render(HDC hdc)
 
 void GameScene::AppearType1()
 {
+	isStart1 = false;
 	for (int i = 0; i < 5; i++)
 	{
 		Monster* monster1 = new AirMonster(GAMEPOS::G_LEFT1);

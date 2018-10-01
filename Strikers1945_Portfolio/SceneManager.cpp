@@ -23,6 +23,7 @@ void SceneManager::ChangeScene(eSceneType type)
 		Release();
 	}
 
+
 	switch (type)
 	{
 	case eSceneType::SCENE_TITLE:

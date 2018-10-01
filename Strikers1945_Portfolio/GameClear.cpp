@@ -14,7 +14,7 @@ GameClear::GameClear()
 
 GameClear::~GameClear()
 {
-	blackBG->Release();
+	//blackBG->Release();
 }
 bool GameClear::Init()
 {

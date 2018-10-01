@@ -39,31 +39,9 @@ Boss::~Boss()
 
 bool Boss::Init(int x, int y)
 {
-
 	bossBody = IMAGEMANAGER->FindImage(TEXT("Boss_body"));
-
-
-	//aniBossBody = new Animation();
-	//aniBossBody->Init(bossBody);
-	//aniBossBody->setDefPlayFrame(false, true);
-	//aniBossBody->setFPS(1);
-	//aniBossBody->start();
-
 	bossLeft = IMAGEMANAGER->FindImage(TEXT("Boss_left"));
-
-	//aniBossLeft = new Animation();
-	//aniBossLeft->Init(bossLeft);
-	//aniBossLeft->setDefPlayFrame(false, true);
-	//aniBossLeft->setFPS(1);
-	//aniBossLeft->start();
-
 	bossRight = IMAGEMANAGER->FindImage(TEXT("Boss_right"));
-
-	//aniBossRight = new Animation();
-	//aniBossRight->Init(bossRight);
-	//aniBossRight->setDefPlayFrame(false, true);
-	//aniBossRight->setFPS(1);
-	//aniBossRight->start();
 
 	bossPropellerLeft = IMAGEMANAGER->FindImage(TEXT("Boss_propeller"));
 	aniBossPropellerLeft = new Animation();
@@ -81,7 +59,6 @@ bool Boss::Init(int x, int y)
 
 
 	// 위치값 정하기
-//	int width = bossBody->GetFrameWidth() + bossLeft->GetFrameWidth() + bossRight->GetFrameWidth();
 	int width = bossBody->GetFrameWidth();
 
 	int height = bossBody->GetFrameHeight();
@@ -171,8 +148,7 @@ bool Boss::Init(int x, int y)
 	damageRightImage = IMAGEMANAGER->FindImage(TEXT("Boss_right2"));
 	damageLeftImage = IMAGEMANAGER->FindImage(TEXT("Boss_left2"));
 
-	//damageEffect->Init(damageBodyImage, damageBodyImage->GetFrameWidth(), damageBodyImage->GetFrameHeight(),
-	//	1, 1.0f);
+
 	EFFECTMANAGER->AddEffect(TEXT("DBoss_body2"), TEXT("../Resource/Image/Monster/Boss_body2.bmp"),
 		damageBodyImage->GetWidth(), damageBodyImage->GetHeight(),
 		damageBodyImage->GetFrameWidth(), damageBodyImage->GetFrameHeight(), 1, 1.0f, 1, RGB(0, 0, 0));
@@ -185,157 +161,6 @@ bool Boss::Init(int x, int y)
 	return true;
 }
 
-bool Boss::Init(const TCHAR * fileName, int x, int y)
-{
-	return true;
-}
-
-bool Boss::Init(const TCHAR * fileName)
-{
-	return true;
-}
-
-bool Boss::Init(const TCHAR * fileName, int number, GAMEPOS pos)
-{
-	return true;
-}
-
-
-bool Boss::Init()
-{
-//	bossBody = IMAGEMANAGER->FindImage(TEXT("Boss_body"));
-//
-//
-//	//aniBossBody = new Animation();
-//	//aniBossBody->Init(bossBody);
-//	//aniBossBody->setDefPlayFrame(false, true);
-//	//aniBossBody->setFPS(1);
-//	//aniBossBody->start();
-//
-//	bossLeft = IMAGEMANAGER->FindImage(TEXT("Boss_left"));
-//
-//	//aniBossLeft = new Animation();
-//	//aniBossLeft->Init(bossLeft);
-//	//aniBossLeft->setDefPlayFrame(false, true);
-//	//aniBossLeft->setFPS(1);
-//	//aniBossLeft->start();
-//
-//	bossRight = IMAGEMANAGER->FindImage(TEXT("Boss_right"));
-//
-//	//aniBossRight = new Animation();
-//	//aniBossRight->Init(bossRight);
-//	//aniBossRight->setDefPlayFrame(false, true);
-//	//aniBossRight->setFPS(1);
-//	//aniBossRight->start();
-//
-//	bossPropellerLeft = IMAGEMANAGER->FindImage(TEXT("Boss_propeller"));
-//	aniBossPropellerLeft = new Animation();
-//	aniBossPropellerLeft->Init(bossPropellerLeft);
-//	aniBossPropellerLeft->setDefPlayFrame(false, true);
-//	aniBossPropellerLeft->setFPS(1.f);
-//	aniBossPropellerLeft->start();
-//
-//	bossPropellerRight = IMAGEMANAGER->FindImage(TEXT("Boss_propeller"));
-//	aniBossPropellerRight = new Animation();
-//	aniBossPropellerRight->Init(bossPropellerRight);
-//	aniBossPropellerRight->setDefPlayFrame(false, true);
-//	aniBossPropellerRight->setFPS(1.f);
-//	aniBossPropellerRight->start();
-//
-//
-//	// 위치값 정하기
-////	int width = bossBody->GetFrameWidth() + bossLeft->GetFrameWidth() + bossRight->GetFrameWidth();
-//	int width = bossBody->GetFrameWidth();
-//
-//	int height = bossBody->GetFrameHeight();
-//
-//	{
-//		rcBoss = RectMakeCenter(WINSIZEX / 2 + bossBody->GetFrameWidth() / 2,
-//			100 + bossBody->GetFrameHeight() / 2,
-//			bossBody->GetFrameWidth() + bossLeft->GetFrameWidth() + bossRight->GetFrameWidth() + 60,
-//			bossBody->GetFrameHeight());
-//		// 보스 위치 지정 
-//		rcBossBody = RectMakeCenter(WINSIZEX / 2 + bossBody->GetFrameWidth() / 2,
-//			100 + bossBody->GetFrameHeight() / 2, width, height);
-//
-//		// 보스 왼쪽 팔
-//		rcBossLeft = RectMakeCenter(rcBossBody.left - (bossLeft->GetFrameWidth() / 2) + 3,
-//			rcBoss.top + (bossBody->GetFrameHeight() / 2) + (bossLeft->GetFrameHeight() / 2) - 12,
-//			bossLeft->GetFrameWidth(), bossLeft->GetFrameHeight());
-//
-//		// 보스 오른쪽 팔
-//		rcBossRight = RectMakeCenter(rcBossBody.right + (bossLeft->GetFrameWidth() / 2) - 3,
-//			rcBoss.top + (bossBody->GetFrameHeight() / 2) + (bossLeft->GetFrameHeight() / 2) - 12,
-//			bossLeft->GetFrameWidth(), bossLeft->GetFrameHeight());
-//
-//		rcBossPropellerLeft = RectMakeCenter(rcBossLeft.left + 50,
-//			rcBossLeft.top + 20,
-//			bossPropellerLeft->GetFrameWidth(),
-//			bossPropellerLeft->GetFrameHeight());
-//
-//		rcBossPropellerRight = RectMakeCenter(rcBossRight.right - 50,
-//			rcBossRight.top + 20,
-//			bossPropellerRight->GetFrameWidth(),
-//			bossPropellerRight->GetFrameHeight());
-//	}
-//
-//
-//	
-//	//=============CENTERPOINT==================================
-//	ptBossCenter = {(rcBoss.left + ((rcBoss.right - rcBoss.left)/2)) ,
-//		(rcBoss.top + ((rcBoss.bottom - rcBoss.top) / 2)) };
-//
-//	ptBossBodyCenter = { (rcBossBody.left + ((rcBossBody.right - rcBossBody.left) / 2)) ,
-//		(rcBossBody.top + ((rcBossBody.bottom - rcBossBody.top) / 2)) };
-//	
-//	ptBossLeftCenter = { (rcBossLeft.left + ((rcBossLeft.right - rcBossLeft.left) / 2)) ,
-//		(rcBossLeft.top + ((rcBossLeft.bottom - rcBossLeft.top) / 2)) };
-//	
-//	ptBossRightCenter = { (rcBossRight.left + ((rcBossRight.right - rcBossRight.left) / 2)) ,
-//		(rcBossRight.top + ((rcBossRight.bottom - rcBossRight.top) / 2)) };
-//	
-//	ptBossPropellerLeftCenter = { (rcBossPropellerLeft.left + ((rcBossPropellerLeft.right - rcBossPropellerLeft.left) / 2)) ,
-//		(rcBossPropellerLeft.top + ((rcBossPropellerLeft.bottom - rcBossPropellerLeft.top) / 2)) };
-//	
-//	ptBossPropellerRightCenter = { (rcBossPropellerRight.left + ((rcBossPropellerRight.right - rcBossPropellerRight.left) / 2)) ,
-//		(rcBossPropellerRight.top + ((rcBossPropellerRight.bottom - rcBossPropellerRight.top) / 2)) };
-//
-//
-//
-//	// GUN
-//	{
-//		gun1 = new NormalGun();
-//		gun2 = new NormalGun();
-//		gun3 = new NormalGun();
-//		gun4 = new NormalGun();
-//		gun5 = new NormalGun();
-//
-//
-//		gun1->Init(ptBossLeftCenter.x , ptBossLeftCenter.y);
-//		gun2->Init(ptBossRightCenter.x, ptBossRightCenter.y);
-//
-//		gun3->Init(ptBossBodyCenter.x, ptBossBodyCenter.y + bossBody->GetFrameHeight() /2 );
-//		gun4->Init(ptBossBodyCenter.x + 50, ptBossBodyCenter.y + bossBody->GetFrameHeight() / 2);
-//		gun5->Init(ptBossBodyCenter.x - 50, ptBossBodyCenter.y + bossBody->GetFrameHeight() / 2);
-//
-//
-//
-//
-//	}
-//	//rcBossRight; RectMakeCenter();
-//
-//
-//	//bossLeft->FrameRender(hdc, WINSIZEX / 2 - bossLeft->GetFrameWidth() + 3, bossBody->GetFrameHeight() / 3 + 140, 0, 0);
-//	//bossRight->FrameRender(hdc, WINSIZEX / 2 + bossBody->GetFrameWidth() - 3, bossBody->GetFrameHeight() / 3 + 140, 0, 0);
-//	//bossPropellerLeft->AniRender(hdc,
-//	//	WINSIZEX / 2 - bossPropellerLeft->GetFrameWidth() + 68,
-//	//	bossBody->GetFrameHeight() / 2 + 15, aniBossPropellerLeft);
-//	//bossPropellerRight->AniRender(hdc,
-//	//	WINSIZEX / 2 + bossBody->GetFrameWidth() - 68,
-//	//	bossBody->GetFrameHeight() / 2 + 15, aniBossPropellerRight);
-//
-	return true;
-}
 
 void Boss::Update()
 {
@@ -348,17 +173,7 @@ void Boss::Update()
 	{
 		isLive = false;
 	}
-	//aniBossBody->frameUpdate(TIMEMANAGER->getElapsedTime() * 10);
-	//aniBossLeft->frameUpdate(TIMEMANAGER->getElapsedTime() * 10);
-	//aniBossRight->frameUpdate(TIMEMANAGER->getElapsedTime() * 10);
-	/*
-	ptBossCenter;
-	ptBossBodyCenter;
-	ptBossLeftCenter;
-	ptBossRightCenter;
-	ptBossPropellerLeftCenter;
-	ptBossPropellerRightCenter;
-	*/
+
 	// 이동 
 	{
 		// 예외 처리 
@@ -585,20 +400,6 @@ void Boss::Update()
 
 void Boss::Render(HDC hdc)
 {
-	//bossBody->FrameRender(hdc, WINSIZEX / 2, WINSIZEY / 2);
-	//bossBody->AniRender(hdc, WINSIZEX / 2, 100, aniBossBody);
-	//bossLeft->AniRender(hdc, WINSIZEX / 2 , 100, aniBossLeft);
-	//bossRight->AniRender(hdc, WINSIZEX / 2 + bossBody->GetFrameWidth(), 100, aniBossRight);
-
-	//DrawObject(hdc, rcBoss, 1, RGB(155, 0, 155), RECTANGLE);
-	//DrawObject(hdc, rcBossBody, 1, RGB(0, 155, 155), RECTANGLE);
-	//DrawObject(hdc, rcBossLeft, 1, RGB(0, 255, 255), RECTANGLE);
-	//DrawObject(hdc, rcBossRight, 1, RGB(0, 255, 255), RECTANGLE);
-	//DrawObject(hdc, rcBossPropellerLeft, 1, RGB(125, 125, 0), RECTANGLE);
-	//DrawObject(hdc, rcBossPropellerRight, 1, RGB(125, 125, 0), RECTANGLE);
-
-
-	//============================================================
 
 	if (isLive)
 	{

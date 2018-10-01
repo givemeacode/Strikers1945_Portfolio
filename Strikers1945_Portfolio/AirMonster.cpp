@@ -35,13 +35,7 @@ bool AirMonster::Init(int x, int y)
 
 	SetPivotX(rcMonster.left + ((rcMonster.right - rcMonster.left) / 2));
 	SetPivotY(rcMonster.bottom + ((rcMonster.bottom - rcMonster.top) / 2));
-	// 피벗 위치 가운데 생성 
-	//SetCenterPivot(rcMonster);
 
-	//SetPivotX(x);
-	//SetPivotY(y);
-
-	//_gun = new Gun();
 	_gun = new GuidedMissileGun();
 
 	_gun->Init(GetPivotX(), GetPivotY());
@@ -54,9 +48,6 @@ bool AirMonster::Init(const TCHAR * fileName, int x, int y)
 	// 충돌 위치 초기화 
 	rcMonster = RectMakeCenter(GAMESYS->GetPosInfo().ptGameCenterLeft1.x, GAMESYS->GetPosInfo().ptGameCenterLeft1.y,
 		50, 50);
-
-	//SetPivotX(rcMonster.left + ((rcMonster.right - rcMonster.left) / 2));
-	//SetPivotY(rcMonster.bottom + ((rcMonster.bottom - rcMonster.top) / 2));
 
 	SetCenterPivot(rcMonster);
 
@@ -125,9 +116,7 @@ bool AirMonster::Init(const TCHAR * fileName, int number, GAMEPOS pos)
 	width = airMonsterImg->GetFrameWidth();
 	height = airMonsterImg->GetFrameHeight();
 
-	//
-	// Gun 생성 
-	//_gun = new NormalGun();
+
 	_gun = new GuidedMissileGun();
 	_gun->Init(GetPivotX(), GetPivotY());
 
@@ -163,12 +152,9 @@ bool AirMonster::Init(const TCHAR * fileName, int number, MonsterType _mType, GA
 	mType = _mType;
 	//
 	// Gun 생성 
-	//_gun = new NormalGun();
 	_gun = new GuidedMissileGun();
 	_gun->Init(GetPivotX(), GetPivotY());
-	//effectDeadImg = IMAGEMANAGER->FindImage(TEXT("Effect_5"));
-	/*effectDead->Init(effectDeadImg, airMonsterImg->GetFrameWidth(), airMonsterImg->GetFrameHeight(),
-		1, 1.0f);*/
+	
 	
 	return true;
 }
@@ -200,13 +186,11 @@ void AirMonster::Release()
 {
  	_gun->Release();
 	SAFE_DELETE(_gun);
-	//SAFE_DELETE(monsterImg);
 	monsterImg->Release();
 }
 
 void AirMonster::MonsterAI()
 {
-	//\
 	
 	if (_gun == NULL)
 	{
@@ -220,22 +204,10 @@ void AirMonster::MonsterAI()
 		isLive = false;
 	}
 
-	//
-	//////
-	//
-	//float _angle = UTIL::GetAngle(rcPosX, rcPosY,
-	//	GAMESYS->GetPosInfo().ptGameCenterRight1.x, GAMESYS->GetPosInfo().ptGameCenterRight1.y);
-
-
 
 	float _angle = UTIL::GetAngle(GetPivotX(), GetPivotY(),
 		ptLastPos.x, ptLastPos.y);
 
-	//rcPosX += (cosf(_angle) * 2.0f);
-	//rcPosY += (-sinf(_angle) * 2.0f);
-
-	////SetPivotX(GetPivotX() + (cosf(angle) * 2.0f));
-	////SetPivotY(GetPivotX() + (-sinf(angle) * 2.0f));
 
 	SetPivotX(GetPivotX() + (cosf(_angle) * 2.0f));
 	SetPivotY(GetPivotY() + (-sinf(_angle) * 2.0f));

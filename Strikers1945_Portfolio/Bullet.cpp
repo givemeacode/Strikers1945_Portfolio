@@ -54,7 +54,6 @@ void Bullet::Update()
 {
 	// 충돌 처리를 할 총알 갱신 
 	rcBullet = RectMakeCenter(fPosX + width / 2 , fPosY + height + 2, width, height); // 총알 크기가 안바뀌는건 이부분 30
-	//aniBullet->frameUpdate(TIMEMANAGER->getElapsedTime() * 10.f);
 
 }
 
@@ -69,13 +68,11 @@ void Bullet::Update(int)
 void Bullet::Render(HDC hdc)
 {
 	DrawObject(hdc, rcBullet, 1, RGB(255, 0, 255), ELLIPSE);
-	//bulletImg->AniRender(hdc, fPosX, fPosY, aniBullet);
 	
 }
 
 void Bullet::Render(HDC hdc , int )
 {
-	//DrawObject(hdc, rcBullet, 1, RGB(255, 0, 255), ELLIPSE);
 	bulletImg->AniRender(hdc, fPosX, fPosY, aniBullet);
 
 }
@@ -83,9 +80,7 @@ void Bullet::Render(HDC hdc , int )
 void Bullet::Release()
 {
 	SAFE_DELETE(aniBullet);
-	//aniBullet->Release();
-	//SAFE_DELETE(bulletImg);
-	//aniBullet->Release();
+
 	bulletImg->Release();
 }
 

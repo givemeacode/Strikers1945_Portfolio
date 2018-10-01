@@ -305,9 +305,6 @@
     <Filter Include="2DFrameWork\Func\SingleTon">
       <UniqueIdentifier>{b2e100c6-6bd0-473f-8a01-e44c50f44b4f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="MainGame\Object\Gun">
-      <UniqueIdentifier>{3cb4e549-b1db-4cac-b245-752033e3702f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="MainGame\Object\Bullet">
       <UniqueIdentifier>{74738a1f-02f2-43d9-91b4-494fcde8d4f8}</UniqueIdentifier>
     </Filter>
@@ -320,9 +317,6 @@
     <Filter Include="2DFrameWork\Timer">
       <UniqueIdentifier>{056ddfab-a701-4bd8-86b0-406e6dd75f4c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="MainGame\Object\Gun\GunType">
-      <UniqueIdentifier>{825e55fc-2dbf-41d8-b42c-fac5c6df22b2}</UniqueIdentifier>
-    </Filter>
     <Filter Include="2DFrameWork\Effect">
       <UniqueIdentifier>{df52427b-27bd-4970-99c7-6003370fdd3b}</UniqueIdentifier>
     </Filter>
@@ -334,6 +328,12 @@
     </Filter>
     <Filter Include="MainGame\Object\Character\Monster">
       <UniqueIdentifier>{7e80becf-5872-4a18-8085-5c46cd93f390}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MainGame\Object\Gun">
+      <UniqueIdentifier>{3cb4e549-b1db-4cac-b245-752033e3702f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MainGame\Object\Gun\GunType">
+      <UniqueIdentifier>{825e55fc-2dbf-41d8-b42c-fac5c6df22b2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

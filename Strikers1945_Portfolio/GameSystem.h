@@ -47,6 +47,8 @@ private:
 	bool isGameClear;
 private:
 	RECT rcClient;
+private:
+	
 public:
 	GameSystem();
 	~GameSystem();
@@ -62,8 +64,10 @@ public:
 	void DeleteObject(std::list<Monster*> monsterlist);
 	void DeleteObject(Monster* monster);
 	void GameOver();
-
-
+	void CollisionPlayer(std::list<Monster*> monsterlist);
+	void CollisionMonster(std::list<Monster*> monsterlist);
+	void CollisionBoss(std::list<Monster*> monsterlist);
+public:
 	Player* GetPlayer() { return player; }
 
 	void SetBoss(Boss* _boss) { boss = _boss; }

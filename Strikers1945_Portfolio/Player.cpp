@@ -9,32 +9,7 @@
 
 Player::Player()
 {
-//	// 플레이어 위치 초기값 설정.
-//	PositionInit();
-//
-//	isDead = false;
-//	isClear = false;
-//	radius = 10.f;
-//	// 시간체크
-//	runTimer = GetTickCount();
-//	deathTimer = 0; // 죽었을때 시점을 저장하기위해.
-//	damage = 1.f;
-////	deathMotionTime = 0; // 죽었을때 잠깐 없어지는 시간 ( 폭파 모션 )
-//	responTime = 0.f; // 리스폰시간
-//
-//	//// 테스트용 ////
-//	//target = RectMakeCenter(WINSIZEX / 2, 50, 50, 50);
-//
-//	//
-//	gun = new PlayerGun;
-//	gun->Init(endx, endy);
-//
-//	// 애니메이션
-//	deathEffect = IMAGEMANAGER->FindImage(TEXT("Effect_7"));
-//	deathAnimation = new Animation;
-//	deathAnimation->Init(deathEffect);
-//	deathAnimation->setDefPlayFrame(false, true);
-//	deathAnimation->setFPS(5.f); //
+
 	isReset = false;
 	isClear = false;
 }
@@ -87,7 +62,7 @@ void Player::Init(std::string fileName)
 	playerLifeCountImage->SetFrameX(3);
 
 
-	playerLifeCount = 30;
+	playerLifeCount = 3;
 
 	playerLifeContinueCountTimer = 0;
 	playerLifeContinueCount = 9;
@@ -129,10 +104,7 @@ void Player::Update()
 	}
 
 	RECT temp;
-	//if (IntersectRect(&temp, &collisionBox, &target))
-	//{
-	//	isDead = true;
-	//}
+
 	damage = playerLevel;
 
 	score = GAMESYS->GetScore();
@@ -250,26 +222,6 @@ void Player::Render(HDC hdc)
 		LineMake(hdc, x, y, endx, endy);
 	}
 
-	//TCHAR szTemp[100] = { 0, };
-	//_stprintf_s(szTemp, sizeof(szTemp), TEXT("runTimer : %d"), runTimer);
-	//TextOut(hdc, WINSIZEX / 2 - 270, 120, TEXT(szTemp), _tcslen(TEXT(szTemp)));
-
-	//// 선택시간.. 9초부터 0초까지... 0초가되면 현재 위치하는 인덱스값으로 자동 결정.
-	//TCHAR tempChoiceTime[100] = { 0, };
-	//_stprintf_s(tempChoiceTime, sizeof(tempChoiceTime), TEXT("deathTimer : %d"), deathTimer);
-	//TextOut(hdc, WINSIZEX / 2 - 270, 150, TEXT(tempChoiceTime), _tcslen(TEXT(tempChoiceTime)));
-
-	//TCHAR playerName[100] = { 0, };
-	//_stprintf_s(playerName, sizeof(playerName), TEXT("responTime : %d"), responTime);
-	//TextOut(hdc, WINSIZEX / 2 - 270, 210, TEXT(playerName), _tcslen(TEXT(playerName)));
-
-	//	TCHAR choiceTime1[100] = { 0, };
-	//	_stprintf_s(choiceTime1, sizeof(choiceTime1), TEXT("deathMotionTime : %d"), deathMotionTime);
-	//	TextOut(hdc, WINSIZEX / 2 - 270, 180, TEXT(choiceTime1), _tcslen(TEXT(choiceTime1)));
-
-
-	//Rectangle(hdc, target.left, target.top, target.right, target.bottom);
-
 	//
 	gun->Render(hdc);
 }
@@ -303,8 +255,6 @@ void Player::PositionInit()
 	speed = 8.f;
 
 	// 플레이어 이미지 초기화
-	//playerImage = new Image;
-	//playerImage->Init(TEXT("../Resource/Image/Player/Move_LR_A.bmp"), 223, 33, 7, 1, true, RGB(0, 0, 0));
 	playerImage = IMAGEMANAGER->FindImage("Move_LR_A");
 	playerImage->SetX(x - playerImage->GetFrameWidth() / 2 - 4); // 렉트는 중심부터 그려지고, 이미지는 left,top부터 그리니까 이미지프레임의 넓이의 반을 계산해줘서 중심으로 옴긴다.
 	playerImage->SetY(y - playerImage->GetFrameHeight() / 2);  // 렉트는 중심부터 그려지고, 이미지는 left,top부터 그리니까 이미지프레임의 높이의 반을 계산해줘서 중심으로 옴긴다.
@@ -326,8 +276,6 @@ void Player::PositionInit(std::string fileName)
 	speed = 8.f;
 
 	// 플레이어 이미지 초기화
-	//playerImage = new Image;
-	//playerImage->Init(TEXT("../Resource/Image/Player/Move_LR_A.bmp"), 223, 33, 7, 1, true, RGB(0, 0, 0));
 	playerImage = IMAGEMANAGER->FindImage(fileName);
 	playerImage->SetX(x - playerImage->GetFrameWidth() / 2 - 4); // 렉트는 중심부터 그려지고, 이미지는 left,top부터 그리니까 이미지프레임의 넓이의 반을 계산해줘서 중심으로 옴긴다.
 	playerImage->SetY(y - playerImage->GetFrameHeight() / 2);  // 렉트는 중심부터 그려지고, 이미지는 left,top부터 그리니까 이미지프레임의 높이의 반을 계산해줘서 중심으로 옴긴다.
@@ -335,7 +283,6 @@ void Player::PositionInit(std::string fileName)
 
 	std::string file;
 	file = fileName + "_Ending";
-	//wsprintf(file, TEXT("%s_Ending"), TEXT(fileName));
 	endingImage = IMAGEMANAGER->FindImage(file);
 
 	endingImage->SetX(x - playerImage->GetFrameWidth() / 2 - 4); // 렉트는 중심부터 그려지고, 이미지는 left,top부터 그리니까 이미지프레임의 넓이의 반을 계산해줘서 중심으로 옴긴다.
@@ -409,7 +356,7 @@ void Player::IsDead(std::string fileName)
 			}
 			else if (responTime == 1000)
 			{
-				playerLifeCount--;
+				//playerLifeCount--;
 				if (playerLifeCount == 0)
 				{
 					x = WINSIZEX/2;

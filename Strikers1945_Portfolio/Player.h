@@ -91,7 +91,7 @@ public:
 	//========================
 	void SetDamage(float _damage) { damage = _damage; }
 	float GetDamage() { return damage; }
-
+	void DeCreaseLife() { playerLifeCount--; }
 };
 
 //함수명 : 앞글자 대문자

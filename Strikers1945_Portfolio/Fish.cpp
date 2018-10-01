@@ -24,8 +24,6 @@ Fish::~Fish()
 
 bool Fish::Init(int x, int y)
 {
-	//================================================== 총알 연습 ================================
-	//rcMonster = RectMakeCenter(x, y, 50, 50);
 	rcMonster = RectMakeCenter(GAMESYS->GetPosInfo().ptGameCenterLeft1.x, GAMESYS->GetPosInfo().ptGameCenterLeft1.y,
 		50, 50);
 	ptMonster.x = rcMonster.left + ((rcMonster.right - rcMonster.left) / 2);
@@ -33,13 +31,7 @@ bool Fish::Init(int x, int y)
 
 	SetPivotX(rcMonster.left + ((rcMonster.right - rcMonster.left) / 2));
 	SetPivotY(rcMonster.bottom + ((rcMonster.bottom - rcMonster.top) / 2));
-	// 피벗 위치 가운데 생성 
-	//SetCenterPivot(rcMonster);
-
-	//SetPivotX(x);
-	//SetPivotY(y);
-
-	//_gun = new Gun();
+	
 	_gun = new RevolvingGun();
 
 	_gun->Init(GetPivotX(), GetPivotY());
@@ -52,9 +44,6 @@ bool Fish::Init(const TCHAR * fileName, int x, int y)
 	// 충돌 위치 초기화 
 	rcMonster = RectMakeCenter(GAMESYS->GetPosInfo().ptGameCenterLeft1.x, GAMESYS->GetPosInfo().ptGameCenterLeft1.y,
 		50, 50);
-
-	//SetPivotX(rcMonster.left + ((rcMonster.right - rcMonster.left) / 2));
-	//SetPivotY(rcMonster.bottom + ((rcMonster.bottom - rcMonster.top) / 2));
 
 	SetCenterPivot(rcMonster);
 
@@ -193,7 +182,6 @@ void Fish::Release()
 {
 	_gun->Release();
 	SAFE_DELETE(_gun);
-	//SAFE_DELETE(monsterImg);
 	monsterImg->Release();
 }
 
@@ -209,27 +197,12 @@ void Fish::MonsterAI()
 	{
 		GAMESYS->AddScore(GetScore());
 		GAMESYS->IsScore(true);
-		//SetScore(GetScore() + 100);
 		isLive = false;
 	}
 
 
-	//
-	//////
-	//
-	//float _angle = UTIL::GetAngle(rcPosX, rcPosY,
-	//	GAMESYS->GetPosInfo().ptGameCenterRight1.x, GAMESYS->GetPosInfo().ptGameCenterRight1.y);
-
-
-
 	float _angle = UTIL::GetAngle(GetPivotX(), GetPivotY(),
 		ptLastPos.x, ptLastPos.y);
-
-	//rcPosX += (cosf(_angle) * 2.0f);
-	//rcPosY += (-sinf(_angle) * 2.0f);
-
-	////SetPivotX(GetPivotX() + (cosf(angle) * 2.0f));
-	////SetPivotY(GetPivotX() + (-sinf(angle) * 2.0f));
 
 	SetPivotX(GetPivotX() + (cosf(_angle) * 2.0f));
 	SetPivotY(GetPivotY() + (-sinf(_angle) * 2.0f));

@@ -36,13 +36,7 @@ bool BigAirPlan::Init(int x, int y)
 
 	SetPivotX(rcMonster.left + ((rcMonster.right - rcMonster.left) / 2));
 	SetPivotY(rcMonster.bottom + ((rcMonster.bottom - rcMonster.top) / 2));
-	// 피벗 위치 가운데 생성 
-	//SetCenterPivot(rcMonster);
 
-	//SetPivotX(x);
-	//SetPivotY(y);
-
-	//_gun = new Gun();
 	_gun = new MultiGun();
 
 	_gun->Init(GetPivotX(), GetPivotY());
@@ -55,9 +49,6 @@ bool BigAirPlan::Init(const TCHAR * fileName, int x, int y)
 	// 충돌 위치 초기화 
 	rcMonster = RectMakeCenter(GAMESYS->GetPosInfo().ptGameCenterLeft1.x, GAMESYS->GetPosInfo().ptGameCenterLeft1.y,
 		50, 50);
-
-	//SetPivotX(rcMonster.left + ((rcMonster.right - rcMonster.left) / 2));
-	//SetPivotY(rcMonster.bottom + ((rcMonster.bottom - rcMonster.top) / 2));
 
 	SetCenterPivot(rcMonster);
 
@@ -108,7 +99,6 @@ bool BigAirPlan::Init(const TCHAR * fileName, int number, GAMEPOS pos)
 	_stprintf(file, TEXT("%s%d"), fileName, number);
 
 	monsterImg = IMAGEMANAGER->FindImage(file);
-	//monsterImg = airMonsterImg;
 	StartPosition(monsterImg);
 	LastPosition(pos);
 
@@ -142,7 +132,6 @@ bool BigAirPlan::Init(const TCHAR * fileName, int number, MonsterType _mType, GA
 	_stprintf(file, TEXT("%s%d"), fileName, number);
 
 	monsterImg = IMAGEMANAGER->FindImage(file);
-	//monsterImg = airMonsterImg;
 	StartPosition(monsterImg);
 	LastPosition(pos);
 
@@ -161,9 +150,7 @@ bool BigAirPlan::Init(const TCHAR * fileName, int number, MonsterType _mType, GA
 	height = monsterImg->GetFrameHeight();
 
 	mType = _mType;
-	//
 	// Gun 생성 
-	//_gun = new NormalGun();
 	_gun = new MultiGun();
 	_gun->Init(GetPivotX(), GetPivotY());
 
@@ -199,7 +186,6 @@ void BigAirPlan::Release()
 {
 	_gun->Release();
 	SAFE_DELETE(_gun);
-	//SAFE_DELETE(monsterImg);
 	monsterImg->Release();
 }
 
@@ -214,7 +200,6 @@ void BigAirPlan::MonsterAI()
 	{
 		GAMESYS->AddScore(GetScore());
 		GAMESYS->IsScore(true);
-		//SetScore(GetScore() + 100);
 		isLive = false;
 	}
 
@@ -229,24 +214,12 @@ void BigAirPlan::MonsterAI()
 	}
 
 
-	//
-	//////
-	//
-	//float _angle = UTIL::GetAngle(rcPosX, rcPosY,
-	//	GAMESYS->GetPosInfo().ptGameCenterRight1.x, GAMESYS->GetPosInfo().ptGameCenterRight1.y);
-
 
 
 	float _angle = UTIL::GetAngle(GetPivotX(), GetPivotY(),
 		ptLastPos.x, ptLastPos.y);
 
-	//rcPosX += (cosf(_angle) * 2.0f);
-	//rcPosY += (-sinf(_angle) * 2.0f);
 
-	////SetPivotX(GetPivotX() + (cosf(angle) * 2.0f));
-	////SetPivotY(GetPivotX() + (-sinf(angle) * 2.0f));
-
-	//SetPivotX(GetPivotX() + (cosf(_angle) * 2.0f));
 	if (isStop == false)
 	{
 		SetPivotY(GetPivotY() + 3.f);
@@ -274,7 +247,6 @@ void BigAirPlan::MonsterAI()
 
 	if (CollisionRectAndRect(rcMonster, rcLastPos))
 	{
-		//Release();
 		isLive = false;
 		isCollision = true;
 	}
